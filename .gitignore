@@ -480,5 +480,5 @@ $RECYCLE.BIN/
 
 appsettings.json
 .idea/
-src/Cepedi.BancoCentral.Cadastro.WebApi/appsettings.Development.json
-src/Cepedi.BancoCentral.Cadastro.WebApi/appsettings.json
+src/Cepedi.BancoCentral.Cadastro.Api/appsettings.Development.json
+src/Cepedi.BancoCentral.Cadastro.Api/appsettings.json

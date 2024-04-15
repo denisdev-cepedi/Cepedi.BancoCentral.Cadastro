@@ -1,27 +1,21 @@
 # Cepedi.CleanArch
 
-Executar o projeto `src\Cepedi.BancoCentral.Cadastro.WebApi` para abrir o swagger
+Executar o projeto `src\Cepedi.BancoCentral.Cadastro.Api` para abrir o swagger
 
 ## Características do projeto
 
 - .NET 7.0
-- ORM Entity Framework
-- Framework de testes: xUnit
-- Framework de assertions: FluentAssertions
-- Framework de Mock: NSubstitute
-- Framework de fake data generator: Bogus
-- Code Analyzer: NetAnalyzers, SonarAnalyzer.Csharp
-- Banco de dados: SqlServer
-- Projeto de testes de unidade
-- Controllers e Actinos atendendo o padrão RestFull
-- Tratamento de Warning como Error
-- Healthcheck
-    - Liveness
-    - Readyness
-- Log com Serilog
 
-## Setup
+- Projeto base para a trilha avançada de .net da residência TIC18. A Residência TIC18 é um projeto oferecido pela parceria entre a Uesc e o Cepedi, localizado em Ilhéus-BA.
 
-* Quais ferramentas necessárias
- - Visual Studio, .NET Core SDK 7+, etc
+## Aplicar migrations
+ dotnet ef migrations add Init --project .\src\Cepedi.BancoCentral.Cadastro.Dados\ -s .\src\Cepedi.BancoCentral.Cadastro.Api\
 
+# Remove a última migration aplicada
+ dotnet ef migrations remove --project .\src\Cepedi.BancoCentral.Cadastro.Dados\ -s .\src\Cepedi.BancoCentral.Cadastro.Api\
+
+# Gera o script de migração
+ dotnet ef migrations script --project .\src\Cepedi.BancoCentral.Cadastro.Dados\ -s .\src\Cepedi.BancoCentral.Cadastro.Api\
+
+# Coloca o banco para o estado inicial zero
+ dotnet ef migrations update 0 --project .\src\Cepedi.BancoCentral.Cadastro.Dados\ -s .\src\Cepedi.BancoCentral.Cadastro.Api\

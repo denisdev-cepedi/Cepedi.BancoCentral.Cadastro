@@ -1,5 +1,5 @@
-﻿using Cepedi.BancoCentral.Cadastro.Data;
-using Cepedi.BancoCentral.Cadastro.Domain.Entities;
+﻿using Cepedi.BancoCentral.Cadastro.Dados;
+using Cepedi.BancoCentral.Cadastro.Dominio.Entidades;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
