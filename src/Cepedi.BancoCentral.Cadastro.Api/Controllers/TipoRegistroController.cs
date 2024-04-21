@@ -50,4 +50,10 @@ public class TipoRegistroController : BaseController
                 var request = new ObtemListaTipoRegistroRequest();
                 return await SendCommand(request);
         }
+
+        [HttpPut]
+        [ProducesResponseType(typeof(AtualizarTipoRegistroResponse), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<AtualizarTipoRegistroResponse>> AtualizarTipoRegistroAsync(
+                [FromBody] AtualizarTipoRegistroRequest request) => await SendCommand(request);
 }
