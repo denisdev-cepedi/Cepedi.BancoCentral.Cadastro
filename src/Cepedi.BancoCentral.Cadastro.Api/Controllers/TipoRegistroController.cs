@@ -41,4 +41,13 @@ public class TipoRegistroController : BaseController
                 var request = new ObtemTipoRegistroRequest { IdTipoRegistro = idTipoRegistro };
                 return await SendCommand(request);
         }
+
+        [HttpGet]
+        [ProducesResponseType(typeof(List<ObtemTipoRegistroResponse>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]  
+        public async Task<ActionResult<List<ObtemTipoRegistroResponse>>> ObterListaTipoRegistroAsync() 
+        {
+                var request = new ObtemListaTipoRegistroRequest();
+                return await SendCommand(request);
+        }
 }
