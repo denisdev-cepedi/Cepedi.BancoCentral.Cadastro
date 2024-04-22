@@ -41,4 +41,20 @@ public class PessoaRepository : IPessoaRepository
         return await
             _context.Pessoa.Where(e => e.IdPessoa == id).FirstOrDefaultAsync();
     }
+
+    public async Task<PessoaEntity> DeletarPessoaAsync(int id)
+    {
+        var pessoa = await ObterPessoaAsync(id);
+
+        if (pessoa == null)
+        {
+            return null;
+        }
+
+        _context.Pessoa.Remove(pessoa);
+
+        await _context.SaveChangesAsync();
+
+        return pessoa;
+    }
 }
