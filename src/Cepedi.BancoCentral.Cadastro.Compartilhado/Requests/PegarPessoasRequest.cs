@@ -4,6 +4,6 @@ using OperationResult;
 
 namespace Cepedi.BancoCentral.Cadastro.Compartilhado.Requests;
 
-public class PegarPessoasRequest : IRequest<Result<PegarPessoasResponse>>
+public class PegarPessoasRequest : IRequest<Result<List<PegarPessoasResponse>>>
 {
 }

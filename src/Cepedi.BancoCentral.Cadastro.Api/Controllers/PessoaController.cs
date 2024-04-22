@@ -37,10 +37,13 @@ public class PessoaController : BaseController
     [HttpGet]
     [ProducesResponseType(typeof(PegarPessoasResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<PegarPessoasResponse>> PegarPessoasAsync(
-        [FromBody] PegarPessoasRequest request) => await SendCommand(request);
+    public async Task<ActionResult<List<PegarPessoasResponse>>> GetPessoasAsync()
+    {
+        var request = new PegarPessoasRequest();
+        return await SendCommand(request);
+    }
 
-    [HttpDelete("{id}")]
+    [HttpDelete]
     [ProducesResponseType(typeof(DeletarPessoaResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<DeletarPessoaResponse>> DeletarPessoaAsync(

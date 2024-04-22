@@ -9,7 +9,7 @@ using OperationResult;
 
 namespace Cepedi.BancoCentral.Cadastro.Dominio.Handlers;
 
-public class PegarPessoaHandler : IRequestHandler<PegarPessoasRequest, Result<PegarPessoasResponse>>
+public class PegarPessoaHandler : IRequestHandler<PegarPessoasRequest, Result<List<PegarPessoasResponse>>>
 {
     private readonly ILogger<PegarPessoaHandler> _logger;
     private readonly IPessoaRepository _pessoaRepository;
@@ -20,20 +20,10 @@ public class PegarPessoaHandler : IRequestHandler<PegarPessoasRequest, Result<Pe
         _logger = logger;
     }
 
-    public async Task<Result<PegarPessoasResponse>> Handle(PegarPessoasRequest request, CancellationToken cancellationToken)
+    public async Task<Result<List<PegarPessoasResponse>>> Handle(PegarPessoasRequest request,
+        CancellationToken cancellationToken)
     {
-        try
-        {
-            var pessoas = await _pessoaRepository.GetPessoasAsync();
-
-            return Result.Success(new PegarPessoasResponse());
-        }
-        catch
-        {
-            _logger.LogError("Ocorreu um erro durante a execução");
-            return Result.Error<PegarPessoasResponse>(new Compartilhado.Excecoes.ExcecaoAplicacao(
-                (Compartilhado.Enums.Cadastro.ErroGravacaoUsuario)));
-        }
+        var pessoas = await _pessoaRepository.GetPessoasAsync();
+        return Result.Success(pessoas.Select(p => new PegarPessoasResponse(p.IdPessoa, p.Nome)).ToList());
     }
-
 }
