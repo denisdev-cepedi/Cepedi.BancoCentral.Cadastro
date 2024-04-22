@@ -35,10 +35,13 @@ public class EmailController : BaseController
         [FromBody] AtualizarEmailRequest request) => await SendCommand(request);
 
     [HttpGet]
-    [ProducesResponseType(typeof(PegarEmailsResponse), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(GetEmailsResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<PegarEmailsResponse>> PegarEmailsAsync(
-        [FromBody] PegarEmailsRequest request) => await SendCommand(request);
+    public async Task<ActionResult<List<GetEmailsResponse>>> GetEmailAsync()
+    {
+        var request = new GetEmailsRequest();
+        return await SendCommand(request);
+    }
 
     [HttpDelete("{id}")]
     [ProducesResponseType(typeof(DeletarEmailResponse), StatusCodes.Status200OK)]

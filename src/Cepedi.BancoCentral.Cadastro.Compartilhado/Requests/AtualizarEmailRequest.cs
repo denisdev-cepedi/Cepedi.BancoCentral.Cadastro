@@ -1,6 +1,10 @@
-﻿namespace Cepedi.BancoCentral.Cadastro.Shareable;
+﻿using Cepedi.BancoCentral.Cadastro.Compartilhado.Responses;
+using MediatR;
+using OperationResult;
 
-public class AtualizarEmailRequest
+namespace Cepedi.BancoCentral.Cadastro.Compartilhado.Requests;
+
+public class AtualizarEmailRequest : IRequest<Result<AtualizarEmailResponse>>
 {
 
 }

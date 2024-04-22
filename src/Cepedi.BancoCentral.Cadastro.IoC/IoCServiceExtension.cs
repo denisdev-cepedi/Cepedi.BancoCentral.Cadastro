@@ -2,6 +2,7 @@
 using Cepedi.BancoCentral.Cadastro.Dados;
 using Cepedi.BancoCentral.Cadastro.Dados.Repositories;
 using Cepedi.BancoCentral.Cadastro.Dominio;
+using Cepedi.BancoCentral.Cadastro.Dominio.Entidades;
 using Cepedi.BancoCentral.Cadastro.Dominio.Pipelines;
 using Cepedi.BancoCentral.Cadastro.Dominio.Repository;
 using FluentValidation;
@@ -25,6 +26,7 @@ namespace Cepedi.BancoCentral.Cadastro.IoC
             ConfigurarFluentValidation(services);
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
             services.AddScoped<IPessoaRepository, PessoaRepository>();
+            services.AddScoped<IEmailRepository, EmailRepository>();
             services.AddHealthChecks()
                .AddDbContextCheck<ApplicationDbContext>();
         }

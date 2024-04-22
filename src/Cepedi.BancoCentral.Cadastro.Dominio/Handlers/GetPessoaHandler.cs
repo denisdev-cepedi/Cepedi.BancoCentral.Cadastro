@@ -9,21 +9,21 @@ using OperationResult;
 
 namespace Cepedi.BancoCentral.Cadastro.Dominio.Handlers;
 
-public class PegarPessoaHandler : IRequestHandler<PegarPessoasRequest, Result<List<PegarPessoasResponse>>>
+public class GetPessoaHandler : IRequestHandler<GetPessoasRequest, Result<List<GetPessoasResponse>>>
 {
-    private readonly ILogger<PegarPessoaHandler> _logger;
+    private readonly ILogger<GetPessoaHandler> _logger;
     private readonly IPessoaRepository _pessoaRepository;
 
-    public PegarPessoaHandler(IPessoaRepository pessoaRepository, ILogger<PegarPessoaHandler> logger)
+    public GetPessoaHandler(IPessoaRepository pessoaRepository, ILogger<GetPessoaHandler> logger)
     {
         _pessoaRepository = pessoaRepository;
         _logger = logger;
     }
 
-    public async Task<Result<List<PegarPessoasResponse>>> Handle(PegarPessoasRequest request,
+    public async Task<Result<List<GetPessoasResponse>>> Handle(GetPessoasRequest request,
         CancellationToken cancellationToken)
     {
         var pessoas = await _pessoaRepository.GetPessoasAsync();
-        return Result.Success(pessoas.Select(p => new PegarPessoasResponse(p.IdPessoa, p.Nome)).ToList());
+        return Result.Success(pessoas.Select(p => new GetPessoasResponse(p.IdPessoa, p.Nome)).ToList());
     }
 }

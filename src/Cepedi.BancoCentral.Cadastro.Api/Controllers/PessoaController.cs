@@ -35,11 +35,11 @@ public class PessoaController : BaseController
         [FromBody] AtualizarPessoaRequest request) => await SendCommand(request);
 
     [HttpGet]
-    [ProducesResponseType(typeof(PegarPessoasResponse), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(GetPessoasResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<List<PegarPessoasResponse>>> GetPessoasAsync()
+    public async Task<ActionResult<List<GetPessoasResponse>>> GetPessoasAsync()
     {
-        var request = new PegarPessoasRequest();
+        var request = new GetPessoasRequest();
         return await SendCommand(request);
     }
 
