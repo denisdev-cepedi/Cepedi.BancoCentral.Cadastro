@@ -3,8 +3,9 @@ using MediatR;
 using OperationResult;
 
 namespace Cepedi.BancoCentral.Cadastro.Compartilhado.Requests;
-public class CriarPessoaRequest : IRequest<Result<CriarPessoaResponse>>
+public class AtualizarPessoaRequest : IRequest<Result<AtualizarPessoaResponse>>
 {
+    public int IdPessoa { get; set; }
     public string Nome { get; set; } = default!;
 
     public DateTime DataNascimento { get; set; }
