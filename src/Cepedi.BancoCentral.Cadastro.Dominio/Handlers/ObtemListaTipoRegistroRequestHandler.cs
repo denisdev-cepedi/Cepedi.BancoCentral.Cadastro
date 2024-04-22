@@ -19,14 +19,10 @@ public class ObtemListaTipoRegistroRequestHandler : IRequestHandler<ObtemListaTi
     }
     public async Task<Result<List<ObtemTipoRegistroResponse>>> Handle(ObtemListaTipoRegistroRequest request, CancellationToken cancellationToken)
     {
-        try{
+       
             var tipos = await _tiporegistroRepository.ObterTipoRegistroAsync();
             return Result.Success(tipos.Select(t => new ObtemTipoRegistroResponse(t.IdTipoRegistro,t.NomeTipo)).ToList());
-        }catch{
-            _logger.LogError("Ocorreu um erro durante a execução");
-            return Result.Error<List<ObtemTipoRegistroResponse>>(new Compartilhado.Excecoes.ExcecaoAplicacao(
-                (Compartilhado.Enums.Cadastro.ErroGravacaoTipoRegistro)));
-        }
+       
 
     }
 }

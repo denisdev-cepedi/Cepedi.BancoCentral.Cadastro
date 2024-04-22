@@ -19,7 +19,6 @@ public class ObtemTipoRegistroRequestHandler : IRequestHandler<ObtemTipoRegistro
     }
     public async Task<Result<ObtemTipoRegistroResponse>> Handle(ObtemTipoRegistroRequest request, CancellationToken cancellationToken)
     {
-        try{
             var tipoRegistro = await _tiporegistroRepository.ObterTipoRegistroAsync(request.IdTipoRegistro);
             if(tipoRegistro == null){
                 return Result.Error<ObtemTipoRegistroResponse>(new Compartilhado.Excecoes.ExcecaoAplicacao(
@@ -27,12 +26,7 @@ public class ObtemTipoRegistroRequestHandler : IRequestHandler<ObtemTipoRegistro
             }
             return Result.Success(new ObtemTipoRegistroResponse(tipoRegistro.IdTipoRegistro, tipoRegistro.NomeTipo));
 
-        }catch{
-            _logger.LogError("Ocorreu um erro durante a execução");
-            return Result.Error<ObtemTipoRegistroResponse>(new Compartilhado.Excecoes.ExcecaoAplicacao(
-                (Compartilhado.Enums.Cadastro.ErroLeituraTipoRegistro)));
-
-        }
+        
 
     }
 }

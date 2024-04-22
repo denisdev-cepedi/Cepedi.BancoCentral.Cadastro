@@ -21,17 +21,11 @@ public class DeletarTipoRegistroRequestHandler : IRequestHandler<DeletarTipoRegi
 
     public async Task<Result<DeletarTipoRegistroResponse>> Handle(DeletarTipoRegistroRequest request, CancellationToken cancellationToken)
     {
-        try{
+        
             var cursoEncontrado = await _tiporegistroRepository.ObterTipoRegistroAsync(request.IdTipoRegistro);
             await _tiporegistroRepository.DeletarTipoRegistroAsync(cursoEncontrado);
             return Result.Success(new DeletarTipoRegistroResponse(cursoEncontrado.IdTipoRegistro,cursoEncontrado.NomeTipo));
 
 
-        }catch{
-            _logger.LogError("Ocorreu um erro durante a execução");
-            return Result.Error<DeletarTipoRegistroResponse>(new Compartilhado.Excecoes.ExcecaoAplicacao(
-                (Compartilhado.Enums.Cadastro.ErroDeletarTipoRegistro)));
-
-        }
     }
 }

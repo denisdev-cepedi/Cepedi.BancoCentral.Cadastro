@@ -20,7 +20,7 @@ public class AtualizarTipoRegistroRequestHandler : IRequestHandler<AtualizarTipo
 
     public Task<Result<AtualizarTipoRegistroResponse>> Handle(AtualizarTipoRegistroRequest request, CancellationToken cancellationToken)
     {
-        try{
+        
             var tipo = new TipoRegistroEntity(){
                 IdTipoRegistro = request.IdTipoRegistro,
                 NomeTipo = request.NomeTipo
@@ -29,10 +29,5 @@ public class AtualizarTipoRegistroRequestHandler : IRequestHandler<AtualizarTipo
             _tiporegistroRepository.AtualizarTipoRegistroAsync(tipo);
             return Task.FromResult(Result.Success(new AtualizarTipoRegistroResponse(tipo.IdTipoRegistro,tipo.NomeTipo)));
 
-        }catch{
-             _logger.LogError("Ocorreu um erro durante a execução");
-            return Result.Error<AtualizarTipoRegistroResponse>(new Compartilhado.Excecoes.ExcecaoAplicacao((Compartilhado.Enums.Cadastro.ErroGravacaoTipoRegistro)));
-
-        }
     }
 }
