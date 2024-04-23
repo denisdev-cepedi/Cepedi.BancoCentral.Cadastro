@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Cepedi.BancoCentral.Cadastro.Dados.Repositories;
 
-public class EstadoCivilRepository
+public class EstadoCivilRepository : IEstadoCivilRepository
 {
     private readonly ApplicationDbContext _context;
 
@@ -42,7 +42,7 @@ public class EstadoCivilRepository
         return estadoCivil;
     }
 
-    public async Task<List<EstadoCivilEntity>> GetEstadoCivilAsync()
+    public async Task<List<EstadoCivilEntity>> GetEstadosCivilAsync()
     {
         return await _context.EstadoCivil.ToListAsync();
     }

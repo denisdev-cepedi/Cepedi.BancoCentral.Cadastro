@@ -24,9 +24,15 @@ namespace Cepedi.BancoCentral.Cadastro.IoC
             services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ExcecaoPipeline<,>));
             services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidacaoComportamento<,>));
             ConfigurarFluentValidation(services);
-            services.AddScoped<IUsuarioRepository, UsuarioRepository>();
-            services.AddScoped<IPessoaRepository, PessoaRepository>();
             services.AddScoped<IEmailRepository, EmailRepository>();
+            services.AddScoped<IEnderecoRepository, EnderecoRepository>();
+            services.AddScoped<IEstadoCivilRepository, EstadoCivilRepository>();
+            services.AddScoped<IGeneroRepository, GeneroRepository>();
+            services.AddScoped<INacionalidadeRepository, NacionalidadeRepository>();
+            services.AddScoped<IPessoaRepository, PessoaRepository>();
+            services.AddScoped<IPixRepository, PixRepository>();
+            services.AddScoped<ITelefoneRepository, TelefoneRepository>();
+            services.AddScoped<IUsuarioRepository, UsuarioRepository>();
             services.AddHealthChecks()
                .AddDbContextCheck<ApplicationDbContext>();
         }

@@ -8,5 +8,5 @@ public interface IEstadoCivilRepository
     Task<EstadoCivilEntity> ObterEstadoCivilAsync(int id);
     Task<EstadoCivilEntity> AtualizarEstadoCivilAsync(EstadoCivilEntity estadoCivil);
     Task<EstadoCivilEntity> DeletarEstadoCivilAsync(int id);
-    Task<List<EstadoCivilEntity>> GetEstadoCivisAsync();
+    Task<List<EstadoCivilEntity>> GetEstadosCivilAsync();
 }
