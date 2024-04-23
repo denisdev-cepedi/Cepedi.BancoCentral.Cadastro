@@ -8,6 +8,7 @@ namespace Cepedi.BancoCentral.Cadastro.Dados;
 public class ApplicationDbContext : DbContext
 {
     public DbSet<UsuarioEntity> Usuario { get; set; } = default!;
+    public DbSet<TipoRegistroEntity> TipoRegistro {get; set;} = default!;
 
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options)
