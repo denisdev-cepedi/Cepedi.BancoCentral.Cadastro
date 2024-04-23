@@ -13,5 +13,5 @@ public class CriarPessoaRequest : IRequest<Result<CriarPessoaResponse>>
 
     public int Genero { get; set; } = default!;
     public int EstadoCivil { get; set; } = default!;
-    public string Nacionalidade { get; set; } = default!;
+    public int Nacionalidade { get; set; } = default!;
 }
