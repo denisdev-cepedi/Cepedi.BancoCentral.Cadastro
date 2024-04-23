@@ -25,6 +25,7 @@ namespace Cepedi.BancoCentral.Cadastro.IoC
             ConfigurarFluentValidation(services);
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
             services.AddScoped<IPixRepository, PixRepository>();
+            services.AddScoped<ITipoPixRepository, TipoPixRepository>();
             services.AddHealthChecks()
                .AddDbContextCheck<ApplicationDbContext>();
         }

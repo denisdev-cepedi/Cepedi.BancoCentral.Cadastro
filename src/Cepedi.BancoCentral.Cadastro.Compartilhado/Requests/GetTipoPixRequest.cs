@@ -4,8 +4,7 @@ using OperationResult;
 
 namespace Cepedi.BancoCentral.Cadastro.Compartilhado.Requests;
 
-public class AtualizarTipoPixRequest : IRequest<Result<AtualizarTipoPixResponse>>
+public class GetTipoPixRequest : IRequest<Result<List<GetTipoPixResponse>>>
 {
-    public int IdTipoPix {get; set;}
-    public string NomeTipo {get; set;} = default!;
+
 }

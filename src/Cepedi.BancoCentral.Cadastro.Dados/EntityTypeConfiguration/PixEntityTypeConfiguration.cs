@@ -21,7 +21,7 @@ public class PixEntityTypeConfiguration
         builder.Property(p => p.IdTipoPix).IsRequired();
 
         // Relacionamento com a entidade TipoPix
-        builder.HasOne(p => p.TipoPix)
+        builder.HasOne(p => p.TipoPixEntity)
                .WithMany()
                .HasForeignKey(p => p.IdTipoPix);
     }

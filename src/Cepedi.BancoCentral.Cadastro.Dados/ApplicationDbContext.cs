@@ -9,6 +9,7 @@ public class ApplicationDbContext : DbContext
 {
     public DbSet<UsuarioEntity> Usuario { get; set; } = default!;
     public DbSet<PixEntity> Pix {get; set;} = default!;
+    public DbSet<TipoPixEntity> TipoPix {get; set;} = default!;
 
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options)
