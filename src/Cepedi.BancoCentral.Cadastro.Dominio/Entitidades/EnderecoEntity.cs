@@ -4,7 +4,7 @@ public class EnderecoEntity
 {
     public int IdEndereco { get; set; }
     public string Cep { get; set; } = default!;
-    public string Rua { get; set; } = default!;
+    public string Logradouro { get; set; } = default!;
     public string Numero { get; set; } = default!;
     public string Bairro { get; set; } = default!;
     public string Cidade { get; set; } = default!;
