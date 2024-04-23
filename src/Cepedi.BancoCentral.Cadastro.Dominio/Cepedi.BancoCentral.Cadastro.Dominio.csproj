@@ -25,6 +25,7 @@
 
   <ItemGroup>
     <Compile Remove="Repository\IEnderecoEntity.cs" />
+    <Compile Remove="Repository\ITelefone.cs" />
   </ItemGroup>
 
 </Project>

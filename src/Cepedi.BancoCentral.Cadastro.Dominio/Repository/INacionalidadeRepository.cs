@@ -2,7 +2,7 @@ using Cepedi.BancoCentral.Cadastro.Dominio.Entidades;
 
 namespace Cepedi.BancoCentral.Cadastro.Dominio.Repository;
 
-public interface INacionalidade
+public interface INacionalidadeRepository
 {
     Task<NacionalidadeEntity> CriarNacionalidadeAsync(NacionalidadeEntity nacionalidade);
     Task<NacionalidadeEntity> ObterNacionalidadeAsync(int id);

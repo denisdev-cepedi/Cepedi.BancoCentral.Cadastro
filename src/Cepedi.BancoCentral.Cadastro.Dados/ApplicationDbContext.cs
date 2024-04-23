@@ -14,6 +14,7 @@ public class ApplicationDbContext : DbContext
     public DbSet<NacionalidadeEntity> Nacionalidade { get; set; } = default!;
     public DbSet<PessoaEntity> Pessoa { get; set; } = default!;
     public DbSet<TelefoneEntity> Telefone { get; set; } = default!;
+    public DbSet<PixEntity> Pix { get; set; } = default!;
     public DbSet<UsuarioEntity> Usuario { get; set; } = default!;
     
 
