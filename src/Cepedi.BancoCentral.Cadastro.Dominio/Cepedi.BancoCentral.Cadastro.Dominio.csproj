@@ -23,4 +23,8 @@
     <ProjectReference Include="..\Cepedi.BancoCentral.Cadastro.Compartilhado\Cepedi.BancoCentral.Cadastro.Compartilhado.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Remove="Repository\IEnderecoEntity.cs" />
+  </ItemGroup>
+
 </Project>
