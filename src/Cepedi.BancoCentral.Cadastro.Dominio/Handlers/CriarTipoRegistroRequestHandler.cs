@@ -22,7 +22,7 @@ public class CriarTipoRegistroRequestHandler : IRequestHandler<CriarTipoRegistro
 
     public async Task<Result<CriarTipoRegistroResponse>> Handle(CriarTipoRegistroRequest request, CancellationToken cancellationToken)
     {
-        try{
+       
             var tipo = new TipoRegistroEntity(){
                 NomeTipo = request.NomeTipo
             };
@@ -30,11 +30,6 @@ public class CriarTipoRegistroRequestHandler : IRequestHandler<CriarTipoRegistro
             await _tiporegistroRepository.CriarTipoRegistroAsync(tipo);
             return Result.Success(new CriarTipoRegistroResponse(tipo.IdTipoRegistro,tipo.NomeTipo));
 
-        }catch{
-             _logger.LogError("Ocorreu um erro durante a execução");
-            return Result.Error<CriarTipoRegistroResponse>(new Compartilhado.Excecoes.ExcecaoAplicacao(
-                (Compartilhado.Enums.Cadastro.ErroGravacaoTipoRegistro)));
-
-        }
+        
     }
 }
