@@ -8,5 +8,7 @@ public class EnderecoEntity
     public string Numero { get; set; } = default!;
     public string Bairro { get; set; } = default!;
     public string Cidade { get; set; } = default!;
+    public string Estado { get; set; } = default!;
+    public string Pais { get; set; } = default!;
     public int IdPessoa { get; set; }
 }

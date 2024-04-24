@@ -16,6 +16,8 @@ public class EnderecoTypeConfiguration
         builder.Property(c => c.Numero).IsRequired().HasMaxLength(10);
         builder.Property(c => c.Bairro).IsRequired().HasMaxLength(255);
         builder.Property(c => c.Cidade).IsRequired().HasMaxLength(255);
+        builder.Property(c => c.Estado).IsRequired().HasMaxLength(2);
+        builder.Property(c => c.Pais).IsRequired().HasMaxLength(255);
         builder.Property(c => c.IdPessoa).IsRequired();
     }
 }
