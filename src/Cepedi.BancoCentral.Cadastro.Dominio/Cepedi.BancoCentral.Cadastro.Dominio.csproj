@@ -9,6 +9,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Handlers\Email\" />
+    <Folder Include="Handlers\Endereco\" />
+    <Folder Include="Handlers\EstadoCivil\" />
+    <Folder Include="Handlers\Genero\" />
+    <Folder Include="Handlers\Nacionalidade\" />
+    <Folder Include="Handlers\PixEntity\" />
+    <Folder Include="Handlers\Telefone\" />
     <Folder Include="Notifications\" />
     <Folder Include="Repository\Queries\" />
     <Folder Include="Services\" />
