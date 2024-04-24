@@ -1,13 +1,12 @@
-﻿using System.Runtime.CompilerServices;
-using Cepedi.BancoCentral.Cadastro.Compartilhado.Requests;
-using Cepedi.BancoCentral.Cadastro.Compartilhado.Responses;
-using Cepedi.BancoCentral.Cadastro.Dominio.Entidades;
+﻿using Cepedi.BancoCentral.Cadastro.Dominio.Entidades;
 using Cepedi.BancoCentral.Cadastro.Dominio.Repository;
+using Cepedi.BancoCentral.Cadastro.Shareable.Requests;
+using Cepedi.BancoCentral.Cadastro.Shareable.Responses;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using OperationResult;
 
-namespace Cepedi.BancoCentral.Cadastro.Dominio;
+namespace Cepedi.BancoCentral.Cadastro.Dominio.Handlers;
 
 public class CriarTipoRegistroRequestHandler : IRequestHandler<CriarTipoRegistroRequest, Result<CriarTipoRegistroResponse>>
 {

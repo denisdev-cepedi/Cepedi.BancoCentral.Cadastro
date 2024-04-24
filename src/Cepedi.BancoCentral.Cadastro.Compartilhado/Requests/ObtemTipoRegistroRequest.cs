@@ -1,8 +1,8 @@
-﻿using Cepedi.BancoCentral.Cadastro.Compartilhado.Responses;
+﻿using Cepedi.BancoCentral.Cadastro.Shareable.Responses;
 using MediatR;
 using OperationResult;
 
-namespace Cepedi.BancoCentral.Cadastro.Compartilhado.Requests;
+namespace Cepedi.BancoCentral.Cadastro.Shareable.Requests;
 
 public class ObtemTipoRegistroRequest : IRequest<Result<ObtemTipoRegistroResponse>>
 {

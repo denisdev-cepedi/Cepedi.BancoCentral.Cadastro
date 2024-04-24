@@ -1,3 +1,3 @@
-﻿namespace Cepedi.BancoCentral.Cadastro.Compartilhado.Responses;
+﻿namespace Cepedi.BancoCentral.Cadastro.Shareable.Responses;
 
 public record CriarTipoRegistroResponse (int idTipoRegistro, string nomeTipo);

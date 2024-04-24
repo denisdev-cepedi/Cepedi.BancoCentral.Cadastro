@@ -7,9 +7,6 @@ public interface ITipoRegistroRepository
     Task<TipoRegistroEntity> CriarTipoRegistroAsync(TipoRegistroEntity TipoRegistro);
     Task<TipoRegistroEntity> ObterTipoRegistroAsync(int id);
     Task<List<TipoRegistroEntity>> ObterTipoRegistroAsync();
-
     Task<TipoRegistroEntity> AtualizarTipoRegistroAsync(TipoRegistroEntity TipoRegistro);
-
     Task<TipoRegistroEntity> DeletarTipoRegistroAsync(TipoRegistroEntity TipoRegistro);
-
 }

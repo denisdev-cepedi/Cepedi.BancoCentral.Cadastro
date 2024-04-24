@@ -1,4 +1,4 @@
-﻿using Cepedi.BancoCentral.Cadastro.Compartilhado.Excecoes;
+﻿using Cepedi.BancoCentral.Cadastro.Shareable.Excecoes;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using OperationResult;
@@ -30,7 +30,7 @@ public class BaseController : ControllerBase
     protected ActionResult HandleError(Exception error) => error switch
     {
         SemResultadosExcecao e => NoContent(),
-        _ => BadRequest(FormatErrorMessage(Compartilhado.Enums.Cadastro.Generico))
+        _ => BadRequest(FormatErrorMessage(Shareable.Enums.Cadastro.Generico))
     };
 
     private ResultadoErro FormatErrorMessage(ResultadoErro responseErro, IEnumerable<string>? errors = null)

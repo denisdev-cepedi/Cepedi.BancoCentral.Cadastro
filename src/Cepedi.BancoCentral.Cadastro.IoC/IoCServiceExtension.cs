@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Cepedi.BancoCentral.Cadastro.Dados;
-using Cepedi.BancoCentral.Cadastro.Dados.Repositories;
+using Cepedi.BancoCentral.Cadastro.Data;
+using Cepedi.BancoCentral.Cadastro.Data.Repositories;
 using Cepedi.BancoCentral.Cadastro.Dominio;
 using Cepedi.BancoCentral.Cadastro.Dominio.Pipelines;
 using Cepedi.BancoCentral.Cadastro.Dominio.Repository;

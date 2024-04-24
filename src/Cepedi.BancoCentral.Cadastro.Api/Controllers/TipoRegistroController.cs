@@ -1,6 +1,8 @@
-﻿using Cepedi.BancoCentral.Cadastro.Compartilhado.Excecoes;
-using Cepedi.BancoCentral.Cadastro.Compartilhado.Requests;
+﻿using Cepedi.BancoCentral.Cadastro.Compartilhado.Requests;
 using Cepedi.BancoCentral.Cadastro.Compartilhado.Responses;
+using Cepedi.BancoCentral.Cadastro.Shareable.Excecoes;
+using Cepedi.BancoCentral.Cadastro.Shareable.Requests;
+using Cepedi.BancoCentral.Cadastro.Shareable.Responses;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

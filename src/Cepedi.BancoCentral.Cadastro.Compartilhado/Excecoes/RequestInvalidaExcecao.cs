@@ -1,4 +1,4 @@
-﻿namespace Cepedi.BancoCentral.Cadastro.Compartilhado.Excecoes;
+﻿namespace Cepedi.BancoCentral.Cadastro.Shareable.Excecoes;
 public class RequestInvalidaExcecao : ExcecaoAplicacao
 {
     public RequestInvalidaExcecao(IDictionary<string, string[]> erros)

@@ -1,12 +1,12 @@
-﻿using Cepedi.BancoCentral.Cadastro.Compartilhado.Requests;
-using Cepedi.BancoCentral.Cadastro.Compartilhado.Responses;
-using Cepedi.BancoCentral.Cadastro.Dominio.Entidades;
+﻿using Cepedi.BancoCentral.Cadastro.Dominio.Entidades;
 using Cepedi.BancoCentral.Cadastro.Dominio.Repository;
+using Cepedi.BancoCentral.Cadastro.Shareable.Requests;
+using Cepedi.BancoCentral.Cadastro.Shareable.Responses;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using OperationResult;
 
-namespace Cepedi.BancoCentral.Cadastro.Dominio;
+namespace Cepedi.BancoCentral.Cadastro.Dominio.Handlers;
 
 public class AtualizarTipoRegistroRequestHandler : IRequestHandler<AtualizarTipoRegistroRequest, Result<AtualizarTipoRegistroResponse>>
 {
@@ -21,7 +21,7 @@ public class AtualizarTipoRegistroRequestHandler : IRequestHandler<AtualizarTipo
     public Task<Result<AtualizarTipoRegistroResponse>> Handle(AtualizarTipoRegistroRequest request, CancellationToken cancellationToken)
     {
         
-            var tipo = new TipoRegistroEntity(){
+            var tipo = new TipoRegistroEntity{
                 IdTipoRegistro = request.IdTipoRegistro,
                 NomeTipo = request.NomeTipo
             };

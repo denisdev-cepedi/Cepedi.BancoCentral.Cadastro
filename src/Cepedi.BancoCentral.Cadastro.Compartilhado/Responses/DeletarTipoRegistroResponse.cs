@@ -1,4 +1,4 @@
-﻿namespace Cepedi.BancoCentral.Cadastro.Compartilhado.Responses;
+﻿namespace Cepedi.BancoCentral.Cadastro.Shareable.Responses;
 
 
 public record DeletarTipoRegistroResponse(int idTipoRegistro , string nomeTipo);

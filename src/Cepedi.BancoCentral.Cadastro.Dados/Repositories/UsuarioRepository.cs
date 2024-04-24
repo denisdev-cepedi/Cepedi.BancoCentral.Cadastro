@@ -2,7 +2,7 @@ using Cepedi.BancoCentral.Cadastro.Dominio.Entidades;
 using Cepedi.BancoCentral.Cadastro.Dominio.Repository;
 using Microsoft.EntityFrameworkCore;
 
-namespace Cepedi.BancoCentral.Cadastro.Dados.Repositories
+namespace Cepedi.BancoCentral.Cadastro.Data.Repositories
 {
     public class UsuarioRepository : IUsuarioRepository
     {
@@ -39,8 +39,8 @@ namespace Cepedi.BancoCentral.Cadastro.Dados.Repositories
 
         public async Task<UsuarioEntity> ObterUsuarioAsync(int id)
         {
-            return await
-                _context.Usuario.Where(e => e.Id == id).FirstOrDefaultAsync();
+            return (await
+                _context.Usuario.Where(e => e.Id == id).FirstOrDefaultAsync())!;
         }
     }
 }

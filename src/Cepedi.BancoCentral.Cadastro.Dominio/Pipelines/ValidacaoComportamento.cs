@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Cepedi.BancoCentral.Cadastro.Compartilhado;
-using Cepedi.BancoCentral.Cadastro.Compartilhado.Excecoes;
+using Cepedi.BancoCentral.Cadastro.Shareable.Excecoes;
 using FluentValidation;
 using MediatR;
 

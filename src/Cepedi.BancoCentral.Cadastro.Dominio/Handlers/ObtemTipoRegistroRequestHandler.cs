@@ -1,6 +1,9 @@
 ﻿using Cepedi.BancoCentral.Cadastro.Compartilhado.Requests;
 using Cepedi.BancoCentral.Cadastro.Compartilhado.Responses;
 using Cepedi.BancoCentral.Cadastro.Dominio.Repository;
+using Cepedi.BancoCentral.Cadastro.Shareable.Excecoes;
+using Cepedi.BancoCentral.Cadastro.Shareable.Requests;
+using Cepedi.BancoCentral.Cadastro.Shareable.Responses;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using OperationResult;
@@ -20,13 +23,10 @@ public class ObtemTipoRegistroRequestHandler : IRequestHandler<ObtemTipoRegistro
     public async Task<Result<ObtemTipoRegistroResponse>> Handle(ObtemTipoRegistroRequest request, CancellationToken cancellationToken)
     {
             var tipoRegistro = await _tiporegistroRepository.ObterTipoRegistroAsync(request.IdTipoRegistro);
-            if(tipoRegistro == null){
-                return Result.Error<ObtemTipoRegistroResponse>(new Compartilhado.Excecoes.ExcecaoAplicacao(
-                    (Compartilhado.Enums.Cadastro.SemResultados)));
+            if(tipoRegistro == null!){
+                return Result.Error<ObtemTipoRegistroResponse>(new ExcecaoAplicacao(
+                    (Shareable.Enums.Cadastro.SemResultados)));
             }
             return Result.Success(new ObtemTipoRegistroResponse(tipoRegistro.IdTipoRegistro, tipoRegistro.NomeTipo));
-
-        
-
     }
 }
