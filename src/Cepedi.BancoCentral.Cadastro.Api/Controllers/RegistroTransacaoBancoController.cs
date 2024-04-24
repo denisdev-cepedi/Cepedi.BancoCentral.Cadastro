@@ -1,4 +1,4 @@
-using Cepedi.BancoCentral.Cadastro.Compartilhado.Excecoes;
+﻿using Cepedi.BancoCentral.Cadastro.Compartilhado.Excecoes;
 using Cepedi.BancoCentral.Cadastro.Compartilhado.Requests;
 using Cepedi.BancoCentral.Cadastro.Compartilhado.Responses;
 using MediatR;
@@ -39,4 +39,12 @@ public class RegistroTransacaoBancoController : BaseController
         return await SendCommand(request);
     }
 
+    [HttpGet]
+    [ProducesResponseType(typeof(List<ObtemRegistroTransacaoBancoResponse>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<List<ObtemRegistroTransacaoBancoResponse>>> ObterListaRegistroTransacaoBancoAsync()
+    {
+        var request = new ObtemListaRegistroTransacaoBancoRequest();
+        return await SendCommand(request);
+    }
 }
