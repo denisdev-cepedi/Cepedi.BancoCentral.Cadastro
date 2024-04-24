@@ -29,4 +29,14 @@ public class RegistroTransacaoBancoController : BaseController
     [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<DeletarRegistroTransacaoBancoResponse>> DeletarRegistroTransacaoBancoAsync(
                [FromBody] DeletarRegistroTransacaoBancoRequest request) => await SendCommand(request);
+
+    [HttpGet("{idRegistroTransacaoBanco}")]
+    [ProducesResponseType(typeof(ObtemRegistroTransacaoBancoResponse), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<ObtemRegistroTransacaoBancoResponse>> ObterRegistroTransacaoBancoAsync(int idRegistroTransacaoBanco)
+    {
+        var request = new ObtemRegistroTransacaoBancoRequest { IdRegistro = idRegistroTransacaoBanco };
+        return await SendCommand(request);
+    }
+
 }
