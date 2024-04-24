@@ -23,9 +23,14 @@ public class CriarBancoRequestHandler : IRequestHandler<CriarBancoRequest, Resul
     {
         var banco = new BancoEntity
         {
-            NomeReal = request.NomeFantasia, Cnpj = request.Cnpj, DataCriacao = request.DataCriacao
+            NomeFantasia = request.NomeFantasia, NomeReal  = request.NomeReal, Cnpj = request.Cnpj, DataCriacao = request.DataCriacao
         };
         await _bancoRepository.CriarBancoAsync(banco);
-        return Result.Success(new CriarBancoResponse(banco.IdBanco, banco.NomeReal, banco.Cnpj, banco.DataCriacao));
+        return Result.Success(new CriarBancoResponse(
+            banco.IdBanco,
+            banco.NomeReal,
+            banco.Cnpj,
+            banco.DataCriacao
+        ));
     }
 }
