@@ -27,10 +27,10 @@ public class CriarRegistroTransacaoBancoRequestHandler : IRequestHandler<CriarRe
 
     public async Task<Result<CriarRegistroTransacaoBancoResponse>> Handle(CriarRegistroTransacaoBancoRequest request, CancellationToken cancellationToken)
     {
-        if (request.Valor <= 0)
-        {
-            throw new Exception("O valor da transação deve ser maior que zero");
-        }
+        // if (request.Valor <= 0)
+        // {
+        //     throw new Exception("O valor da transação deve ser maior que zero");
+        // }
         //Todo : Fazer Busca da Pessoa pelo id, quando o método estiver pronto
         var pessoa = await _registroTransacaoBancoRepository.ObterRegistroTransacaoBancoPorIdPessoaAsync(request.IdPessoa);
 

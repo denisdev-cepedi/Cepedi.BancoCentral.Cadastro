@@ -4,7 +4,7 @@ using OperationResult;
 
 namespace Cepedi.BancoCentral.Cadastro.Compartilhado.Requests;
 
-public class CriarRegistroTransacaoBancoRequest : IRequest<Result<CriarRegistroTransacaoBancoResponse>>
+public class CriarRegistroTransacaoBancoRequest : IRequest<Result<CriarRegistroTransacaoBancoResponse>>, IValida
 {
     public DateTime DataRegistro { get; set; }
     public int IdTipoRegistro { get; set; }
