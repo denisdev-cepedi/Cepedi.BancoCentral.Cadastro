@@ -5,7 +5,8 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Cepedi.BancoCentral.Cadastro.Api.Controllers;
-
+[ApiController]
+[Route("[controller]")]
 public class PixController : BaseController
 {
     private readonly ILogger<PixController> _logger;
@@ -46,5 +47,5 @@ public class PixController : BaseController
     [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<DeletarPixResponse>> DeletarPixAsync(
         [FromBody] DeletarPixRequest request) => await SendCommand(request);
-    
+
 }

@@ -5,7 +5,8 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Cepedi.BancoCentral.Cadastro.Api.Controllers;
-
+[ApiController]
+[Route("[controller]")]
 public class NacionalidadeController : BaseController
 {
     private readonly ILogger<NacionalidadeController> _logger;
