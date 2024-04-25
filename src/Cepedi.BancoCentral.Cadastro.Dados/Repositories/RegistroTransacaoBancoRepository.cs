@@ -16,7 +16,6 @@ public class RegistroTransacaoBancoRepository : IRegistroTransacaoBancoRepositor
     {
         await _context.RegistroTransacaoBanco.AddAsync(registroTransacaoBanco);
         await _context.SaveChangesAsync();
-        var id = registroTransacaoBanco.IdRegistro;
         return registroTransacaoBanco;
     }
 
