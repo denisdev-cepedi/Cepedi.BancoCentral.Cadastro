@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Cepedi.BancoCentral.Cadastro.Dados.EntityTypeConfiguration;
 
-public class EstadoCivilTypeConfiguration
+public class EstadoCivilTypeConfiguration : IEntityTypeConfiguration<EstadoCivilEntity>
 {
     public void Configure(EntityTypeBuilder<EstadoCivilEntity> builder)
     {

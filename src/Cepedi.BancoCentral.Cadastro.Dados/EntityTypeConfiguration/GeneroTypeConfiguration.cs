@@ -4,8 +4,8 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Cepedi.BancoCentral.Cadastro.Dados.EntityTypeConfiguration;
 
-public class GeneroTypeConfiguration
-{   
+public class GeneroTypeConfiguration : IEntityTypeConfiguration<GeneroEntity>
+{
     public void Configure(EntityTypeBuilder<GeneroEntity> builder)
     {
         builder.ToTable("Genero");

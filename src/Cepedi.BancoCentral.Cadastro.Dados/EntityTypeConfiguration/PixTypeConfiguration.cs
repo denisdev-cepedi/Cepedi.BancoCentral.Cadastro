@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Cepedi.BancoCentral.Cadastro.Dados.EntityTypeConfiguration;
 
-public class PixTypeConfiguration
+public class PixTypeConfiguration : IEntityTypeConfiguration<PixEntity>
 {
     public void Configure(EntityTypeBuilder<PixEntity> builder)
     {

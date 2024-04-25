@@ -4,8 +4,8 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Cepedi.BancoCentral.Cadastro.Dados.EntityTypeConfiguration;
 
-public class TelefoneTypeConfiguration
-{   
+public class TelefoneTypeConfiguration : IEntityTypeConfiguration<TelefoneEntity>
+{
     public void Configure(EntityTypeBuilder<TelefoneEntity> builder)
     {
         builder.ToTable("Telefone");

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Cepedi.BancoCentral.Cadastro.Dados.EntityTypeConfiguration;
 
-public class EmailTypeConfiguration
+public class EmailTypeConfiguration : IEntityTypeConfiguration<EmailEntity>
 {
     public void Configure(EntityTypeBuilder<EmailEntity> builder)
     {

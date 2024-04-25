@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Cepedi.BancoCentral.Cadastro.Dados.EntityTypeConfiguration;
 
-public class PessoaTypeConfiguration
+public class PessoaTypeConfiguration : IEntityTypeConfiguration<PessoaEntity>
 {
     public void Configure(EntityTypeBuilder<PessoaEntity> builder)
     {
@@ -17,7 +17,7 @@ public class PessoaTypeConfiguration
         builder.Property(c => c.Genero).IsRequired();
         builder.Property(c => c.EstadoCivil).IsRequired();
         builder.Property(c => c.Nacionalidade).IsRequired();
-        
+
         builder.HasMany(c => c.Telefones).WithOne().HasForeignKey(c => c.IdPessoa);
         builder.HasMany(c => c.Emails).WithOne().HasForeignKey(c => c.IdPessoa);
         builder.HasMany(c => c.Enderecos).WithOne().HasForeignKey(c => c.IdPessoa);

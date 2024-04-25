@@ -4,8 +4,8 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Cepedi.BancoCentral.Cadastro.Dados.EntityTypeConfiguration;
 
-public class NacionalidadeTypeConfiguration
-{   
+public class NacionalidadeTypeConfiguration : IEntityTypeConfiguration<NacionalidadeEntity>
+{
     public void Configure(EntityTypeBuilder<NacionalidadeEntity> builder)
     {
         builder.ToTable("Nacionalidade");
