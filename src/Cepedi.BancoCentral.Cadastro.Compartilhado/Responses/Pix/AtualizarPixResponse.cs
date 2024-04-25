@@ -1,3 +1,3 @@
 namespace Cepedi.BancoCentral.Cadastro.Compartilhado.Responses;
 
-public record AtualizarPixResponse(string Pix);
+public record AtualizarPixResponse(string ChavePix, string TipoPix);

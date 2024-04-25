@@ -6,5 +6,6 @@ namespace Cepedi.BancoCentral.Cadastro.Compartilhado.Requests;
 
 public class CriarTelefoneRequest : IRequest<Result<CriarTelefoneResponse>>
 {
+    public int IdPessoa { get; set; }
     public string NumeroTelefone { get; set; }
 }

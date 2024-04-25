@@ -11,4 +11,15 @@ public class EnderecoEntity
     public string Estado { get; set; } = default!;
     public string Pais { get; set; } = default!;
     public int IdPessoa { get; set; }
+    
+    internal void Atualizar(string cep, string logradouro, string numero, string bairro, string cidade, string estado, string pais)
+    {
+        Cep = cep;
+        Logradouro = logradouro;
+        Numero = numero;
+        Bairro = bairro;
+        Cidade = cidade;
+        Estado = estado;
+        Pais = pais;
+    }
 }

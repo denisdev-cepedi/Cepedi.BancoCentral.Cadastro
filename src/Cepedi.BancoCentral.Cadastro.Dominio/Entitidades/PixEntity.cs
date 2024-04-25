@@ -6,4 +6,10 @@ public class PixEntity
     public string ChavePix { get; set; } = default!;
     public string TipoPix { get; set; } = default!;
     public int IdPessoa { get; set; }
+    
+    internal void Atualizar(string chavePix, string tipoPix)
+    {
+        ChavePix = chavePix;
+        TipoPix = tipoPix;
+    }
 }
