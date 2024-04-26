@@ -22,7 +22,7 @@ public class CriarTipoRegistroRequestHandler : IRequestHandler<CriarTipoRegistro
 
     public async Task<Result<CriarTipoRegistroResponse>> Handle(CriarTipoRegistroRequest request, CancellationToken cancellationToken)
     {
-       
+            
             var tipo = new TipoRegistroEntity(){
                 NomeTipo = request.NomeTipo
             };
