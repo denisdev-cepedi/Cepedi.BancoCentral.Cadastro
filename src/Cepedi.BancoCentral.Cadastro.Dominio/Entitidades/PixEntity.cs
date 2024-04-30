@@ -1,7 +1,10 @@
-﻿namespace Cepedi.BancoCentral.Cadastro.Dominio.Entidades;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Cepedi.BancoCentral.Cadastro.Dominio.Entidades;
 
 public class PixEntity
 {
+    [Key]
     public int IdPix { get; set; }
     public string ChavePix {get; set;} = default!;
     public string Agencia {get; set;} = default!;

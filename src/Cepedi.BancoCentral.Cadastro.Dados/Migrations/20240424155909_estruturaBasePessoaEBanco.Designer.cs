@@ -4,6 +4,7 @@ using Cepedi.BancoCentral.Cadastro.Dados;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Cepedi.BancoCentral.Cadastro.Dados.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240424155909_estruturaBasePessoaEBanco")]
+    partial class estruturaBasePessoaEBanco
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -86,43 +89,6 @@ namespace Cepedi.BancoCentral.Cadastro.Dados.Migrations
                     b.ToTable("Pessoa", (string)null);
                 });
 
-            modelBuilder.Entity("Cepedi.BancoCentral.Cadastro.Dominio.Entidades.PixEntity", b =>
-                {
-                    b.Property<int>("IdPix")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdPix"));
-
-                    b.Property<string>("Agencia")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ChavePix")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Conta")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("IdTipoPix")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Instituicao")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("TipoPixEntityIdTipoPix")
-                        .HasColumnType("int");
-
-                    b.HasKey("IdPix");
-
-                    b.HasIndex("TipoPixEntityIdTipoPix");
-
-                    b.ToTable("Pix");
-                });
-
             modelBuilder.Entity("Cepedi.BancoCentral.Cadastro.Dominio.Entidades.RegistroTransacaoBancoEntity", b =>
                 {
                     b.Property<int>("IdRegistro")
@@ -155,23 +121,6 @@ namespace Cepedi.BancoCentral.Cadastro.Dados.Migrations
                     b.HasIndex("IdTipoRegistro");
 
                     b.ToTable("RegistroTransacaoBanco", (string)null);
-                });
-
-            modelBuilder.Entity("Cepedi.BancoCentral.Cadastro.Dominio.Entidades.TipoPixEntity", b =>
-                {
-                    b.Property<int>("IdTipoPix")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdTipoPix"));
-
-                    b.Property<string>("NomeTipo")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("IdTipoPix");
-
-                    b.ToTable("TipoPix");
                 });
 
             modelBuilder.Entity("Cepedi.BancoCentral.Cadastro.Dominio.Entidades.TipoRegistroEntity", b =>
@@ -231,15 +180,6 @@ namespace Cepedi.BancoCentral.Cadastro.Dados.Migrations
                     b.ToTable("Usuario", (string)null);
                 });
 
-            modelBuilder.Entity("Cepedi.BancoCentral.Cadastro.Dominio.Entidades.PixEntity", b =>
-                {
-                    b.HasOne("Cepedi.BancoCentral.Cadastro.Dominio.Entidades.TipoPixEntity", "TipoPixEntity")
-                        .WithMany("Pixs")
-                        .HasForeignKey("TipoPixEntityIdTipoPix");
-
-                    b.Navigation("TipoPixEntity");
-                });
-
             modelBuilder.Entity("Cepedi.BancoCentral.Cadastro.Dominio.Entidades.RegistroTransacaoBancoEntity", b =>
                 {
                     b.HasOne("Cepedi.BancoCentral.Cadastro.Dominio.Entidades.BancoEntity", "Banco")
@@ -265,11 +205,6 @@ namespace Cepedi.BancoCentral.Cadastro.Dados.Migrations
                     b.Navigation("Pessoa");
 
                     b.Navigation("TipoRegistro");
-                });
-
-            modelBuilder.Entity("Cepedi.BancoCentral.Cadastro.Dominio.Entidades.TipoPixEntity", b =>
-                {
-                    b.Navigation("Pixs");
                 });
 #pragma warning restore 612, 618
         }
