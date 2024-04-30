@@ -24,8 +24,7 @@ public class ObtemRegistroTransacaoBancoRequestHandler : IRequestHandler<ObtemRe
         var registroTransacao = await _registroTransacaoBancoRepository.ObterRegistroTransacaoBancoAsync(request.IdRegistro);
         if (registroTransacao == null)
         {
-            return Result.Error<ObtemRegistroTransacaoBancoResponse>(new Compartilhado.Excecoes.ExcecaoAplicacao(
-                (Compartilhado.Enums.Cadastro.SemResultados)));
+            return Result.Error<ObtemRegistroTransacaoBancoResponse>(new Compartilhado.Excecoes.ExcecaoAplicacao((Compartilhado.Enums.Cadastro.SemResultados)));
         }
         return Result.Success(new ObtemRegistroTransacaoBancoResponse(registroTransacao.IdRegistro, registroTransacao.DataRegistro, registroTransacao.TipoRegistro.NomeTipo, registroTransacao.Pessoa.Nome, registroTransacao.Banco.NomeReal));
     }

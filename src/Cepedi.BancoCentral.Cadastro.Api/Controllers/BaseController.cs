@@ -30,6 +30,7 @@ public class BaseController : ControllerBase
     protected ActionResult HandleError(Exception error) => error switch
     {
         SemResultadosExcecao e => NoContent(),
+        ExcecaoAplicacao erro => BadRequest(FormatErrorMessage(erro.ResponseErro)),
         _ => BadRequest(FormatErrorMessage(Compartilhado.Enums.Cadastro.Generico))
     };
 
