@@ -22,23 +22,15 @@ public class CriarEmailHandler : IRequestHandler<CriarEmailRequest, Result<Criar
 
     public async Task<Result<CriarEmailResponse>> Handle(CriarEmailRequest request, CancellationToken cancellationToken)
     {
-        try
+        var email = new EmailEntity()
         {
-            var email = new EmailEntity()
-            {
-                EnderecoEmail = request.EnderecoEmail,
-                IdPessoa = request.IdPessoa
-            };
+            EnderecoEmail = request.EnderecoEmail,
+            IdPessoa = request.IdPessoa
+        };
 
-            await _emailRepository.CriarEmailAsync(email);
+        await _emailRepository.CriarEmailAsync(email);
 
-            return Result.Success(new CriarEmailResponse(email.IdEmail, email.EnderecoEmail));
-        }
-        catch
-        {
-            _logger.LogError("Ocorreu um erro durante a execução");
-            return Result.Error<CriarEmailResponse>(new Compartilhado.Excecoes.ExcecaoAplicacao(
-                (Compartilhado.Enums.Cadastro.ErroGravacaoUsuario)));
-        }
+        return Result.Success(new CriarEmailResponse(email.IdEmail, email.EnderecoEmail));
     }
 }
+

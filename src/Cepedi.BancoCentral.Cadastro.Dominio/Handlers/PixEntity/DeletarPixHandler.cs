@@ -22,25 +22,16 @@ public class DeletarPixHandler : IRequestHandler<DeletarPixRequest, Result<Delet
 
     public async Task<Result<DeletarPixResponse>> Handle(DeletarPixRequest request, CancellationToken cancellationToken)
     {
-        try
+        var pix = await _pixRepository.ObterPixAsync(request.IdPix);
+
+        if (pix == null)
         {
-            var pix = await _pixRepository.ObterPixAsync(request.IdPix);
-
-            if (pix == null)
-            {
-                return Result.Error<DeletarPixResponse>(new Compartilhado.
-                    Excecoes.SemResultadosExcecao());
-            }
-
-            await _pixRepository.DeletarPixAsync(pix.IdPix);
-
-            return Result.Success(new DeletarPixResponse(pix.ChavePix));
+            return Result.Error<DeletarPixResponse>(new Compartilhado.
+                Excecoes.SemResultadosExcecao());
         }
-        catch
-        {
-            _logger.LogError("Ocorreu um erro durante a execução");
-            return Result.Error<DeletarPixResponse>(new Compartilhado.Excecoes.ExcecaoAplicacao(
-                (Compartilhado.Enums.Cadastro.ErroGravacaoUsuario)));
-        }
+
+        await _pixRepository.DeletarPixAsync(pix);
+
+        return Result.Success(new DeletarPixResponse(pix.ChavePix));
     }
 }

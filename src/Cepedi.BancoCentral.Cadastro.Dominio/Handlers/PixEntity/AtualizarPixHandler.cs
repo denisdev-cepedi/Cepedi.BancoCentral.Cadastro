@@ -20,25 +20,17 @@ public class AtualizarPixHandler : IRequestHandler<AtualizarPixRequest, Result<A
 
     public async Task<Result<AtualizarPixResponse>> Handle(AtualizarPixRequest request, CancellationToken cancellationToken)
     {
-        try
+        var pixEntity = await _pixRepository.ObterPixAsync(request.IdPix);
+
+        if (pixEntity == null)
         {
-            var pixEntity = await _pixRepository.ObterPixAsync(request.IdPix);
-
-            if (pixEntity == null)
-            {
-                return Result.Error<AtualizarPixResponse>(new Compartilhado.Excecoes.SemResultadosExcecao());
-            }
-
-            pixEntity.Atualizar(request.ChavePix, request.TipoPix);
-
-            await _pixRepository.AtualizarPixAsync(pixEntity);
-
-            return Result.Success(new AtualizarPixResponse(pixEntity.ChavePix, pixEntity.TipoPix));
+            return Result.Error<AtualizarPixResponse>(new Compartilhado.Excecoes.SemResultadosExcecao());
         }
-        catch
-        {
-            _logger.LogError("Ocorreu um erro ao atualizar os pix");
-            throw;
-        }
+
+        pixEntity.Atualizar(request.ChavePix, request.TipoPix);
+
+        await _pixRepository.AtualizarPixAsync(pixEntity);
+
+        return Result.Success(new AtualizarPixResponse(pixEntity.ChavePix, pixEntity.TipoPix));
     }
 }

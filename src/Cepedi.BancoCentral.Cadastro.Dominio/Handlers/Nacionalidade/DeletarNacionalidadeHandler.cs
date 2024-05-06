@@ -22,25 +22,16 @@ public class DeletarNacionalidadeHandler : IRequestHandler<DeletarNacionalidadeR
 
     public async Task<Result<DeletarNacionalidadeResponse>> Handle(DeletarNacionalidadeRequest request, CancellationToken cancellationToken)
     {
-        try
+        var nacionalidade = await _nacionalidadeRepository.ObterNacionalidadeAsync(request.Id);
+
+        if (nacionalidade == null)
         {
-            var nacionalidade = await _nacionalidadeRepository.ObterNacionalidadeAsync(request.Id);
-
-            if (nacionalidade == null)
-            {
-                return Result.Error<DeletarNacionalidadeResponse>(new Compartilhado.
-                    Excecoes.SemResultadosExcecao());
-            }
-
-            await _nacionalidadeRepository.DeletarNacionalidadeAsync(nacionalidade.IdNacionalidade);
-
-            return Result.Success(new DeletarNacionalidadeResponse(nacionalidade.NomeNacionalidade));
+            return Result.Error<DeletarNacionalidadeResponse>(new Compartilhado.
+                Excecoes.SemResultadosExcecao());
         }
-        catch
-        {
-            _logger.LogError("Ocorreu um erro durante a execução");
-            return Result.Error<DeletarNacionalidadeResponse>(new Compartilhado.Excecoes.ExcecaoAplicacao(
-                (Compartilhado.Enums.Cadastro.ErroGravacaoUsuario)));
-        }
+
+        await _nacionalidadeRepository.DeletarNacionalidadeAsync(nacionalidade);
+
+        return Result.Success(new DeletarNacionalidadeResponse(nacionalidade.NomeNacionalidade));
     }
 }

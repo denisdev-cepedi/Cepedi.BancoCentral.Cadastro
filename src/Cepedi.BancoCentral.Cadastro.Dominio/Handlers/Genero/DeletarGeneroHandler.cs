@@ -22,25 +22,16 @@ public class DeletarGeneroHandler : IRequestHandler<DeletarGeneroRequest, Result
 
     public async Task<Result<DeletarGeneroResponse>> Handle(DeletarGeneroRequest request, CancellationToken cancellationToken)
     {
-        try
+        var genero = await _generoRepository.ObterGeneroAsync(request.Id);
+
+        if (genero == null)
         {
-            var genero = await _generoRepository.ObterGeneroAsync(request.Id);
-
-            if (genero == null)
-            {
-                return Result.Error<DeletarGeneroResponse>(new Compartilhado.
-                    Excecoes.SemResultadosExcecao());
-            }
-
-            await _generoRepository.DeletarGeneroAsync(genero.IdGenero);
-
-            return Result.Success(new DeletarGeneroResponse(genero.NomeGenero));
+            return Result.Error<DeletarGeneroResponse>(new Compartilhado.
+                Excecoes.SemResultadosExcecao());
         }
-        catch
-        {
-            _logger.LogError("Ocorreu um erro durante a execução");
-            return Result.Error<DeletarGeneroResponse>(new Compartilhado.Excecoes.ExcecaoAplicacao(
-                (Compartilhado.Enums.Cadastro.ErroGravacaoUsuario)));
-        }
+
+        await _generoRepository.DeletarGeneroAsync(genero);
+
+        return Result.Success(new DeletarGeneroResponse(genero.NomeGenero));
     }
 }

@@ -22,24 +22,15 @@ public class CriarPixHandler : IRequestHandler<CriarPixRequest, Result<CriarPixR
 
     public async Task<Result<CriarPixResponse>> Handle(CriarPixRequest request, CancellationToken cancellationToken)
     {
-        try
+        var pix = new PixEntity()
         {
-            var pix = new PixEntity()
-            {
-                IdPessoa = request.IdCliente,
-                ChavePix = request.ChavePix,
-                TipoPix = request.TipoPix,
-            };
+            IdPessoa = request.IdCliente,
+            ChavePix = request.ChavePix,
+            TipoPix = request.TipoPix,
+        };
 
-            await _pixRepository.CriarPixAsync(pix);
+        await _pixRepository.CriarPixAsync(pix);
 
-            return Result.Success(new CriarPixResponse(pix.ChavePix, pix.TipoPix));
-        }
-        catch
-        {
-            _logger.LogError("Ocorreu um erro durante a execução");
-            return Result.Error<CriarPixResponse>(new Compartilhado.Excecoes.ExcecaoAplicacao(
-                (Compartilhado.Enums.Cadastro.ErroGravacaoUsuario)));
-        }
+        return Result.Success(new CriarPixResponse(pix.ChavePix, pix.TipoPix));
     }
 }

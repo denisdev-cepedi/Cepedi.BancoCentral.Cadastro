@@ -20,25 +20,17 @@ public class AtualizarEmailHandler : IRequestHandler<AtualizarEmailRequest, Resu
 
     public async Task<Result<AtualizarEmailResponse>> Handle(AtualizarEmailRequest request, CancellationToken cancellationToken)
     {
-        try
+        var emailEntity = await _emailRepository.ObterEmailAsync(request.Id);
+
+        if (emailEntity == null)
         {
-            var emailEntity = await _emailRepository.ObterEmailAsync(request.Id);
-
-            if (emailEntity == null)
-            {
-                return Result.Error<AtualizarEmailResponse>(new Compartilhado.Excecoes.SemResultadosExcecao());
-            }
-
-            emailEntity.Atualizar(request.Email);
-
-            await _emailRepository.AtualizarEmailAsync(emailEntity);
-
-            return Result.Success(new AtualizarEmailResponse(emailEntity.EnderecoEmail));
+            return Result.Error<AtualizarEmailResponse>(new Compartilhado.Excecoes.SemResultadosExcecao());
         }
-        catch
-        {
-            _logger.LogError("Ocorreu um erro ao atualizar os emails");
-            throw;
-        }
+
+        emailEntity.Atualizar(request.Email);
+
+        await _emailRepository.AtualizarEmailAsync(emailEntity);
+
+        return Result.Success(new AtualizarEmailResponse(emailEntity.EnderecoEmail));
     }
 }

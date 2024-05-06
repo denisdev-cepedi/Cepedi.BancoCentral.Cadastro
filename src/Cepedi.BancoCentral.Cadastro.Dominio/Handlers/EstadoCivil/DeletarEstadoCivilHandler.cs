@@ -22,25 +22,16 @@ public class DeletarEstadoCivilHandler : IRequestHandler<DeletarEstadoCivilReque
 
     public async Task<Result<DeletarEstadoCivilResponse>> Handle(DeletarEstadoCivilRequest request, CancellationToken cancellationToken)
     {
-        try
+        var estadoCivil = await _estadoCivilRepository.ObterEstadoCivilAsync(request.Id);
+
+        if (estadoCivil == null)
         {
-            var estadoCivil = await _estadoCivilRepository.ObterEstadoCivilAsync(request.Id);
-
-            if (estadoCivil == null)
-            {
-                return Result.Error<DeletarEstadoCivilResponse>(new Compartilhado.
-                    Excecoes.SemResultadosExcecao());
-            }
-
-            await _estadoCivilRepository.DeletarEstadoCivilAsync(estadoCivil.IdEstadoCivil);
-
-            return Result.Success(new DeletarEstadoCivilResponse(estadoCivil.NomeEstadoCivil));
+            return Result.Error<DeletarEstadoCivilResponse>(new Compartilhado.
+                Excecoes.SemResultadosExcecao());
         }
-        catch
-        {
-            _logger.LogError("Ocorreu um erro durante a execução");
-            return Result.Error<DeletarEstadoCivilResponse>(new Compartilhado.Excecoes.ExcecaoAplicacao(
-                (Compartilhado.Enums.Cadastro.ErroGravacaoUsuario)));
-        }
+
+        await _estadoCivilRepository.DeletarEstadoCivilAsync(estadoCivil);
+
+        return Result.Success(new DeletarEstadoCivilResponse(estadoCivil.NomeEstadoCivil));
     }
 }

@@ -31,10 +31,8 @@ public class PixRepository : IPixRepository
         return pix;
     }
 
-    public async Task<PixEntity> DeletarPixAsync(int id)
+    public async Task<PixEntity> DeletarPixAsync(PixEntity pix)
     {
-        var pix = await ObterPixAsync(id);
-
         _context.Pix.Remove(pix);
 
         await _context.SaveChangesAsync();

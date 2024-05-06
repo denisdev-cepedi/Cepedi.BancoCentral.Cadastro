@@ -22,25 +22,16 @@ public class DeletarTelefoneHandler : IRequestHandler<DeletarTelefoneRequest, Re
 
     public async Task<Result<DeletarTelefoneResponse>> Handle(DeletarTelefoneRequest request, CancellationToken cancellationToken)
     {
-        try
+        var telefone = await _telefoneRepository.ObterTelefoneAsync(request.IdTelefone);
+
+        if (telefone == null)
         {
-            var telefone = await _telefoneRepository.ObterTelefoneAsync(request.IdTelefone);
-
-            if (telefone == null)
-            {
-                return Result.Error<DeletarTelefoneResponse>(new Compartilhado.
-                    Excecoes.SemResultadosExcecao());
-            }
-
-            await _telefoneRepository.DeletarTelefoneAsync(telefone.IdTelefone);
-
-            return Result.Success(new DeletarTelefoneResponse(telefone.NumeroTelefone));
+            return Result.Error<DeletarTelefoneResponse>(new Compartilhado.
+                Excecoes.SemResultadosExcecao());
         }
-        catch
-        {
-            _logger.LogError("Ocorreu um erro durante a execução");
-            return Result.Error<DeletarTelefoneResponse>(new Compartilhado.Excecoes.ExcecaoAplicacao(
-                (Compartilhado.Enums.Cadastro.ErroGravacaoUsuario)));
-        }
+
+        await _telefoneRepository.DeletarTelefoneAsync(telefone);
+
+        return Result.Success(new DeletarTelefoneResponse(telefone.NumeroTelefone));
     }
 }

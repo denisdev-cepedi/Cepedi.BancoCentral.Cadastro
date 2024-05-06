@@ -8,7 +8,7 @@ namespace Cepedi.BancoCentral.Cadastro.Dominio.Repository
         Task<PessoaEntity> ObterPessoaAsync(int id);
 
         Task<PessoaEntity> AtualizarPessoaAsync(PessoaEntity pessoa);
-        Task<PessoaEntity> DeletarPessoaAsync(int id);
+        Task<PessoaEntity> DeletarPessoaAsync(PessoaEntity pessoa);
         Task<List<PessoaEntity>> GetPessoasAsync();
     }
 

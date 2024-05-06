@@ -22,29 +22,20 @@ public class CriarEnderecoHandler : IRequestHandler<CriarEnderecoRequest, Result
 
     public async Task<Result<CriarEnderecoResponse>> Handle(CriarEnderecoRequest request, CancellationToken cancellationToken)
     {
-        try
+        var endereco = new EnderecoEntity()
         {
-            var endereco = new EnderecoEntity()
-            {
-                IdPessoa = request.IdPessoa,
-                Logradouro = request.Logradouro,
-                Numero = request.Numero,
-                Bairro = request.Bairro,
-                Cidade = request.Cidade,
-                Estado = request.Estado,
-                Pais = request.Pais,
-                Cep = request.Cep
-            };
+            IdPessoa = request.IdPessoa,
+            Logradouro = request.Logradouro,
+            Numero = request.Numero,
+            Bairro = request.Bairro,
+            Cidade = request.Cidade,
+            Estado = request.Estado,
+            Pais = request.Pais,
+            Cep = request.Cep
+        };
 
-            await _enderecoRepository.CriarEnderecoAsync(endereco);
+        await _enderecoRepository.CriarEnderecoAsync(endereco);
 
-            return Result.Success(new CriarEnderecoResponse(endereco.Cep, endereco.Logradouro, endereco.Bairro, endereco.Cidade, endereco.Estado, endereco.Numero, endereco.Pais));
-        }
-        catch
-        {
-            _logger.LogError("Ocorreu um erro durante a execução");
-            return Result.Error<CriarEnderecoResponse>(new Compartilhado.Excecoes.ExcecaoAplicacao(
-                (Compartilhado.Enums.Cadastro.ErroGravacaoUsuario)));
-        }
+        return Result.Success(new CriarEnderecoResponse(endereco.Cep, endereco.Logradouro, endereco.Bairro, endereco.Cidade, endereco.Estado, endereco.Numero, endereco.Pais));
     }
 }

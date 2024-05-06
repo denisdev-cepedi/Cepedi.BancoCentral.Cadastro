@@ -22,22 +22,13 @@ public class CriarGeneroHandler : IRequestHandler<CriarGeneroRequest, Result<Cri
 
     public async Task<Result<CriarGeneroResponse>> Handle(CriarGeneroRequest request, CancellationToken cancellationToken)
     {
-        try
+        var genero = new GeneroEntity()
         {
-            var genero = new GeneroEntity()
-            {
-                NomeGenero = request.Descricao
-            };
+            NomeGenero = request.Descricao
+        };
 
-            await _generoRepository.CriarGeneroAsync(genero);
+        await _generoRepository.CriarGeneroAsync(genero);
 
-            return Result.Success(new CriarGeneroResponse(genero.NomeGenero));
-        }
-        catch
-        {
-            _logger.LogError("Ocorreu um erro durante a execução");
-            return Result.Error<CriarGeneroResponse>(new Compartilhado.Excecoes.ExcecaoAplicacao(
-                (Compartilhado.Enums.Cadastro.ErroGravacaoUsuario)));
-        }
+        return Result.Success(new CriarGeneroResponse(genero.NomeGenero));
     }
 }

@@ -22,25 +22,16 @@ public class DeletarEnderecoHandler : IRequestHandler<DeletarEnderecoRequest, Re
 
     public async Task<Result<DeletarEnderecoResponse>> Handle(DeletarEnderecoRequest request, CancellationToken cancellationToken)
     {
-        try
+        var endereco = await _enderecoRepository.ObterEnderecoAsync(request.Id);
+
+        if (endereco == null)
         {
-            var endereco = await _enderecoRepository.ObterEnderecoAsync(request.Id);
-
-            if (endereco == null)
-            {
-                return Result.Error<DeletarEnderecoResponse>(new Compartilhado.
-                    Excecoes.SemResultadosExcecao());
-            }
-
-            await _enderecoRepository.DeletarEnderecoAsync(endereco.IdEndereco);
-
-            return Result.Success(new DeletarEnderecoResponse(endereco.Logradouro));
+            return Result.Error<DeletarEnderecoResponse>(new Compartilhado.
+                Excecoes.SemResultadosExcecao());
         }
-        catch
-        {
-            _logger.LogError("Ocorreu um erro durante a execução");
-            return Result.Error<DeletarEnderecoResponse>(new Compartilhado.Excecoes.ExcecaoAplicacao(
-                (Compartilhado.Enums.Cadastro.ErroGravacaoUsuario)));
-        }
+
+        await _enderecoRepository.DeletarEnderecoAsync(endereco);
+
+        return Result.Success(new DeletarEnderecoResponse(endereco.Logradouro));
     }
 }

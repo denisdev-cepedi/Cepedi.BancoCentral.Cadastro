@@ -20,25 +20,17 @@ public class AtualizarEstadoCivilHandler : IRequestHandler<AtualizarEstadoCivilR
 
     public async Task<Result<AtualizarEstadoCivilResponse>> Handle(AtualizarEstadoCivilRequest request, CancellationToken cancellationToken)
     {
-        try
+        var estadoCivilEntity = await _estadoCivilRepository.ObterEstadoCivilAsync(request.Id);
+
+        if (estadoCivilEntity == null)
         {
-            var estadoCivilEntity = await _estadoCivilRepository.ObterEstadoCivilAsync(request.Id);
-
-            if (estadoCivilEntity == null)
-            {
-                return Result.Error<AtualizarEstadoCivilResponse>(new Compartilhado.Excecoes.SemResultadosExcecao());
-            }
-
-            estadoCivilEntity.Atualizar(request.Descricao);
-
-            await _estadoCivilRepository.AtualizarEstadoCivilAsync(estadoCivilEntity);
-
-            return Result.Success(new AtualizarEstadoCivilResponse(estadoCivilEntity.NomeEstadoCivil));
+            return Result.Error<AtualizarEstadoCivilResponse>(new Compartilhado.Excecoes.SemResultadosExcecao());
         }
-        catch
-        {
-            _logger.LogError("Ocorreu um erro ao atualizar os estados civis");
-            throw;
-        }
+
+        estadoCivilEntity.Atualizar(request.Descricao);
+
+        await _estadoCivilRepository.AtualizarEstadoCivilAsync(estadoCivilEntity);
+
+        return Result.Success(new AtualizarEstadoCivilResponse(estadoCivilEntity.NomeEstadoCivil));
     }
 }

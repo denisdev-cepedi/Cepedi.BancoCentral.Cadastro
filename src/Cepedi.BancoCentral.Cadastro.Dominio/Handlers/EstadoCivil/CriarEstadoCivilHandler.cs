@@ -22,22 +22,13 @@ public class CriarEstadoCivilHandler : IRequestHandler<CriarEstadoCivilRequest, 
 
     public async Task<Result<CriarEstadoCivilResponse>> Handle(CriarEstadoCivilRequest request, CancellationToken cancellationToken)
     {
-        try
+        var estadoCivil = new EstadoCivilEntity()
         {
-            var estadoCivil = new EstadoCivilEntity()
-            {
-                NomeEstadoCivil = request.Descricao
-            };
+            NomeEstadoCivil = request.Descricao
+        };
 
-            await _estadoCivilRepository.CriarEstadoCivilAsync(estadoCivil);
+        await _estadoCivilRepository.CriarEstadoCivilAsync(estadoCivil);
 
-            return Result.Success(new CriarEstadoCivilResponse(estadoCivil.NomeEstadoCivil));
-        }
-        catch
-        {
-            _logger.LogError("Ocorreu um erro durante a execução");
-            return Result.Error<CriarEstadoCivilResponse>(new Compartilhado.Excecoes.ExcecaoAplicacao(
-                (Compartilhado.Enums.Cadastro.ErroGravacaoUsuario)));
-        }
+        return Result.Success(new CriarEstadoCivilResponse(estadoCivil.NomeEstadoCivil));
     }
 }

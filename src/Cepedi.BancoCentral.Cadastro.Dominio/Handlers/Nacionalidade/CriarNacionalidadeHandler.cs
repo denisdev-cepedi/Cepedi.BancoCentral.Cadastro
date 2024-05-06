@@ -22,22 +22,13 @@ public class CriarNacionalidadeHandler : IRequestHandler<CriarNacionalidadeReque
 
     public async Task<Result<CriarNacionalidadeResponse>> Handle(CriarNacionalidadeRequest request, CancellationToken cancellationToken)
     {
-        try
+        var nacionalidade = new NacionalidadeEntity()
         {
-            var nacionalidade = new NacionalidadeEntity()
-            {
-                NomeNacionalidade = request.Descricao
-            };
+            NomeNacionalidade = request.Descricao
+        };
 
-            await _nacionalidadeRepository.CriarNacionalidadeAsync(nacionalidade);
+        await _nacionalidadeRepository.CriarNacionalidadeAsync(nacionalidade);
 
-            return Result.Success(new CriarNacionalidadeResponse(nacionalidade.NomeNacionalidade));
-        }
-        catch
-        {
-            _logger.LogError("Ocorreu um erro durante a execução");
-            return Result.Error<CriarNacionalidadeResponse>(new Compartilhado.Excecoes.ExcecaoAplicacao(
-                (Compartilhado.Enums.Cadastro.ErroGravacaoUsuario)));
-        }
+        return Result.Success(new CriarNacionalidadeResponse(nacionalidade.NomeNacionalidade));
     }
 }

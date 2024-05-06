@@ -42,15 +42,8 @@ public class PessoaRepository : IPessoaRepository
             _context.Pessoa.Where(e => e.IdPessoa == id).FirstOrDefaultAsync();
     }
 
-    public async Task<PessoaEntity> DeletarPessoaAsync(int id)
+    public async Task<PessoaEntity> DeletarPessoaAsync(PessoaEntity pessoa)
     {
-        var pessoa = await ObterPessoaAsync(id);
-
-        if (pessoa == null)
-        {
-            return null;
-        }
-
         _context.Pessoa.Remove(pessoa);
 
         await _context.SaveChangesAsync();

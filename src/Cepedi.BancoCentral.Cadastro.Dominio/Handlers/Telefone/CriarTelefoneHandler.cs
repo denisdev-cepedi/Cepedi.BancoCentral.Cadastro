@@ -22,23 +22,14 @@ public class CriarTelefoneHandler : IRequestHandler<CriarTelefoneRequest, Result
 
     public async Task<Result<CriarTelefoneResponse>> Handle(CriarTelefoneRequest request, CancellationToken cancellationToken)
     {
-        try
+        var telefone = new TelefoneEntity()
         {
-            var telefone = new TelefoneEntity()
-            {
-                IdPessoa = request.IdPessoa,
-                NumeroTelefone = request.NumeroTelefone,
-            };
+            IdPessoa = request.IdPessoa,
+            NumeroTelefone = request.NumeroTelefone,
+        };
 
-            await _telefoneRepository.CriarTelefoneAsync(telefone);
+        await _telefoneRepository.CriarTelefoneAsync(telefone);
 
-            return Result.Success(new CriarTelefoneResponse(telefone.NumeroTelefone));
-        }
-        catch
-        {
-            _logger.LogError("Ocorreu um erro durante a execução");
-            return Result.Error<CriarTelefoneResponse>(new Compartilhado.Excecoes.ExcecaoAplicacao(
-                (Compartilhado.Enums.Cadastro.ErroGravacaoUsuario)));
-        }
+        return Result.Success(new CriarTelefoneResponse(telefone.NumeroTelefone));
     }
 }

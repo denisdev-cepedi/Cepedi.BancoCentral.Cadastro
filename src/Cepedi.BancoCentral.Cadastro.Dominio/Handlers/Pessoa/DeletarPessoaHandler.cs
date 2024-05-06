@@ -22,25 +22,16 @@ public class DeletarPessoaHandler : IRequestHandler<DeletarPessoaRequest, Result
 
     public async Task<Result<DeletarPessoaResponse>> Handle(DeletarPessoaRequest request, CancellationToken cancellationToken)
     {
-        try
+        var pessoa = await _pessoaRepository.ObterPessoaAsync(request.Id);
+
+        if (pessoa == null)
         {
-            var pessoa = await _pessoaRepository.ObterPessoaAsync(request.Id);
-
-            if (pessoa == null)
-            {
-                return Result.Error<DeletarPessoaResponse>(new Compartilhado.
-                    Excecoes.SemResultadosExcecao());
-            }
-
-            await _pessoaRepository.DeletarPessoaAsync(pessoa.IdPessoa);
-
-            return Result.Success(new DeletarPessoaResponse(pessoa.IdPessoa, pessoa.Nome));
+            return Result.Error<DeletarPessoaResponse>(new Compartilhado.
+                Excecoes.SemResultadosExcecao());
         }
-        catch
-        {
-            _logger.LogError("Ocorreu um erro durante a execução");
-            return Result.Error<DeletarPessoaResponse>(new Compartilhado.Excecoes.ExcecaoAplicacao(
-                (Compartilhado.Enums.Cadastro.ErroGravacaoUsuario)));
-        }
+
+        await _pessoaRepository.DeletarPessoaAsync(pessoa);
+
+        return Result.Success(new DeletarPessoaResponse(pessoa.IdPessoa, pessoa.Nome));
     }
 }

@@ -22,25 +22,16 @@ public class DeletarEmailHandler : IRequestHandler<DeletarEmailRequest, Result<D
 
     public async Task<Result<DeletarEmailResponse>> Handle(DeletarEmailRequest request, CancellationToken cancellationToken)
     {
-        try
+        var email = await _emailRepository.ObterEmailAsync(request.Id);
+
+        if (email == null)
         {
-            var email = await _emailRepository.ObterEmailAsync(request.Id);
-
-            if (email == null)
-            {
-                return Result.Error<DeletarEmailResponse>(new Compartilhado.
-                    Excecoes.SemResultadosExcecao());
-            }
-
-            await _emailRepository.DeletarEmailAsync(email.IdEmail);
-
-            return Result.Success(new DeletarEmailResponse(email.EnderecoEmail));
+            return Result.Error<DeletarEmailResponse>(new Compartilhado.
+                Excecoes.SemResultadosExcecao());
         }
-        catch
-        {
-            _logger.LogError("Ocorreu um erro durante a execução");
-            return Result.Error<DeletarEmailResponse>(new Compartilhado.Excecoes.ExcecaoAplicacao(
-                (Compartilhado.Enums.Cadastro.ErroGravacaoUsuario)));
-        }
+
+        await _emailRepository.DeletarEmailAsync(email);
+
+        return Result.Success(new DeletarEmailResponse(email.EnderecoEmail));
     }
 }

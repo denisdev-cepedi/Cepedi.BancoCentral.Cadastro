@@ -7,6 +7,6 @@ public interface ITelefoneRepository
     Task<TelefoneEntity> CriarTelefoneAsync(TelefoneEntity telefone);
     Task<TelefoneEntity> ObterTelefoneAsync(int id);
     Task<TelefoneEntity> AtualizarTelefoneAsync(TelefoneEntity telefone);
-    Task<TelefoneEntity> DeletarTelefoneAsync(int id);
+    Task<TelefoneEntity> DeletarTelefoneAsync(TelefoneEntity telefone);
     Task<List<TelefoneEntity>> GetTelefonesAsync();
 }

@@ -7,6 +7,6 @@ public interface INacionalidadeRepository
     Task<NacionalidadeEntity> CriarNacionalidadeAsync(NacionalidadeEntity nacionalidade);
     Task<NacionalidadeEntity> ObterNacionalidadeAsync(int id);
     Task<NacionalidadeEntity> AtualizarNacionalidadeAsync(NacionalidadeEntity nacionalidade);
-    Task<NacionalidadeEntity> DeletarNacionalidadeAsync(int id);
-    Task<List<NacionalidadeEntity>> GetNacionalidadesAsync();    
+    Task<NacionalidadeEntity> DeletarNacionalidadeAsync(NacionalidadeEntity nacionalidade);
+    Task<List<NacionalidadeEntity>> GetNacionalidadesAsync();
 }

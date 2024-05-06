@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Cepedi.BancoCentral.Cadastro.Dados.Repositories;
 
 public class GeneroRepository : IGeneroRepository
-{  
+{
     private readonly ApplicationDbContext _context;
 
     public GeneroRepository(ApplicationDbContext context)
@@ -31,10 +31,8 @@ public class GeneroRepository : IGeneroRepository
         return genero;
     }
 
-    public async Task<GeneroEntity> DeletarGeneroAsync(int id)
+    public async Task<GeneroEntity> DeletarGeneroAsync(GeneroEntity genero)
     {
-        var genero = await ObterGeneroAsync(id);
-
         _context.Genero.Remove(genero);
 
         await _context.SaveChangesAsync();

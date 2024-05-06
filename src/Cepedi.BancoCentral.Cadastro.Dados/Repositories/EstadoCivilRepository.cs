@@ -31,10 +31,8 @@ public class EstadoCivilRepository : IEstadoCivilRepository
         return estadoCivil;
     }
 
-    public async Task<EstadoCivilEntity> DeletarEstadoCivilAsync(int id)
+    public async Task<EstadoCivilEntity> DeletarEstadoCivilAsync(EstadoCivilEntity estadoCivil)
     {
-        var estadoCivil = await ObterEstadoCivilAsync(id);
-
         _context.EstadoCivil.Remove(estadoCivil);
 
         await _context.SaveChangesAsync();
@@ -51,5 +49,5 @@ public class EstadoCivilRepository : IEstadoCivilRepository
     {
         return await
             _context.EstadoCivil.Where(e => e.IdEstadoCivil == id).FirstOrDefaultAsync();
-    }    
+    }
 }

@@ -22,27 +22,18 @@ public class CriarPessoaRequestHandler
 
     public async Task<Result<CriarPessoaResponse>> Handle(CriarPessoaRequest request, CancellationToken cancellationToken)
     {
-        try
+        var pessoa = new PessoaEntity()
         {
-            var pessoa = new PessoaEntity()
-            {
-                Nome = request.Nome,
-                DataNascimento = request.DataNascimento,
-                Cpf = request.Cpf,
-                Genero = request.Genero,
-                EstadoCivil = request.EstadoCivil,
-                Nacionalidade = request.Nacionalidade
-            };
+            Nome = request.Nome,
+            DataNascimento = request.DataNascimento,
+            Cpf = request.Cpf,
+            Genero = request.Genero,
+            EstadoCivil = request.EstadoCivil,
+            Nacionalidade = request.Nacionalidade
+        };
 
-            await _pessoaRepository.CriarPessoaAsync(pessoa);
+        await _pessoaRepository.CriarPessoaAsync(pessoa);
 
-            return Result.Success(new CriarPessoaResponse(pessoa.IdPessoa, pessoa.Nome));
-        }
-        catch
-        {
-            _logger.LogError("Ocorreu um erro durante a execução");
-            return Result.Error<CriarPessoaResponse>(new Compartilhado.Excecoes.ExcecaoAplicacao(
-                (Compartilhado.Enums.Cadastro.ErroGravacaoUsuario)));
-        }
+        return Result.Success(new CriarPessoaResponse(pessoa.IdPessoa, pessoa.Nome));
     }
 }

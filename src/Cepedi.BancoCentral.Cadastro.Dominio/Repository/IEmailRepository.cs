@@ -7,6 +7,6 @@ public interface IEmailRepository
     Task<EmailEntity> CriarEmailAsync(EmailEntity email);
     Task<EmailEntity> ObterEmailAsync(int id);
     Task<EmailEntity> AtualizarEmailAsync(EmailEntity email);
-    Task<EmailEntity> DeletarEmailAsync(int id);
+    Task<EmailEntity> DeletarEmailAsync(EmailEntity email);
     Task<List<EmailEntity>> GetEmailsAsync();
 }

@@ -20,25 +20,17 @@ public class AtualizarNacionalidadeHandler : IRequestHandler<AtualizarNacionalid
 
     public async Task<Result<AtualizarNacionalidadeResponse>> Handle(AtualizarNacionalidadeRequest request, CancellationToken cancellationToken)
     {
-        try
+        var nacionalidadeEntity = await _nacionalidadeRepository.ObterNacionalidadeAsync(request.Id);
+
+        if (nacionalidadeEntity == null)
         {
-            var nacionalidadeEntity = await _nacionalidadeRepository.ObterNacionalidadeAsync(request.Id);
-
-            if (nacionalidadeEntity == null)
-            {
-                return Result.Error<AtualizarNacionalidadeResponse>(new Compartilhado.Excecoes.SemResultadosExcecao());
-            }
-
-            nacionalidadeEntity.Atualizar(request.Descricao);
-
-            await _nacionalidadeRepository.AtualizarNacionalidadeAsync(nacionalidadeEntity);
-
-            return Result.Success(new AtualizarNacionalidadeResponse(nacionalidadeEntity.NomeNacionalidade));
+            return Result.Error<AtualizarNacionalidadeResponse>(new Compartilhado.Excecoes.SemResultadosExcecao());
         }
-        catch
-        {
-            _logger.LogError("Ocorreu um erro ao atualizar as nacionalidades");
-            throw;
-        }
+
+        nacionalidadeEntity.Atualizar(request.Descricao);
+
+        await _nacionalidadeRepository.AtualizarNacionalidadeAsync(nacionalidadeEntity);
+
+        return Result.Success(new AtualizarNacionalidadeResponse(nacionalidadeEntity.NomeNacionalidade));
     }
 }

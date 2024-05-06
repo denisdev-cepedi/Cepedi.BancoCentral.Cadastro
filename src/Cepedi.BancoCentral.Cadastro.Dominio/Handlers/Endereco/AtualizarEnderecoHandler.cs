@@ -20,27 +20,19 @@ public class AtualizarEnderecoHandler : IRequestHandler<AtualizarEnderecoRequest
 
     public async Task<Result<AtualizarEnderecoResponse>> Handle(AtualizarEnderecoRequest request, CancellationToken cancellationToken)
     {
-        try
+        var enderecoEntity = await _enderecoRepository.ObterEnderecoAsync(request.IdEndereco);
+
+        if (enderecoEntity == null)
         {
-            var enderecoEntity = await _enderecoRepository.ObterEnderecoAsync(request.IdEndereco);
-
-            if (enderecoEntity == null)
-            {
-                return Result.Error<AtualizarEnderecoResponse>(new Compartilhado.Excecoes.SemResultadosExcecao());
-            }
-
-            enderecoEntity.Atualizar(request.Cep, request.Logradouro, request.Bairro, request.Cidade, request.Estado, request.Numero, request.Pais);
-
-            await _enderecoRepository.AtualizarEnderecoAsync(enderecoEntity);
-
-            return Result.Success(new AtualizarEnderecoResponse(enderecoEntity.Cep, enderecoEntity.Logradouro,
-                enderecoEntity.Bairro, enderecoEntity.Cidade, enderecoEntity.Estado, enderecoEntity.Numero,
-                enderecoEntity.Pais));
+            return Result.Error<AtualizarEnderecoResponse>(new Compartilhado.Excecoes.SemResultadosExcecao());
         }
-        catch
-        {
-            _logger.LogError("Ocorreu um erro ao atualizar os enderecos");
-            throw;
-        }
+
+        enderecoEntity.Atualizar(request.Cep, request.Logradouro, request.Bairro, request.Cidade, request.Estado, request.Numero, request.Pais);
+
+        await _enderecoRepository.AtualizarEnderecoAsync(enderecoEntity);
+
+        return Result.Success(new AtualizarEnderecoResponse(enderecoEntity.Cep, enderecoEntity.Logradouro,
+            enderecoEntity.Bairro, enderecoEntity.Cidade, enderecoEntity.Estado, enderecoEntity.Numero,
+            enderecoEntity.Pais));
     }
 }

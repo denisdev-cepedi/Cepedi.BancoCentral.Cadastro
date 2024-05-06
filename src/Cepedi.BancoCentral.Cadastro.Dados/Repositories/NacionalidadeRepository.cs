@@ -31,10 +31,8 @@ public class NacionalidadeRepository : INacionalidadeRepository
         return nacionalidade;
     }
 
-    public async Task<NacionalidadeEntity> DeletarNacionalidadeAsync(int id)
+    public async Task<NacionalidadeEntity> DeletarNacionalidadeAsync(NacionalidadeEntity nacionalidade)
     {
-        var nacionalidade = await ObterNacionalidadeAsync(id);
-
         _context.Nacionalidade.Remove(nacionalidade);
 
         await _context.SaveChangesAsync();

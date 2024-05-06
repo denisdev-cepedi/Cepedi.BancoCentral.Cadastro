@@ -20,25 +20,17 @@ public class AtualizarTelefoneHandler : IRequestHandler<AtualizarTelefoneRequest
 
     public async Task<Result<AtualizarTelefoneResponse>> Handle(AtualizarTelefoneRequest request, CancellationToken cancellationToken)
     {
-        try
+        var telefoneEntity = await _telefoneRepository.ObterTelefoneAsync(request.IdTelefone);
+
+        if (telefoneEntity == null)
         {
-            var telefoneEntity = await _telefoneRepository.ObterTelefoneAsync(request.IdTelefone);
-
-            if (telefoneEntity == null)
-            {
-                return Result.Error<AtualizarTelefoneResponse>(new Compartilhado.Excecoes.SemResultadosExcecao());
-            }
-
-            telefoneEntity.Atualizar(request.NumeroTelefone);
-
-            await _telefoneRepository.AtualizarTelefoneAsync(telefoneEntity);
-
-            return Result.Success(new AtualizarTelefoneResponse(telefoneEntity.NumeroTelefone));
+            return Result.Error<AtualizarTelefoneResponse>(new Compartilhado.Excecoes.SemResultadosExcecao());
         }
-        catch
-        {
-            _logger.LogError("Ocorreu um erro ao atualizar os telefones");
-            throw;
-        }
+
+        telefoneEntity.Atualizar(request.NumeroTelefone);
+
+        await _telefoneRepository.AtualizarTelefoneAsync(telefoneEntity);
+
+        return Result.Success(new AtualizarTelefoneResponse(telefoneEntity.NumeroTelefone));
     }
 }

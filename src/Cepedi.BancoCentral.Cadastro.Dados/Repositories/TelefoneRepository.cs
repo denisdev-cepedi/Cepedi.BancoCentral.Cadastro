@@ -31,10 +31,8 @@ public class TelefoneRepository : ITelefoneRepository
         return telefone;
     }
 
-    public async Task<TelefoneEntity> DeletarTelefoneAsync(int id)
+    public async Task<TelefoneEntity> DeletarTelefoneAsync(TelefoneEntity telefone)
     {
-        var telefone = await ObterTelefoneAsync(id);
-
         _context.Telefone.Remove(telefone);
 
         await _context.SaveChangesAsync();

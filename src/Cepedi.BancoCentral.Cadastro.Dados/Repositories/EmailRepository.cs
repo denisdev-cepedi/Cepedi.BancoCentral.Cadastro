@@ -31,10 +31,8 @@ public class EmailRepository : IEmailRepository
         return email;
     }
 
-    public async Task<EmailEntity> DeletarEmailAsync(int id)
+    public async Task<EmailEntity> DeletarEmailAsync(EmailEntity email)
     {
-        var email = await ObterEmailAsync(id);
-
         _context.Email.Remove(email);
 
         await _context.SaveChangesAsync();
