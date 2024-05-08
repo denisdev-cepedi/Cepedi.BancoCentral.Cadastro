@@ -9,7 +9,7 @@ using OperationResult;
 
 namespace Cepedi.BancoCentral.Cadastro.Dominio.Handlers;
 
-public class CriarPixRequestHandler 
+public class CriarPixRequestHandler
     : IRequestHandler<CriarPixRequest, Result<CriarPixResponse>>
 {
     private readonly ILogger<CriarPixRequestHandler> _logger;
@@ -21,26 +21,20 @@ public class CriarPixRequestHandler
         _logger = logger;
     }
 
-    public async Task<Result<CriarPixResponse>> Handle(CriarPixRequest request, CancellationToken cancellationToken){
-        try
-        {
-            var pix = new PixEntity()
-            {
-                ChavePix = request.ChavePix,
-                Agencia = request.Agencia,
-                Conta = request.Conta,
-                Instituicao = request.Instituicao,
-                IdTipoPix = request.IdTipoPix
-            };
+    public async Task<Result<CriarPixResponse>> Handle(CriarPixRequest request, CancellationToken cancellationToken)
+    {
 
-            await _pixRepository.CriarPixAsync(pix);
-            return Result.Success(new CriarPixResponse(pix.IdPix, pix.ChavePix));
-        }
-        catch (System.Exception)
+        var pix = new PixEntity()
         {
-            _logger.LogError("Ocorreu um erro durante a execução");
-            return Result.Error<CriarPixResponse>(new Compartilhado.Excecoes.ExcecaoAplicacao(
-                (Compartilhado.Enums.Cadastro.ErroGravacaoUsuario)));
-        }
+            ChavePix = request.ChavePix,
+            Agencia = request.Agencia,
+            Conta = request.Conta,
+            Instituicao = request.Instituicao,
+            IdTipoPix = request.IdTipoPix
+        };
+
+        await _pixRepository.CriarPixAsync(pix);
+        return Result.Success(new CriarPixResponse(pix.IdPix, pix.ChavePix));
+
     }
 }
