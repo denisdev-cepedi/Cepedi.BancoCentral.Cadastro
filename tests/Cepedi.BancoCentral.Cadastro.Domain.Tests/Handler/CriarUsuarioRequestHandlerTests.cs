@@ -17,7 +17,7 @@ public class CriarUsuarioRequestHandlerTests
     Substitute.For<IUsuarioRepository>();
     private readonly ILogger<CriarUsuarioRequestHandler> _logger = Substitute.For<ILogger<CriarUsuarioRequestHandler>>();
     private readonly CriarUsuarioRequestHandler _sut;
-
+    
     public CriarUsuarioRequestHandlerTests()
     {
         _sut = new CriarUsuarioRequestHandler(_usuarioRepository, _logger);

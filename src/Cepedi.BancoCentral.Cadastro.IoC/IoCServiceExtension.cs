@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using Cepedi.BancoCentral.Cadastro.Compartilhado;
 using Cepedi.BancoCentral.Cadastro.Dados;
 using Cepedi.BancoCentral.Cadastro.Dados.Repositories;
 using Cepedi.BancoCentral.Cadastro.Dominio;
@@ -33,6 +34,8 @@ namespace Cepedi.BancoCentral.Cadastro.IoC
             services.AddScoped<IPixRepository, PixRepository>();
             services.AddScoped<ITelefoneRepository, TelefoneRepository>();
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+            services.AddScoped<ITipoRegistroRepository, TipoRegistroRepository>();
+            services.AddScoped<IRegistroTransacaoBancoRepository, RegistroTransacaoBancoRepository>();
             services.AddHealthChecks()
                .AddDbContextCheck<ApplicationDbContext>();
         }
@@ -40,7 +43,7 @@ namespace Cepedi.BancoCentral.Cadastro.IoC
         private static void ConfigurarFluentValidation(IServiceCollection services)
         {
             var abstractValidator = typeof(AbstractValidator<>);
-            var validadores = typeof(QualquerCoisa)
+            var validadores = typeof(IValida)
                 .Assembly
                 .DefinedTypes
                 .Where(type => type.BaseType?.IsGenericType is true &&
