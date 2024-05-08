@@ -7,7 +7,7 @@ public interface IPixRepository
     Task<PixEntity> CriarPixAsync(PixEntity pix);
     Task<PixEntity> ObterPixAsync(int id);
     Task<PixEntity> AtualizarPixAsync(PixEntity pix);
-    Task<PixEntity> DeletarPixAsync(int id);
+    Task<PixEntity> DeletarPixAsync(PixEntity pix);
     Task<List<PixEntity>> GetPixsAync();
 
 }

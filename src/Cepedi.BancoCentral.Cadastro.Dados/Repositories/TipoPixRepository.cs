@@ -32,18 +32,10 @@ public class TipoPixRepository : ITipoPixRepository
         return await _context.TipoPix.Where(p => p.IdTipoPix == id).FirstOrDefaultAsync();
     }
 
-    public async Task<TipoPixEntity> DeletarTipoPixAsync(int id)
+    public async Task<TipoPixEntity> DeletarTipoPixAsync(TipoPixEntity tipoPix) 
     {
-        var tipoPix = await ObterTipoPixAsync(id);
-        if (tipoPix == null)
-        {
-            return null;
-        }
-
         _context.TipoPix.Remove(tipoPix);
-
         await _context.SaveChangesAsync();
-
         return tipoPix;
     }
 

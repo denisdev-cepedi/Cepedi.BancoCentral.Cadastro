@@ -31,7 +31,7 @@ public class DeletarPixRequestHandler
                 Excecoes.SemResultadosExcecao());
         }
 
-        await _pixRepository.DeletarPixAsync(pix.IdPix);
+        await _pixRepository.DeletarPixAsync(pix);
         return Result.Success(new DeletarPixResponse(pix.IdPix, pix.ChavePix));
     }
 }

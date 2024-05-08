@@ -32,18 +32,11 @@ public class PixRepository : IPixRepository
         return await _context.Pix.Where(p => p.IdPix == id).FirstOrDefaultAsync();
     }
 
-    public async Task<PixEntity> DeletarPixAsync(int id)
+    public async Task<PixEntity> DeletarPixAsync(PixEntity pix)
     {
-        var pix = await ObterPixAsync(id);
-        if (pix == null)
-        {
-            return null;
-        }
-
+        
         _context.Pix.Remove(pix);
-
         await _context.SaveChangesAsync();
-
         return pix;
     }
 

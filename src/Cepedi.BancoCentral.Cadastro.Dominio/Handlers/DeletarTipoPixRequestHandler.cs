@@ -25,13 +25,13 @@ public class DeletarTipoPixRequestHandler
     {
         var tipoPix = await _tipoPixRepository.ObterTipoPixAsync(request.IdTipoPix);
 
-        if (tipoPix == null)
+        if (tipoPix == null) 
         {
             return Result.Error<DeletarTipoPixResponse>(new Compartilhado.
                 Excecoes.SemResultadosExcecao());
         }
 
-        await _tipoPixRepository.DeletarTipoPixAsync(tipoPix.IdTipoPix);
+        await _tipoPixRepository.DeletarTipoPixAsync(tipoPix);
         return Result.Success(new DeletarTipoPixResponse(tipoPix.IdTipoPix, tipoPix.NomeTipo));
     }
 }
