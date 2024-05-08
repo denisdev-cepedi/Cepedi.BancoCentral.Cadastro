@@ -22,7 +22,8 @@ public class CriarUsuarioRequestHandler
 
     public async Task<Result<CriarUsuarioResponse>> Handle(CriarUsuarioRequest request, CancellationToken cancellationToken)
     {
-        
+        try
+        {
             var usuario = new UsuarioEntity()
             {
                 Nome = request.Nome,
@@ -36,6 +37,12 @@ public class CriarUsuarioRequestHandler
             await _usuarioRepository.CriarUsuarioAsync(usuario);
 
             return Result.Success(new CriarUsuarioResponse(usuario.Id, usuario.Nome));
-        
+        }
+        catch
+        {
+            _logger.LogError("Ocorreu um erro durante a execução");
+            return Result.Error<CriarUsuarioResponse>(new Compartilhado.Excecoes.ExcecaoAplicacao(
+                (Compartilhado.Enums.Cadastro.ErroGravacaoUsuario)));
+        }
     }
 }
