@@ -482,3 +482,6 @@ appsettings.json
 .idea/
 src/Cepedi.BancoCentral.Cadastro.Api/appsettings.Development.json
 src/Cepedi.BancoCentral.Cadastro.Api/appsettings.json
+
+#Removendo arquivos criados pelo wsl
+values.xml 
