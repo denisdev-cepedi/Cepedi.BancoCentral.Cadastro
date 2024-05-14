@@ -31,6 +31,7 @@ public class Cadastro
         Tipo = ETipoErro.Erro
     };
 
+    
      public static ResultadoErro ErroGravacaoTipoRegistro = new()
     {
         Titulo = "Ocorreu um erro na gravação",

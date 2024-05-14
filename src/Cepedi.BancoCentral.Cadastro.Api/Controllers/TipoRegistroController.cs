@@ -34,7 +34,6 @@ public class TipoRegistroController : BaseController
         public async Task<ActionResult<DeletarTipoRegistroResponse>> DeletarTipoRegistroAsync(
                 [FromBody] DeletarTipoRegistroRequest request) => await SendCommand(request);
 
-
         [HttpGet("{idTipoRegistro}")]
         [ProducesResponseType(typeof(ObtemTipoRegistroResponse), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]

@@ -23,25 +23,7 @@ namespace Cepedi.BancoCentral.Cadastro.Dados.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Cepedi.BancoCentral.Cadastro.Dominio.Entidades.TipoRegistroEntity", b =>
-                {
-                    b.Property<int>("IdTipoRegistro")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdTipoRegistro"));
-
-                    b.Property<string>("NomeTipo")
-                        .IsRequired()
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
-
-                    b.HasKey("IdTipoRegistro");
-
-                    b.ToTable("TipoRegistro", (string)null);
-                });
-
-            modelBuilder.Entity("Cepedi.BancoCentral.Cadastro.Dominio.Entidades.UsuarioEntity", b =>
+            modelBuilder.Entity("Cepedi.BancoCentral.Cadastro.Dominio.Entities.UsuarioEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()

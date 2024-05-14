@@ -1,4 +1,4 @@
-﻿using Cepedi.BancoCentral.Cadastro.Dominio.Entidades;
+﻿﻿using Cepedi.BancoCentral.Cadastro.Dominio.Entidades;
 
 namespace Cepedi.BancoCentral.Cadastro.Dominio.Repository;
 

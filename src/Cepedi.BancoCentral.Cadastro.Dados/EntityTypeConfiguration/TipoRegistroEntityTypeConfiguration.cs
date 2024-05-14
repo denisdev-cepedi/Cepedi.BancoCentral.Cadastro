@@ -1,4 +1,4 @@
-﻿using Cepedi.BancoCentral.Cadastro.Dominio.Entidades;
+﻿﻿using Cepedi.BancoCentral.Cadastro.Dominio.Entidades;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
