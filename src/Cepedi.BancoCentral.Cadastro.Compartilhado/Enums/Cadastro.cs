@@ -1,6 +1,6 @@
-﻿using Cepedi.BancoCentral.Cadastro.Shareable.Excecoes;
+﻿using Cepedi.BancoCentral.Cadastro.Compartilhado.Excecoes;
 
-namespace Cepedi.BancoCentral.Cadastro.Shareable.Enums;
+namespace Cepedi.BancoCentral.Cadastro.Compartilhado.Enums;
 public class Cadastro
 {
     public static readonly ResultadoErro Generico = new()

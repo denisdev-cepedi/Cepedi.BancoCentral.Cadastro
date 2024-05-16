@@ -1,7 +1,7 @@
-﻿using Cepedi.BancoCentral.Cadastro.Dominio.Repository;
+﻿using Cepedi.BancoCentral.Cadastro.Compartilhado.Excecoes;
+using Cepedi.BancoCentral.Cadastro.Dominio.Repository;
 using Cepedi.BancoCentral.Cadastro.Compartilhado.Requests;
 using Cepedi.BancoCentral.Cadastro.Compartilhado.Responses;
-using Cepedi.BancoCentral.Cadastro.Shareable.Excecoes;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using OperationResult;

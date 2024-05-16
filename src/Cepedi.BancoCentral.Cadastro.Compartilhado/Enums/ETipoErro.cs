@@ -1,4 +1,4 @@
-﻿namespace Cepedi.BancoCentral.Cadastro.Shareable.Enums;
+﻿namespace Cepedi.BancoCentral.Cadastro.Compartilhado.Enums;
 public enum ETipoErro
 {
     Erro = 1,

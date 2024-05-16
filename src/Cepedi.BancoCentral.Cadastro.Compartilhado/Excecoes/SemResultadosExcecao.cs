@@ -1,4 +1,4 @@
-﻿namespace Cepedi.BancoCentral.Cadastro.Shareable.Excecoes;
+﻿namespace Cepedi.BancoCentral.Cadastro.Compartilhado.Excecoes;
 public class SemResultadosExcecao : ExcecaoAplicacao
 {
     public SemResultadosExcecao() : 

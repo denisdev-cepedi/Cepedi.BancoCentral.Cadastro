@@ -1,5 +1,5 @@
+using Cepedi.BancoCentral.Cadastro.Compartilhado.Excecoes;
 using Cepedi.BancoCentral.Cadastro.Dominio.Entidades;
-using Cepedi.BancoCentral.Cadastro.Shareable.Excecoes;
 using Cepedi.BancoCentral.Cadastro.Shareable.Requests;
 using Cepedi.BancoCentral.Cadastro.Shareable.Responses;
 using MediatR;
