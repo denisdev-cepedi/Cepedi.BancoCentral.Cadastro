@@ -1,4 +1,5 @@
-using Cepedi.BancoCentral.Cadastro.Dados.Repositories;
+using Cepedi.BancoCentral.Cadastro.Data;
+using Cepedi.BancoCentral.Cadastro.Data.Repositories;
 using Cepedi.BancoCentral.Cadastro.Dominio.Entidades;
 using Microsoft.EntityFrameworkCore;
 

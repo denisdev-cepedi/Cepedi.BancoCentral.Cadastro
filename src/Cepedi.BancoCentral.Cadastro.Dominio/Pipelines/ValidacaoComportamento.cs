@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Cepedi.BancoCentral.Cadastro.Compartilhado;
+﻿using Cepedi.BancoCentral.Cadastro.Compartilhado;
 using Cepedi.BancoCentral.Cadastro.Compartilhado.Excecoes;
 using FluentValidation;
 using MediatR;
