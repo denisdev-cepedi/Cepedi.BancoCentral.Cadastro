@@ -37,6 +37,7 @@ namespace Cepedi.BancoCentral.Cadastro.IoC
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
             services.AddScoped<ITipoRegistroRepository, TipoRegistroRepository>();
             services.AddScoped<IRegistroTransacaoBancoRepository, RegistroTransacaoBancoRepository>();
+            services.AddScoped<IBancoRepository, BancoRepository>();
             services.AddHealthChecks()
                .AddDbContextCheck<ApplicationDbContext>();
         }
