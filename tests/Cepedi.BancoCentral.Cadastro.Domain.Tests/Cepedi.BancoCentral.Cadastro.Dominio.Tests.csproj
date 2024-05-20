@@ -34,10 +34,4 @@
     <ProjectReference Include="..\..\src\Cepedi.BancoCentral.Cadastro.Dados\Cepedi.BancoCentral.Cadastro.Dados.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Handler\Nacionalidade\" />
-    <Folder Include="Handler\Pessoa\" />
-    <Folder Include="Handler\Telefone\" />
-  </ItemGroup>
-
 </Project>

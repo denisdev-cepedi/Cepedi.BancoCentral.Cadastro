@@ -1,6 +1,6 @@
 namespace Cepedi.BancoCentral.Cadastro.Dominio.Tests.Genero;
 
-public class GetGenerosGandlerTests
+public class GetGenerosHandlerTests
 {
     
 }
