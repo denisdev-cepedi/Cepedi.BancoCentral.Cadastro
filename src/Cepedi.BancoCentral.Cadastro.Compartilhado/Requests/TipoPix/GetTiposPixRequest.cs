@@ -4,7 +4,7 @@ using OperationResult;
 
 namespace Cepedi.BancoCentral.Cadastro.Compartilhado.Requests;
 
-public class GetTiposPixRequest : IRequest<Result<List<GetTipoPixResponse>>>
+public class GetTiposPixRequest : IRequest<Result<List<GetTiposPixResponse>>>
 {
 
 }
