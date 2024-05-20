@@ -7,7 +7,7 @@ using Microsoft.Extensions.Logging;
 using Moq;
 using NSubstitute;
 using OperationResult;
-using Cepedi.BancoCentral.Cadastro.Dominio;
+using Cepedi.BancoCentral.Cadastro.Dominio.Handlers;
 namespace Cepedi.BancoCentral.Cadastro.Dominio.Tests;
 
 public class AtualizarTipoRegistroRequestHandlerTests
