@@ -1,5 +1,4 @@
-﻿using Cepedi.BancoCentral.Cadastro.Compartilhado.Enums;
-using Cepedi.BancoCentral.Cadastro.Dominio.Entidades;
+﻿using Cepedi.BancoCentral.Cadastro.Dominio.Entidades;
 using Cepedi.BancoCentral.Cadastro.Dominio.Repository;
 using Cepedi.BancoCentral.Cadastro.Compartilhado.Requests;
 using Cepedi.BancoCentral.Cadastro.Compartilhado.Responses;

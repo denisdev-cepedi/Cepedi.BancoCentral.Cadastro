@@ -2,6 +2,7 @@
 using Cepedi.BancoCentral.Cadastro.Compartilhado;
 using Cepedi.BancoCentral.Cadastro.Dados;
 using Cepedi.BancoCentral.Cadastro.Dados.Repositories;
+using Cepedi.BancoCentral.Cadastro.Data.Repositories;
 using Cepedi.BancoCentral.Cadastro.Dominio;
 using Cepedi.BancoCentral.Cadastro.Dominio.Entidades;
 using Cepedi.BancoCentral.Cadastro.Dominio.Pipelines;
