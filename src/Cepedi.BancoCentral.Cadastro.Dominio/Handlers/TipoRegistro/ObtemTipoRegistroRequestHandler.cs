@@ -5,7 +5,7 @@ using MediatR;
 using Microsoft.Extensions.Logging;
 using OperationResult;
 
-namespace Cepedi.BancoCentral.Cadastro.Dominio.Handlers;
+namespace Cepedi.BancoCentral.Cadastro.Dominio;
 
 public class ObtemTipoRegistroRequestHandler : IRequestHandler<ObtemTipoRegistroRequest, Result<ObtemTipoRegistroResponse>>
 {
