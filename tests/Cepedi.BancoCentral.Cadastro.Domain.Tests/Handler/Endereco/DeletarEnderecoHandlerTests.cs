@@ -1,6 +1,6 @@
 ﻿namespace Cepedi.BancoCentral.Cadastro.Dominio.Tests;
 
-public class GetEmailsHanlderTests
+public class DeletarEnderecoHandlerTests
 {
 
 }

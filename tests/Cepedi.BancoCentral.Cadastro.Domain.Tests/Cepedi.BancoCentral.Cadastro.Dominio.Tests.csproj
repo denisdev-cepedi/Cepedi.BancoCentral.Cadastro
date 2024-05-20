@@ -35,7 +35,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Handler\Endereco\" />
     <Folder Include="Handler\EstadoCivil\" />
     <Folder Include="Handler\Genero\" />
     <Folder Include="Handler\Nacionalidade\" />
