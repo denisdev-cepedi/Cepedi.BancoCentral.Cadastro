@@ -35,7 +35,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Handler\Genero\" />
     <Folder Include="Handler\Nacionalidade\" />
     <Folder Include="Handler\Pessoa\" />
     <Folder Include="Handler\Telefone\" />
