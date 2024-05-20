@@ -6,28 +6,30 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Cepedi.BancoCentral.Cadastro.Api.Controllers;
+[ApiController]
+[Route("[controller]")]
 
 public class BancoController : BaseController
 {
     private readonly IMediator _mediator;
     private readonly ILogger<BancoEntity> _logger;
-    
+
     public BancoController(IMediator mediator, ILogger<BancoEntity> logger) : base(mediator)
     {
         _mediator = mediator;
         _logger = logger;
     }
-    
+
     [HttpPost]
     [ProducesResponseType(typeof(CriarBancoResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<CriarBancoResponse>> CriarBancoAsync([FromBody] CriarBancoRequest request) => await SendCommand(request);
-    
+
     [HttpDelete]
     [ProducesResponseType(typeof(DeletarBancoResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<DeletarBancoResponse>> DeletarBancoAsync([FromBody] DeletarBancoRequest request) => await SendCommand(request);
-    
+
     [HttpGet("{idBanco:int}")]
     [ProducesResponseType(typeof(ObtemBancoResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
@@ -36,7 +38,7 @@ public class BancoController : BaseController
         var request = new ObtemBancoRequest { IdBanco = idBanco };
         return await SendCommand(request);
     }
-    
+
     [HttpGet]
     [ProducesResponseType(typeof(List<ObtemBancoResponse>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
@@ -45,7 +47,7 @@ public class BancoController : BaseController
         var request = new ObtemListaBancoRequest();
         return await SendCommand(request);
     }
-    
+
     [HttpPut]
     [ProducesResponseType(typeof(AtualizarBancoResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
