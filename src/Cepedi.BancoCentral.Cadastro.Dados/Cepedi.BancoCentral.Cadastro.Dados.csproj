@@ -22,6 +22,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Cepedi.BancoCentral.Cadastro.Dominio\Cepedi.BancoCentral.Cadastro.Dominio.csproj" />
+    <ProjectReference Include="..\..\08 - Dapper\Cepedi.BancoCentral.Cadastro.Cache\Cepedi.BancoCentral.Cadastro.Cache.csproj" />
   </ItemGroup>
 
 </Project>

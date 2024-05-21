@@ -1,5 +1,5 @@
 using Cepedi.BancoCentral.Cadastro.Dominio.Entidades;
-using Cepedi.BancoCentral.PagamentoPix.Dominio.Repositorio.Queries;
+using Cepedi.BancoCentral.Cadastro.Dominio.Repository.Queries;
 using Dapper;
 using Microsoft.Extensions.Configuration;
  

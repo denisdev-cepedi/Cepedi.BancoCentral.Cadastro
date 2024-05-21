@@ -1,6 +1,6 @@
 using Cepedi.BancoCentral.Cadastro.Dominio.Entidades;
 
-namespace Cepedi.BancoCentral.PagamentoPix.Dominio.Repositorio.Queries;
+namespace Cepedi.BancoCentral.Cadastro.Dominio.Repository.Queries;
 
 public interface IPessoaQueryRepository
 {
