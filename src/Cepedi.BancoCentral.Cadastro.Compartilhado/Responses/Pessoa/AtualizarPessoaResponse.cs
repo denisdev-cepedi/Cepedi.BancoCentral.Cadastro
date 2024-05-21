@@ -1,3 +1,3 @@
 ﻿namespace Cepedi.BancoCentral.Cadastro.Compartilhado.Responses;
 
-public record AtualizarPessoaResponse(string nome);
+public record AtualizarPessoaResponse(string Nome);

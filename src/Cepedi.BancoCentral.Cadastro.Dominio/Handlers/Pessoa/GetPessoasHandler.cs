@@ -9,12 +9,12 @@ using OperationResult;
 
 namespace Cepedi.BancoCentral.Cadastro.Dominio.Handlers;
 
-public class GetPessoaHandler : IRequestHandler<GetPessoasRequest, Result<List<GetPessoasResponse>>>
+public class GetPessoasHandler : IRequestHandler<GetPessoasRequest, Result<List<GetPessoasResponse>>>
 {
-    private readonly ILogger<GetPessoaHandler> _logger;
+    private readonly ILogger<GetPessoasHandler> _logger;
     private readonly IPessoaRepository _pessoaRepository;
 
-    public GetPessoaHandler(IPessoaRepository pessoaRepository, ILogger<GetPessoaHandler> logger)
+    public GetPessoasHandler(IPessoaRepository pessoaRepository, ILogger<GetPessoasHandler> logger)
     {
         _pessoaRepository = pessoaRepository;
         _logger = logger;
