@@ -13,11 +13,13 @@ public class CriarGeneroHandler : IRequestHandler<CriarGeneroRequest, Result<Cri
 {
     private readonly ILogger<CriarGeneroHandler> _logger;
     private readonly IGeneroRepository _generoRepository;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public CriarGeneroHandler(IGeneroRepository generoRepository, ILogger<CriarGeneroHandler> logger)
+    public CriarGeneroHandler(IGeneroRepository generoRepository, ILogger<CriarGeneroHandler> logger, IUnitOfWork unitOfWork)
     {
         _generoRepository = generoRepository;
         _logger = logger;
+        _unitOfWork = unitOfWork;
     }
 
     public async Task<Result<CriarGeneroResponse>> Handle(CriarGeneroRequest request, CancellationToken cancellationToken)
@@ -29,6 +31,8 @@ public class CriarGeneroHandler : IRequestHandler<CriarGeneroRequest, Result<Cri
 
         await _generoRepository.CriarGeneroAsync(genero);
 
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
+        
         return Result.Success(new CriarGeneroResponse(genero.NomeGenero));
     }
 }

@@ -16,9 +16,7 @@ public class TelefoneRepository : ITelefoneRepository
     public async Task<TelefoneEntity> AtualizarTelefoneAsync(TelefoneEntity telefone)
     {
         _context.Telefone.Update(telefone);
-
-        await _context.SaveChangesAsync();
-
+        
         return telefone;
     }
 
@@ -26,16 +24,12 @@ public class TelefoneRepository : ITelefoneRepository
     {
         _context.Telefone.Add(telefone);
 
-        await _context.SaveChangesAsync();
-
         return telefone;
     }
 
     public async Task<TelefoneEntity> DeletarTelefoneAsync(TelefoneEntity telefone)
     {
         _context.Telefone.Remove(telefone);
-
-        await _context.SaveChangesAsync();
 
         return telefone;
     }

@@ -11,11 +11,13 @@ public class AtualizarGeneroHandler : IRequestHandler<AtualizarGeneroRequest, Re
 {
     private readonly IGeneroRepository _generoRepository;
     private readonly ILogger<AtualizarGeneroHandler> _logger;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public AtualizarGeneroHandler(IGeneroRepository generoRepository, ILogger<AtualizarGeneroHandler> logger)
+    public AtualizarGeneroHandler(IGeneroRepository generoRepository, ILogger<AtualizarGeneroHandler> logger, IUnitOfWork unitOfWork)
     {
         _generoRepository = generoRepository;
         _logger = logger;
+        _unitOfWork = unitOfWork;
     }
 
     public async Task<Result<AtualizarGeneroResponse>> Handle(AtualizarGeneroRequest request, CancellationToken cancellationToken)
@@ -31,6 +33,8 @@ public class AtualizarGeneroHandler : IRequestHandler<AtualizarGeneroRequest, Re
 
         await _generoRepository.AtualizarGeneroAsync(generoEntity);
 
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
+        
         return Result.Success(new AtualizarGeneroResponse(generoEntity.NomeGenero));
     }
 }

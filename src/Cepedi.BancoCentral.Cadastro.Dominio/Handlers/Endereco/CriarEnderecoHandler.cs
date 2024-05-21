@@ -13,11 +13,13 @@ public class CriarEnderecoHandler : IRequestHandler<CriarEnderecoRequest, Result
 {
     private readonly ILogger<CriarEnderecoHandler> _logger;
     private readonly IEnderecoRepository _enderecoRepository;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public CriarEnderecoHandler(IEnderecoRepository enderecoRepository, ILogger<CriarEnderecoHandler> logger)
+    public CriarEnderecoHandler(IEnderecoRepository enderecoRepository, ILogger<CriarEnderecoHandler> logger, IUnitOfWork unitOfWork)
     {
         _enderecoRepository = enderecoRepository;
         _logger = logger;
+        _unitOfWork = unitOfWork;
     }
 
     public async Task<Result<CriarEnderecoResponse>> Handle(CriarEnderecoRequest request, CancellationToken cancellationToken)
@@ -36,6 +38,8 @@ public class CriarEnderecoHandler : IRequestHandler<CriarEnderecoRequest, Result
 
         await _enderecoRepository.CriarEnderecoAsync(endereco);
 
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
+        
         return Result.Success(new CriarEnderecoResponse(endereco.Cep, endereco.Logradouro, endereco.Bairro, endereco.Cidade, endereco.Estado, endereco.Numero, endereco.Pais));
     }
 }

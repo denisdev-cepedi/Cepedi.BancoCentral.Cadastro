@@ -13,13 +13,14 @@ public class DeletarEstadoCivilHandler : IRequestHandler<DeletarEstadoCivilReque
 {
     private readonly ILogger<DeletarEstadoCivilHandler> _logger;
     private readonly IEstadoCivilRepository _estadoCivilRepository;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public DeletarEstadoCivilHandler(IEstadoCivilRepository estadoCivilRepository, ILogger<DeletarEstadoCivilHandler> logger)
+    public DeletarEstadoCivilHandler(IEstadoCivilRepository estadoCivilRepository, ILogger<DeletarEstadoCivilHandler> logger, IUnitOfWork unitOfWork)
     {
         _estadoCivilRepository = estadoCivilRepository;
         _logger = logger;
+        _unitOfWork = unitOfWork;
     }
-
     public async Task<Result<DeletarEstadoCivilResponse>> Handle(DeletarEstadoCivilRequest request, CancellationToken cancellationToken)
     {
         var estadoCivil = await _estadoCivilRepository.ObterEstadoCivilAsync(request.Id);
@@ -31,6 +32,8 @@ public class DeletarEstadoCivilHandler : IRequestHandler<DeletarEstadoCivilReque
         }
 
         await _estadoCivilRepository.DeletarEstadoCivilAsync(estadoCivil);
+        
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
 
         return Result.Success(new DeletarEstadoCivilResponse(estadoCivil.NomeEstadoCivil));
     }

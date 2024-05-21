@@ -17,16 +17,12 @@ public class PessoaRepository : IPessoaRepository
     {
         _context.Pessoa.Update(pessoa);
 
-        await _context.SaveChangesAsync();
-
         return pessoa;
     }
 
     public async Task<PessoaEntity> CriarPessoaAsync(PessoaEntity pessoa)
     {
         _context.Pessoa.Add(pessoa);
-
-        await _context.SaveChangesAsync();
 
         return pessoa;
     }
@@ -45,8 +41,6 @@ public class PessoaRepository : IPessoaRepository
     public async Task<PessoaEntity> DeletarPessoaAsync(PessoaEntity pessoa)
     {
         _context.Pessoa.Remove(pessoa);
-
-        await _context.SaveChangesAsync();
 
         return pessoa;
     }

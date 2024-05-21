@@ -17,8 +17,6 @@ public class NacionalidadeRepository : INacionalidadeRepository
     {
         _context.Nacionalidade.Update(nacionalidade);
 
-        await _context.SaveChangesAsync();
-
         return nacionalidade;
     }
 
@@ -26,16 +24,12 @@ public class NacionalidadeRepository : INacionalidadeRepository
     {
         _context.Nacionalidade.Add(nacionalidade);
 
-        await _context.SaveChangesAsync();
-
         return nacionalidade;
     }
 
     public async Task<NacionalidadeEntity> DeletarNacionalidadeAsync(NacionalidadeEntity nacionalidade)
     {
         _context.Nacionalidade.Remove(nacionalidade);
-
-        await _context.SaveChangesAsync();
 
         return nacionalidade;
     }

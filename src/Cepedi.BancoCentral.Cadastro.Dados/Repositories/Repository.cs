@@ -1,9 +1,10 @@
-﻿using Cepedi.BancoCentral.Cadastro.Dados;
+using Cepedi.BancoCentral.Cadastro.Dados;
 using Cepedi.BancoCentral.Cadastro.Dominio.Repository;
+ 
+namespace Cepedi.BancoCentral.Cadastro.Data.Repositories;
 
-namespace Cepedi.BancoCentral.Cadastro.Data;
-
-public class Repository<T> : IDisposable, IRepository<T> where T : class
+public class Repository<T> :
+    IDisposable, IRepository<T> where T : class
 {
     private readonly ApplicationDbContext _context;
     private bool dispose;
@@ -12,7 +13,8 @@ public class Repository<T> : IDisposable, IRepository<T> where T : class
     {
         _context = context;
     }
-   public async Task<T> AdicionarAsync(T entidade, CancellationToken cancellationToken)
+
+    public async Task<T> AdicionarAsync(T entidade, CancellationToken cancellationToken)
     {
         await _context.Set<T>().AddAsync(entidade, cancellationToken);
 
@@ -41,5 +43,4 @@ public class Repository<T> : IDisposable, IRepository<T> where T : class
         Dispose(true);
         GC.SuppressFinalize(this);
     }
-
 }

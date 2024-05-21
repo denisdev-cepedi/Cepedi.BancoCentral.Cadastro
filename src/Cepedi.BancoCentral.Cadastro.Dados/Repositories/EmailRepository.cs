@@ -17,8 +17,6 @@ public class EmailRepository : IEmailRepository
     {
         _context.Email.Update(email);
 
-        await _context.SaveChangesAsync();
-
         return email;
     }
 
@@ -26,16 +24,12 @@ public class EmailRepository : IEmailRepository
     {
         _context.Email.Add(email);
 
-        await _context.SaveChangesAsync();
-
         return email;
     }
 
     public async Task<EmailEntity> DeletarEmailAsync(EmailEntity email)
     {
         _context.Email.Remove(email);
-
-        await _context.SaveChangesAsync();
 
         return email;
     }

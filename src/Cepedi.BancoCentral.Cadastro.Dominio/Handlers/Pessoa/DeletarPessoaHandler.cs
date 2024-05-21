@@ -13,11 +13,13 @@ public class DeletarPessoaHandler : IRequestHandler<DeletarPessoaRequest, Result
 {
     private readonly ILogger<DeletarPessoaHandler> _logger;
     private readonly IPessoaRepository _pessoaRepository;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public DeletarPessoaHandler(IPessoaRepository pessoaRepository, ILogger<DeletarPessoaHandler> logger)
+    public DeletarPessoaHandler(IPessoaRepository pessoaRepository, ILogger<DeletarPessoaHandler> logger, IUnitOfWork unitOfWork)
     {
         _pessoaRepository = pessoaRepository;
         _logger = logger;
+        _unitOfWork = unitOfWork;
     }
 
     public async Task<Result<DeletarPessoaResponse>> Handle(DeletarPessoaRequest request, CancellationToken cancellationToken)
@@ -32,6 +34,8 @@ public class DeletarPessoaHandler : IRequestHandler<DeletarPessoaRequest, Result
 
         await _pessoaRepository.DeletarPessoaAsync(pessoa);
 
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
+        
         return Result.Success(new DeletarPessoaResponse(pessoa.IdPessoa, pessoa.Nome));
     }
 }

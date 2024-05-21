@@ -1,9 +1,9 @@
-﻿namespace Cepedi.BancoCentral.Cadastro.Dominio.Repository;
+namespace Cepedi.BancoCentral.Cadastro.Dominio.Repository;
 
-public interface IRepository<T> where T : class
+public interface IRepository<T> 
+    where T : class
 {
     Task<T> AdicionarAsync(T entidade, CancellationToken cancellationToken);
 
     T Atualizar(T entidade);
-
 }

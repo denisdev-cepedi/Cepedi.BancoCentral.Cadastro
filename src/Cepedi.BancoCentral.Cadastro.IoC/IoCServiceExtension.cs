@@ -68,6 +68,12 @@ namespace Cepedi.BancoCentral.Cadastro.IoC
                 //options.UseSqlite(configuration.GetConnectionString("DefaultConnection"));
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
             });
+            
+            // services.AddDbContext<AlternativeDbContext>((sp, options) =>
+            // {
+            //     //options.UseSqlite(configuration.GetConnectionString("DefaultConnection"));
+            //     options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
+            // });
 
             services.AddScoped<ApplicationDbContextInitialiser>();
         }
