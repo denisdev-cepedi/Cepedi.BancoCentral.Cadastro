@@ -9,7 +9,7 @@ using OperationResult;
 
 namespace Cepedi.BancoCentral.Cadastro.Dominio.Handlers;
 
-public class CriarTipoPixRequestHandler 
+public class CriarTipoPixRequestHandler
     : IRequestHandler<CriarTipoPixRequest, Result<CriarTipoPixResponse>>
 {
     private readonly ILogger<CriarTipoPixRequestHandler> _logger;
@@ -21,22 +21,14 @@ public class CriarTipoPixRequestHandler
         _logger = logger;
     }
 
-    public async Task<Result<CriarTipoPixResponse>> Handle(CriarTipoPixRequest request, CancellationToken cancellationToken){
-        try
+    public async Task<Result<CriarTipoPixResponse>> Handle(CriarTipoPixRequest request, CancellationToken cancellationToken)
+    {
+        var tipoPix = new TipoPixEntity()
         {
-            var tipoPix = new TipoPixEntity()
-            {
-                TipoPix = request.TipoPix,
-            };
+            TipoPix = request.TipoPix,
+        };
 
-            await _tipoPixRepository.CriarTipoPixAsync(tipoPix);
-            return Result.Success(new CriarTipoPixResponse(tipoPix.IdTipoPix, tipoPix.TipoPix));
-        }
-        catch (System.Exception)
-        {
-            _logger.LogError("Ocorreu um erro durante a execução");
-            return Result.Error<CriarTipoPixResponse>(new Compartilhado.Excecoes.ExcecaoAplicacao(
-                (Compartilhado.Enums.Cadastro.ErroGravacaoUsuario)));
-        }
+        await _tipoPixRepository.CriarTipoPixAsync(tipoPix);
+        return Result.Success(new CriarTipoPixResponse(tipoPix.IdTipoPix, tipoPix.TipoPix));
     }
 }
