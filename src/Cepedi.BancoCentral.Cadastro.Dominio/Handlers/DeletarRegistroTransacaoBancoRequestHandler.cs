@@ -13,10 +13,14 @@ public class DeletarRegistroTransacaoBancoRequestHandler : IRequestHandler<Delet
 {
     private readonly ILogger<DeletarRegistroTransacaoBancoRequestHandler> _logger;
     private readonly IRegistroTransacaoBancoRepository _registroTransacaoBancoRepository;
-    public DeletarRegistroTransacaoBancoRequestHandler(ILogger<DeletarRegistroTransacaoBancoRequestHandler> logger, IRegistroTransacaoBancoRepository registroTransacaoBancoRepository)
+    private readonly IUnitOfWork _unitOfWork;
+    public DeletarRegistroTransacaoBancoRequestHandler(ILogger<DeletarRegistroTransacaoBancoRequestHandler> logger, 
+    IRegistroTransacaoBancoRepository registroTransacaoBancoRepository,
+    IUnitOfWork unitOfWork)
     {
         _logger = logger;
         _registroTransacaoBancoRepository = registroTransacaoBancoRepository;
+        _unitOfWork = unitOfWork;
     }
 
     public async Task<Result<DeletarRegistroTransacaoBancoResponse>> Handle(DeletarRegistroTransacaoBancoRequest request, CancellationToken cancellationToken)
@@ -24,6 +28,7 @@ public class DeletarRegistroTransacaoBancoRequestHandler : IRequestHandler<Delet
         _logger.LogInformation($"Deletando registro {request.IdRegistro} de transação de banco , data: {DateTime.Now}");
         var registroEncontrado = await _registroTransacaoBancoRepository.ObterRegistroTransacaoBancoAsync(request.IdRegistro);
         await _registroTransacaoBancoRepository.DeletarRegistroTransacaoBancoAsync(registroEncontrado);
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
         return Result.Success(new DeletarRegistroTransacaoBancoResponse(request.IdRegistro, request.Motivo));
     }
 }
