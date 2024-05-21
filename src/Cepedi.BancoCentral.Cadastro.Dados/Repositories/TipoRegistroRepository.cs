@@ -1,8 +1,9 @@
-﻿﻿using Cepedi.BancoCentral.Cadastro.Dominio.Entidades;
+﻿﻿using Cepedi.BancoCentral.Cadastro.Dados;
+ using Cepedi.BancoCentral.Cadastro.Dominio.Entidades;
 using Cepedi.BancoCentral.Cadastro.Dominio.Repository;
 using Microsoft.EntityFrameworkCore;
 
-namespace Cepedi.BancoCentral.Cadastro.Dados.Repositories;
+namespace Cepedi.BancoCentral.Cadastro.Data.Repositories;
 
 public class TipoRegistroRepository : ITipoRegistroRepository
 {
@@ -13,34 +14,34 @@ public class TipoRegistroRepository : ITipoRegistroRepository
         _context = context;
     }
 
-    public async Task<TipoRegistroEntity> AtualizarTipoRegistroAsync(TipoRegistroEntity TipoRegistro)
+    public async Task<TipoRegistroEntity> AtualizarTipoRegistroAsync(TipoRegistroEntity tipoRegistro)
     {
-        _context.TipoRegistro.Update(TipoRegistro);
+        _context.TipoRegistro.Update(tipoRegistro);
         await _context.SaveChangesAsync();
-        return TipoRegistro;
+        return tipoRegistro;
 
 
     }
 
-    public async Task<TipoRegistroEntity> CriarTipoRegistroAsync(TipoRegistroEntity TipoRegistro)
+    public async Task<TipoRegistroEntity> CriarTipoRegistroAsync(TipoRegistroEntity tipoRegistro)
     {
-        _context.TipoRegistro.Add(TipoRegistro);
+        _context.TipoRegistro.Add(tipoRegistro);
 
         await _context.SaveChangesAsync();
 
-        return TipoRegistro;
+        return tipoRegistro;
     }
 
-    public async Task<TipoRegistroEntity> DeletarTipoRegistroAsync(TipoRegistroEntity TipoRegistro)
+    public async Task<TipoRegistroEntity> DeletarTipoRegistroAsync(TipoRegistroEntity tipoRegistro)
     {
-        _context.TipoRegistro.Remove(TipoRegistro);
+        _context.TipoRegistro.Remove(tipoRegistro);
         await _context.SaveChangesAsync();
-        return TipoRegistro;
+        return tipoRegistro;
     }
 
     public async Task<TipoRegistroEntity> ObterTipoRegistroAsync(int id)
     {
-        return await _context.TipoRegistro.Where(e => e.IdTipoRegistro == id).FirstOrDefaultAsync();
+        return (await _context.TipoRegistro.Where(e => e.IdTipoRegistro == id).FirstOrDefaultAsync())!;
     }
 
     public async Task<List<TipoRegistroEntity>> ObterTipoRegistroAsync()

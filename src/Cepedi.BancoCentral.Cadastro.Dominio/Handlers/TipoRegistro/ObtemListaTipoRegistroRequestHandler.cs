@@ -5,15 +5,15 @@ using MediatR;
 using Microsoft.Extensions.Logging;
 using OperationResult;
 
-namespace Cepedi.BancoCentral.Cadastro.Dominio;
+namespace Cepedi.BancoCentral.Cadastro.Dominio.Handlers;
 
 
 public class ObtemListaTipoRegistroRequestHandler : IRequestHandler<ObtemListaTipoRegistroRequest, Result<List<ObtemTipoRegistroResponse>>>
 {
-    private readonly ILogger<CriarTipoRegistroRequestHandler> _logger;
+    private readonly ILogger< ObtemListaTipoRegistroRequestHandler> _logger;
     private readonly ITipoRegistroRepository _tiporegistroRepository;
 
-    public ObtemListaTipoRegistroRequestHandler (ITipoRegistroRepository tipoRegistroRepository, ILogger<CriarTipoRegistroRequestHandler> logger){
+    public ObtemListaTipoRegistroRequestHandler (ITipoRegistroRepository tipoRegistroRepository, ILogger< ObtemListaTipoRegistroRequestHandler> logger){
         _logger = logger;
         _tiporegistroRepository = tipoRegistroRepository;
     }

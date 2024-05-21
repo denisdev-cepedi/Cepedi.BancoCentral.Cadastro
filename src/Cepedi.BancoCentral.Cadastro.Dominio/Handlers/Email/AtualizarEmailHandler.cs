@@ -31,6 +31,6 @@ public class AtualizarEmailHandler : IRequestHandler<AtualizarEmailRequest, Resu
 
         await _emailRepository.AtualizarEmailAsync(emailEntity);
 
-        return Result.Success(new AtualizarEmailResponse(emailEntity.EnderecoEmail));
+        return Result.Success(new AtualizarEmailResponse(emailEntity.IdEmail,emailEntity.EnderecoEmail));
     }
 }
