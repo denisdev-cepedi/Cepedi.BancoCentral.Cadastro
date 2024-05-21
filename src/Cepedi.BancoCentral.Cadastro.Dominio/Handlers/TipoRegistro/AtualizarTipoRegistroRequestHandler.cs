@@ -6,7 +6,7 @@ using MediatR;
 using Microsoft.Extensions.Logging;
 using OperationResult;
 
-namespace Cepedi.BancoCentral.Cadastro.Dominio;
+namespace Cepedi.BancoCentral.Cadastro.Dominio.Handlers;
 
 public class AtualizarTipoRegistroRequestHandler : IRequestHandler<AtualizarTipoRegistroRequest, Result<AtualizarTipoRegistroResponse>>
 {
