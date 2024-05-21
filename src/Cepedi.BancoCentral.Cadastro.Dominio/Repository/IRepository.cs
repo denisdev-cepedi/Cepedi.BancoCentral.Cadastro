@@ -2,9 +2,8 @@
 
 public interface IRepository<T> where T : class
 {
-    Task<bool> SaveChangesAsync(CancellationToken cancellationToken = default);
+    Task<T> AdicionarAsync(T entidade, CancellationToken cancellationToken);
 
-    IRepository<T> Repository<T>()
-        where T: class;
+    T Atualizar(T entidade);
 
 }

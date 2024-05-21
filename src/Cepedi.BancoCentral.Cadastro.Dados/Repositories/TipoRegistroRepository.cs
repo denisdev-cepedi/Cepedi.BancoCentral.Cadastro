@@ -17,7 +17,7 @@ public class TipoRegistroRepository : ITipoRegistroRepository
     public async Task<TipoRegistroEntity> AtualizarTipoRegistroAsync(TipoRegistroEntity tipoRegistro)
     {
         _context.TipoRegistro.Update(tipoRegistro);
-        await _context.SaveChangesAsync();
+        // await _context.SaveChangesAsync();
         return tipoRegistro;
 
 
@@ -27,7 +27,7 @@ public class TipoRegistroRepository : ITipoRegistroRepository
     {
         _context.TipoRegistro.Add(tipoRegistro);
 
-        await _context.SaveChangesAsync();
+        // await _context.SaveChangesAsync();
 
         return tipoRegistro;
     }
@@ -35,7 +35,7 @@ public class TipoRegistroRepository : ITipoRegistroRepository
     public async Task<TipoRegistroEntity> DeletarTipoRegistroAsync(TipoRegistroEntity tipoRegistro)
     {
         _context.TipoRegistro.Remove(tipoRegistro);
-        await _context.SaveChangesAsync();
+        // await _context.SaveChangesAsync();
         return tipoRegistro;
     }
 
