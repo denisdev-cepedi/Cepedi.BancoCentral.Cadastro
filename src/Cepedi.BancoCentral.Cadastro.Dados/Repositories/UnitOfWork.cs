@@ -1,6 +1,6 @@
 using Cepedi.BancoCentral.Cadastro.Dados;
 using Cepedi.BancoCentral.Cadastro.Dominio.Repository;
- 
+
 namespace Cepedi.BancoCentral.Cadastro.Data.Repositories;
 
 public class UnitOfWork : IUnitOfWork
@@ -14,10 +14,10 @@ public class UnitOfWork : IUnitOfWork
         _repositories = new Dictionary<Type, object>();
     }
 
-    public IRepository<T> Repository<T>() 
+    public IRepository<T> Repository<T>()
         where T : class
     {
-        if(_repositories.ContainsKey(typeof(T)))
+        if (_repositories.ContainsKey(typeof(T)))
         {
             return (IRepository<T>)_repositories[typeof(T)];
         }
@@ -37,6 +37,6 @@ public class UnitOfWork : IUnitOfWork
 
     public void Dispose()
     {
-        throw new NotImplementedException();
+        _context.Dispose();
     }
 }
