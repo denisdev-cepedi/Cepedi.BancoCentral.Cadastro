@@ -1,6 +1,8 @@
-namespace Cepedi.BancoCentral.Cadastro.Dominio.Repository.Queries;
+using Cepedi.BancoCentral.Cadastro.Dominio.Entidades;
 
-public class IPessoaQueryRepository
+namespace Cepedi.BancoCentral.PagamentoPix.Dominio.Repositorio.Queries;
+
+public interface IPessoaQueryRepository
 {
-    
+    Task<List<PessoaEntity>> ObterPessoasAsync(string nome);
 }

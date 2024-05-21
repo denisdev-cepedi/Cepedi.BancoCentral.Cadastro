@@ -10,8 +10,6 @@
 
   <ItemGroup>
     <Folder Include="Notifications\" />
-    <Folder Include="Repository\Queries\" />
-    <Folder Include="Services\" />
   </ItemGroup>
 
   <ItemGroup>

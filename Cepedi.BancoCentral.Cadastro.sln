@@ -38,6 +38,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cepedi.BancoCentral.Cadastr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cepedi.BancoCentral.Cadastro.Performance.Test", "tests\Cepedi.BancoCentral.Cadastro.Performance.Test\Cepedi.BancoCentral.Cadastro.Performance.Test.csproj", "{FFC77DB4-14C0-49F6-B613-3C31B99FBA62}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "08 - Dapper", "08 - Dapper", "{38AFBDFC-6B03-4351-BE84-E6B15B8DD3F8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cepedi.BancoCentral.Cadastro.Cache", "08 - Dapper\Cepedi.BancoCentral.Cadastro.Cache\Cepedi.BancoCentral.Cadastro.Cache.csproj", "{5CE76060-3CEC-4FFA-806E-5AA4429879B5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -80,6 +84,10 @@ Global
 		{FFC77DB4-14C0-49F6-B613-3C31B99FBA62}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FFC77DB4-14C0-49F6-B613-3C31B99FBA62}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FFC77DB4-14C0-49F6-B613-3C31B99FBA62}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5CE76060-3CEC-4FFA-806E-5AA4429879B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CE76060-3CEC-4FFA-806E-5AA4429879B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CE76060-3CEC-4FFA-806E-5AA4429879B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CE76060-3CEC-4FFA-806E-5AA4429879B5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -94,6 +102,7 @@ Global
 		{7D33D51C-C022-4B95-B095-7C74F724A9C7} = {73346350-30C0-4828-8EF9-4A2D5DF2A8C6}
 		{B880E2BA-2214-41F4-B393-D7C1D53EC1DD} = {1631223A-2E69-4D27-82C2-58651840B7EC}
 		{FFC77DB4-14C0-49F6-B613-3C31B99FBA62} = {2D4A6734-55E9-46FD-BC86-1A6B9652198C}
+		{5CE76060-3CEC-4FFA-806E-5AA4429879B5} = {38AFBDFC-6B03-4351-BE84-E6B15B8DD3F8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {18F2618F-D5A0-4779-AB65-8871DF992684}

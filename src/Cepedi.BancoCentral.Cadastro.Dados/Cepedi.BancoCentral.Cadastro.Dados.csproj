@@ -24,8 +24,4 @@
     <ProjectReference Include="..\Cepedi.BancoCentral.Cadastro.Dominio\Cepedi.BancoCentral.Cadastro.Dominio.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Repositories\Queries\" />
-  </ItemGroup>
-
 </Project>
