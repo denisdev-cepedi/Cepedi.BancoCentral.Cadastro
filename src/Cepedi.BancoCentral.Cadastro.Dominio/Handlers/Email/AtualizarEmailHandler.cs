@@ -11,11 +11,13 @@ public class AtualizarEmailHandler : IRequestHandler<AtualizarEmailRequest, Resu
 {
     private readonly IEmailRepository _emailRepository;
     private readonly ILogger<AtualizarEmailHandler> _logger;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public AtualizarEmailHandler(IEmailRepository emailRepository, ILogger<AtualizarEmailHandler> logger)
+    public AtualizarEmailHandler(IEmailRepository emailRepository, ILogger<AtualizarEmailHandler> logger, IUnitOfWork unitOfWork)
     {
         _emailRepository = emailRepository;
         _logger = logger;
+        _unitOfWork = unitOfWork;
     }
 
     public async Task<Result<AtualizarEmailResponse>> Handle(AtualizarEmailRequest request, CancellationToken cancellationToken)
@@ -30,6 +32,8 @@ public class AtualizarEmailHandler : IRequestHandler<AtualizarEmailRequest, Resu
         emailEntity.Atualizar(request.Email);
 
         await _emailRepository.AtualizarEmailAsync(emailEntity);
+        
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
 
         return Result.Success(new AtualizarEmailResponse(emailEntity.EnderecoEmail));
     }

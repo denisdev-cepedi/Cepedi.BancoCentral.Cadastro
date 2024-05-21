@@ -13,11 +13,12 @@ public class DeletarNacionalidadeHandler : IRequestHandler<DeletarNacionalidadeR
 {
     private readonly ILogger<DeletarNacionalidadeHandler> _logger;
     private readonly INacionalidadeRepository _nacionalidadeRepository;
-
-    public DeletarNacionalidadeHandler(INacionalidadeRepository nacionalidadeRepository, ILogger<DeletarNacionalidadeHandler> logger)
+    private readonly IUnitOfWork _unitOfWork;
+    public DeletarNacionalidadeHandler(INacionalidadeRepository nacionalidadeRepository, ILogger<DeletarNacionalidadeHandler> logger, IUnitOfWork unitOfWork)
     {
         _nacionalidadeRepository = nacionalidadeRepository;
         _logger = logger;
+        _unitOfWork = unitOfWork;
     }
 
     public async Task<Result<DeletarNacionalidadeResponse>> Handle(DeletarNacionalidadeRequest request, CancellationToken cancellationToken)
@@ -32,6 +33,8 @@ public class DeletarNacionalidadeHandler : IRequestHandler<DeletarNacionalidadeR
 
         await _nacionalidadeRepository.DeletarNacionalidadeAsync(nacionalidade);
 
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
+        
         return Result.Success(new DeletarNacionalidadeResponse(nacionalidade.NomeNacionalidade));
     }
 }

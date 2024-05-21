@@ -1,3 +1,4 @@
+using System.Xml.Resolvers;
 using Cepedi.BancoCentral.Cadastro.Dominio.Repository;
 using Cepedi.BancoCentral.Cadastro.Compartilhado.Requests;
 using Cepedi.BancoCentral.Cadastro.Compartilhado.Responses;
@@ -11,11 +12,13 @@ public class AtualizarTelefoneHandler : IRequestHandler<AtualizarTelefoneRequest
 {
     private readonly ITelefoneRepository _telefoneRepository;
     private readonly ILogger<AtualizarTelefoneHandler> _logger;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public AtualizarTelefoneHandler(ITelefoneRepository telefoneRepository, ILogger<AtualizarTelefoneHandler> logger)
+    public AtualizarTelefoneHandler(ITelefoneRepository telefoneRepository, ILogger<AtualizarTelefoneHandler> logger, IUnitOfWork unitOfWork)
     {
         _telefoneRepository = telefoneRepository;
         _logger = logger;
+        _unitOfWork = unitOfWork;
     }
 
     public async Task<Result<AtualizarTelefoneResponse>> Handle(AtualizarTelefoneRequest request, CancellationToken cancellationToken)
@@ -31,6 +34,8 @@ public class AtualizarTelefoneHandler : IRequestHandler<AtualizarTelefoneRequest
 
         await _telefoneRepository.AtualizarTelefoneAsync(telefoneEntity);
 
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
+        
         return Result.Success(new AtualizarTelefoneResponse(telefoneEntity.NumeroTelefone));
     }
 }

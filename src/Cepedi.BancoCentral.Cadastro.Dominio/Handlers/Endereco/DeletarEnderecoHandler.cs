@@ -13,11 +13,13 @@ public class DeletarEnderecoHandler : IRequestHandler<DeletarEnderecoRequest, Re
 {
     private readonly ILogger<DeletarEnderecoHandler> _logger;
     private readonly IEnderecoRepository _enderecoRepository;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public DeletarEnderecoHandler(IEnderecoRepository enderecoRepository, ILogger<DeletarEnderecoHandler> logger)
+    public DeletarEnderecoHandler(IEnderecoRepository enderecoRepository, ILogger<DeletarEnderecoHandler> logger, IUnitOfWork unitOfWork)
     {
         _enderecoRepository = enderecoRepository;
         _logger = logger;
+        _unitOfWork = unitOfWork;
     }
 
     public async Task<Result<DeletarEnderecoResponse>> Handle(DeletarEnderecoRequest request, CancellationToken cancellationToken)
@@ -32,6 +34,8 @@ public class DeletarEnderecoHandler : IRequestHandler<DeletarEnderecoRequest, Re
 
         await _enderecoRepository.DeletarEnderecoAsync(endereco);
 
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
+        
         return Result.Success(new DeletarEnderecoResponse(endereco.Logradouro));
     }
 }

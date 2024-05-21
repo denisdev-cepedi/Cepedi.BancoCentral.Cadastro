@@ -13,11 +13,13 @@ public class CriarPessoaRequestHandler
 {
     private readonly ILogger<CriarPessoaRequestHandler> _logger;
     private readonly IPessoaRepository _pessoaRepository;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public CriarPessoaRequestHandler(IPessoaRepository pessoaRepository, ILogger<CriarPessoaRequestHandler> logger)
+    public CriarPessoaRequestHandler(IPessoaRepository pessoaRepository, ILogger<CriarPessoaRequestHandler> logger, IUnitOfWork unitOfWork)
     {
         _pessoaRepository = pessoaRepository;
         _logger = logger;
+        _unitOfWork = unitOfWork;
     }
 
     public async Task<Result<CriarPessoaResponse>> Handle(CriarPessoaRequest request, CancellationToken cancellationToken)
@@ -34,6 +36,8 @@ public class CriarPessoaRequestHandler
 
         await _pessoaRepository.CriarPessoaAsync(pessoa);
 
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
+        
         return Result.Success(new CriarPessoaResponse(pessoa.IdPessoa, pessoa.Nome));
     }
 }

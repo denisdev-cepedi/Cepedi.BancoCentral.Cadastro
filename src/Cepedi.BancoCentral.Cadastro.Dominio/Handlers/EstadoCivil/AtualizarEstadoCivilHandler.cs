@@ -11,11 +11,13 @@ public class AtualizarEstadoCivilHandler : IRequestHandler<AtualizarEstadoCivilR
 {
     private readonly IEstadoCivilRepository _estadoCivilRepository;
     private readonly ILogger<AtualizarEstadoCivilHandler> _logger;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public AtualizarEstadoCivilHandler(IEstadoCivilRepository estadoCivilRepository, ILogger<AtualizarEstadoCivilHandler> logger)
+    public AtualizarEstadoCivilHandler(IEstadoCivilRepository estadoCivilRepository, ILogger<AtualizarEstadoCivilHandler> logger, IUnitOfWork unitOfWork)
     {
         _estadoCivilRepository = estadoCivilRepository;
         _logger = logger;
+        _unitOfWork = unitOfWork;
     }
 
     public async Task<Result<AtualizarEstadoCivilResponse>> Handle(AtualizarEstadoCivilRequest request, CancellationToken cancellationToken)
@@ -31,6 +33,8 @@ public class AtualizarEstadoCivilHandler : IRequestHandler<AtualizarEstadoCivilR
 
         await _estadoCivilRepository.AtualizarEstadoCivilAsync(estadoCivilEntity);
 
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
+        
         return Result.Success(new AtualizarEstadoCivilResponse(estadoCivilEntity.NomeEstadoCivil));
     }
 }

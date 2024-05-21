@@ -13,13 +13,14 @@ public class DeletarGeneroHandler : IRequestHandler<DeletarGeneroRequest, Result
 {
     private readonly ILogger<DeletarGeneroHandler> _logger;
     private readonly IGeneroRepository _generoRepository;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public DeletarGeneroHandler(IGeneroRepository generoRepository, ILogger<DeletarGeneroHandler> logger)
+    public DeletarGeneroHandler(IGeneroRepository generoRepository, ILogger<DeletarGeneroHandler> logger, IUnitOfWork unitOfWork)
     {
         _generoRepository = generoRepository;
         _logger = logger;
+        _unitOfWork = unitOfWork;
     }
-
     public async Task<Result<DeletarGeneroResponse>> Handle(DeletarGeneroRequest request, CancellationToken cancellationToken)
     {
         var genero = await _generoRepository.ObterGeneroAsync(request.Id);
@@ -31,6 +32,8 @@ public class DeletarGeneroHandler : IRequestHandler<DeletarGeneroRequest, Result
         }
 
         await _generoRepository.DeletarGeneroAsync(genero);
+        
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
 
         return Result.Success(new DeletarGeneroResponse(genero.NomeGenero));
     }

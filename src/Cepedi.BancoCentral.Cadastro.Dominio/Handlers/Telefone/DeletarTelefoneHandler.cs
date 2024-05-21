@@ -13,13 +13,14 @@ public class DeletarTelefoneHandler : IRequestHandler<DeletarTelefoneRequest, Re
 {
     private readonly ILogger<DeletarTelefoneHandler> _logger;
     private readonly ITelefoneRepository _telefoneRepository;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public DeletarTelefoneHandler(ITelefoneRepository telefoneRepository, ILogger<DeletarTelefoneHandler> logger)
+    public DeletarTelefoneHandler(ITelefoneRepository telefoneRepository, ILogger<DeletarTelefoneHandler> logger, IUnitOfWork unitOfWork)
     {
         _telefoneRepository = telefoneRepository;
         _logger = logger;
+        _unitOfWork = unitOfWork;
     }
-
     public async Task<Result<DeletarTelefoneResponse>> Handle(DeletarTelefoneRequest request, CancellationToken cancellationToken)
     {
         var telefone = await _telefoneRepository.ObterTelefoneAsync(request.IdTelefone);
@@ -32,6 +33,8 @@ public class DeletarTelefoneHandler : IRequestHandler<DeletarTelefoneRequest, Re
 
         await _telefoneRepository.DeletarTelefoneAsync(telefone);
 
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
+        
         return Result.Success(new DeletarTelefoneResponse(telefone.NumeroTelefone));
     }
 }

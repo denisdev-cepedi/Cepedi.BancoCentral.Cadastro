@@ -11,11 +11,13 @@ public class AtualizarPessoaRequestHandler :
 {
     private readonly IPessoaRepository _pessoaRepository;
     private readonly ILogger<AtualizarPessoaRequestHandler> _logger;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public AtualizarPessoaRequestHandler(IPessoaRepository pessoaRepository, ILogger<AtualizarPessoaRequestHandler> logger)
+    public AtualizarPessoaRequestHandler(IPessoaRepository pessoaRepository, ILogger<AtualizarPessoaRequestHandler> logger, IUnitOfWork unitOfWork)
     {
         _pessoaRepository = pessoaRepository;
         _logger = logger;
+        _unitOfWork = unitOfWork;
     }
 
     public async Task<Result<AtualizarPessoaResponse>> Handle(AtualizarPessoaRequest request, CancellationToken cancellationToken)
@@ -32,6 +34,8 @@ public class AtualizarPessoaRequestHandler :
 
         await _pessoaRepository.AtualizarPessoaAsync(pessoaEntity);
 
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
+        
         return Result.Success(new AtualizarPessoaResponse(pessoaEntity.Nome));
     }
 }

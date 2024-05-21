@@ -13,11 +13,13 @@ public class CriarEstadoCivilHandler : IRequestHandler<CriarEstadoCivilRequest, 
 {
     private readonly ILogger<CriarEstadoCivilHandler> _logger;
     private readonly IEstadoCivilRepository _estadoCivilRepository;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public CriarEstadoCivilHandler(IEstadoCivilRepository estadoCivilRepository, ILogger<CriarEstadoCivilHandler> logger)
+    public CriarEstadoCivilHandler(IEstadoCivilRepository estadoCivilRepository, ILogger<CriarEstadoCivilHandler> logger, IUnitOfWork unitOfWork)
     {
         _estadoCivilRepository = estadoCivilRepository;
         _logger = logger;
+        _unitOfWork = unitOfWork;
     }
 
     public async Task<Result<CriarEstadoCivilResponse>> Handle(CriarEstadoCivilRequest request, CancellationToken cancellationToken)
@@ -29,6 +31,8 @@ public class CriarEstadoCivilHandler : IRequestHandler<CriarEstadoCivilRequest, 
 
         await _estadoCivilRepository.CriarEstadoCivilAsync(estadoCivil);
 
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
+        
         return Result.Success(new CriarEstadoCivilResponse(estadoCivil.NomeEstadoCivil));
     }
 }

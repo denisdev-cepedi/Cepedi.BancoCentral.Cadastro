@@ -11,11 +11,12 @@ public class AtualizarEnderecoHandler : IRequestHandler<AtualizarEnderecoRequest
 {
     private readonly IEnderecoRepository _enderecoRepository;
     private readonly ILogger<AtualizarEnderecoHandler> _logger;
-
-    public AtualizarEnderecoHandler(IEnderecoRepository enderecoRepository, ILogger<AtualizarEnderecoHandler> logger)
+    private readonly IUnitOfWork _unitOfWork;
+    public AtualizarEnderecoHandler(IEnderecoRepository enderecoRepository, ILogger<AtualizarEnderecoHandler> logger, IUnitOfWork unitOfWork)
     {
         _enderecoRepository = enderecoRepository;
         _logger = logger;
+        _unitOfWork = unitOfWork;
     }
 
     public async Task<Result<AtualizarEnderecoResponse>> Handle(AtualizarEnderecoRequest request, CancellationToken cancellationToken)
@@ -31,6 +32,8 @@ public class AtualizarEnderecoHandler : IRequestHandler<AtualizarEnderecoRequest
 
         await _enderecoRepository.AtualizarEnderecoAsync(enderecoEntity);
 
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
+        
         return Result.Success(new AtualizarEnderecoResponse(enderecoEntity.Cep, enderecoEntity.Logradouro,
             enderecoEntity.Bairro, enderecoEntity.Cidade, enderecoEntity.Estado, enderecoEntity.Numero,
             enderecoEntity.Pais));
