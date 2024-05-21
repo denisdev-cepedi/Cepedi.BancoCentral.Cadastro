@@ -1,6 +1,7 @@
 ﻿using System.Text.Json;
 using Microsoft.Extensions.Caching.Distributed;
 using Cepedi.BancoCentral.Cadastro.Dominio.Services;
+using Cepedi.BancoCentral.Cadastro.Dominio.Entidades;
 
 namespace Cepedi.BancoCentral.Cadastro.Cache;
 
