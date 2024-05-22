@@ -15,12 +15,13 @@ public class CriarTipoRegistroRequestHandlerTests
 {
     private readonly ILogger<CriarTipoRegistroRequestHandler> _logger = Substitute.For<ILogger<CriarTipoRegistroRequestHandler>>();
     private readonly ITipoRegistroRepository _tiporegistroRepository = Substitute.For<ITipoRegistroRepository>();
+    private readonly IUnitOfWork _unitOfWork = Substitute.For<IUnitOfWork>();
 
     private readonly CriarTipoRegistroRequestHandler _sut;
 
     public CriarTipoRegistroRequestHandlerTests()
     {
-        _sut = new CriarTipoRegistroRequestHandler(_tiporegistroRepository, _logger);
+        _sut = new CriarTipoRegistroRequestHandler(_tiporegistroRepository, _logger, _unitOfWork);
     }
 
     [Fact]

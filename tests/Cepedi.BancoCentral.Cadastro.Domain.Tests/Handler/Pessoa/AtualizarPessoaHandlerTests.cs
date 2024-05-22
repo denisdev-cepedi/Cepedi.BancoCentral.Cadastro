@@ -17,10 +17,11 @@ public class AtualizarPessoaHandlerTests
         Substitute.For<IPessoaRepository>();
     private readonly ILogger<AtualizarPessoaHandler> _logger = Substitute.For<ILogger<AtualizarPessoaHandler>>();
     private readonly AtualizarPessoaHandler _sut;
+    private readonly IUnitOfWork _unitOfWork = Substitute.For<IUnitOfWork>();
     
     public AtualizarPessoaHandlerTests()
     {
-        _sut = new AtualizarPessoaHandler(_pessoaRepository, _logger);
+        _sut = new AtualizarPessoaHandler(_pessoaRepository, _logger, _unitOfWork);
     }
     
     [Fact]

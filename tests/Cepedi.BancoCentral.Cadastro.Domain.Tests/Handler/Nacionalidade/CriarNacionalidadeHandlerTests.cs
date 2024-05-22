@@ -17,10 +17,11 @@ public class CriarNacionalidadeHandlerTests
         Substitute.For<INacionalidadeRepository>();
     private readonly ILogger<CriarNacionalidadeHandler> _logger = Substitute.For<ILogger<CriarNacionalidadeHandler>>();
     private readonly CriarNacionalidadeHandler _sut;
+    private readonly IUnitOfWork _unitOfWork = Substitute.For<IUnitOfWork>();
     
     public CriarNacionalidadeHandlerTests()
     {
-        _sut = new CriarNacionalidadeHandler(_nacionalidadeRepository, _logger);
+        _sut = new CriarNacionalidadeHandler(_nacionalidadeRepository, _logger, _unitOfWork);
     }
     
     [Fact]

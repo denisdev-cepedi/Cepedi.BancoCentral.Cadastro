@@ -17,10 +17,11 @@ public class CriarPessoaHandlerTests
         Substitute.For<IPessoaRepository>();
     private readonly ILogger<CriarPessoaHandler> _logger = Substitute.For<ILogger<CriarPessoaHandler>>();
     private readonly CriarPessoaHandler _sut;
+    private readonly IUnitOfWork _unitOfWork = Substitute.For<IUnitOfWork>();
     
     public CriarPessoaHandlerTests()
     {
-        _sut = new CriarPessoaHandler(_pessoaRepository, _logger);
+        _sut = new CriarPessoaHandler(_pessoaRepository, _logger, _unitOfWork);
     }
     
     [Fact]

@@ -16,10 +16,11 @@ public class DeletarTelefoneHandlerTests
     private readonly ITelefoneRepository _telefoneRepository = Substitute.For<ITelefoneRepository>();
     private readonly ILogger<DeletarTelefoneHandler> _logger = Substitute.For<ILogger<DeletarTelefoneHandler>>();
     private readonly DeletarTelefoneHandler _sut;
+    private readonly IUnitOfWork _unitOfWork = Substitute.For<IUnitOfWork>();
 
     public DeletarTelefoneHandlerTests()
     {
-        _sut = new DeletarTelefoneHandler(_telefoneRepository, _logger);
+        _sut = new DeletarTelefoneHandler(_telefoneRepository, _logger, _unitOfWork);
     }
 
     [Fact]

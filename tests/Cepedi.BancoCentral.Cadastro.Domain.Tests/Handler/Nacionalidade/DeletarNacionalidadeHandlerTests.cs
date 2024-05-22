@@ -16,10 +16,11 @@ public class DeletarNacionalidadeHandlerTests
     private readonly INacionalidadeRepository _nacionalidadeRepository = Substitute.For<INacionalidadeRepository>();
     private readonly ILogger<DeletarNacionalidadeHandler> _logger = Substitute.For<ILogger<DeletarNacionalidadeHandler>>();
     private readonly DeletarNacionalidadeHandler _sut;
+    private readonly IUnitOfWork _unitOfWork = Substitute.For<IUnitOfWork>();
 
     public DeletarNacionalidadeHandlerTests()
     {
-        _sut = new DeletarNacionalidadeHandler(_nacionalidadeRepository, _logger);
+        _sut = new DeletarNacionalidadeHandler(_nacionalidadeRepository, _logger, _unitOfWork);
     }
 
     [Fact]

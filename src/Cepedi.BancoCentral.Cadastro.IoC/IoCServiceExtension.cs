@@ -35,6 +35,7 @@ namespace Cepedi.BancoCentral.Cadastro.IoC
             services.AddScoped<INacionalidadeRepository, NacionalidadeRepository>();
             services.AddScoped<IPessoaRepository, PessoaRepository>();
             services.AddScoped<IPixRepository, PixRepository>();
+            services.AddScoped<ITipoPixRepository, TipoPixRepository>();
             services.AddScoped<ITelefoneRepository, TelefoneRepository>();
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
             services.AddScoped<ITipoRegistroRepository, TipoRegistroRepository>();

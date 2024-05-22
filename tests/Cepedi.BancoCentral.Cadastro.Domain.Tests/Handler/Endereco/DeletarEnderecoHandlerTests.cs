@@ -16,10 +16,11 @@ public class DeletarEnderecoHandlerTests
     private readonly IEnderecoRepository _enderecoRepository = Substitute.For<IEnderecoRepository>();
     private readonly ILogger<DeletarEnderecoHandler> _logger = Substitute.For<ILogger<DeletarEnderecoHandler>>();
     private readonly DeletarEnderecoHandler _sut;
-
+    private readonly IUnitOfWork _unitOfWork = Substitute.For<IUnitOfWork>();
+    
     public DeletarEnderecoHandlerTests()
     {
-        _sut = new DeletarEnderecoHandler(_enderecoRepository, _logger);
+        _sut = new DeletarEnderecoHandler(_enderecoRepository, _logger, _unitOfWork);
     }
 
     [Fact]

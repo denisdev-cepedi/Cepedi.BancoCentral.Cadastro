@@ -17,10 +17,11 @@ public class CriarTelefoneHandlerTests
         Substitute.For<ITelefoneRepository>();
     private readonly ILogger<CriarTelefoneHandler> _logger = Substitute.For<ILogger<CriarTelefoneHandler>>();
     private readonly CriarTelefoneHandler _sut;
+    private readonly IUnitOfWork _unitOfWork = Substitute.For<IUnitOfWork>();
     
     public CriarTelefoneHandlerTests()
     {
-        _sut = new CriarTelefoneHandler(_telefoneRepository, _logger);
+        _sut = new CriarTelefoneHandler(_telefoneRepository, _logger, _unitOfWork);
     }
     
     [Fact]
