@@ -1,4 +1,4 @@
-﻿﻿namespace Cepedi.BancoCentral.Cadastro.Dominio.Entidades;
+﻿namespace Cepedi.BancoCentral.Cadastro.Dominio.Entidades;
 
 public class BancoEntity 
 {

@@ -3,10 +3,12 @@ using Cepedi.BancoCentral.Cadastro.Compartilhado;
 using Cepedi.BancoCentral.Cadastro.Dados;
 using Cepedi.BancoCentral.Cadastro.Dados.Repositories;
 using Cepedi.BancoCentral.Cadastro.Data.Repositories;
+using Cepedi.BancoCentral.Cadastro.Data.Repositories.Queries;
 using Cepedi.BancoCentral.Cadastro.Dominio;
 using Cepedi.BancoCentral.Cadastro.Dominio.Entidades;
 using Cepedi.BancoCentral.Cadastro.Dominio.Pipelines;
 using Cepedi.BancoCentral.Cadastro.Dominio.Repository;
+using Cepedi.BancoCentral.Cadastro.Dominio.Repository.Queries;
 using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -40,6 +42,9 @@ namespace Cepedi.BancoCentral.Cadastro.IoC
             services.AddScoped<IBancoRepository, BancoRepository>();
             services.AddHealthChecks()
                .AddDbContextCheck<ApplicationDbContext>();
+            
+            // Dapper
+            services.AddScoped<IBancoQueryRepository, BancoQueryRepository>();
         }
 
         private static void ConfigurarFluentValidation(IServiceCollection services)
