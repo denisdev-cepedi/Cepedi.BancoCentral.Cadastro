@@ -3,11 +3,12 @@ using Cepedi.BancoCentral.Cadastro.Compartilhado;
 using Cepedi.BancoCentral.Cadastro.Dados;
 using Cepedi.BancoCentral.Cadastro.Dados.Repositories;
 using Cepedi.BancoCentral.Cadastro.Data.Repositories;
-using Cepedi.BancoCentral.Cadastro.Dominio;
-using Cepedi.BancoCentral.Cadastro.Dominio.Entidades;
 using Cepedi.BancoCentral.Cadastro.Dominio.Pipelines;
 using Cepedi.BancoCentral.Cadastro.Dominio.Repository;
 using FluentValidation;
+using Keycloak.AuthServices.Authentication;
+using Keycloak.AuthServices.Authorization;
+using Keycloak.AuthServices.Sdk.Admin;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -22,7 +23,7 @@ namespace Cepedi.BancoCentral.Cadastro.IoC
         {
             ConfigureDbContext(services, configuration);
             services.AddMediatR(cfg =>
-            cfg.RegisterServicesFromAssemblies(AppDomain.CurrentDomain.GetAssemblies()));
+                cfg.RegisterServicesFromAssemblies(AppDomain.CurrentDomain.GetAssemblies()));
             services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ExcecaoPipeline<,>));
             services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidacaoComportamento<,>));
             ConfigurarFluentValidation(services);
@@ -40,8 +41,11 @@ namespace Cepedi.BancoCentral.Cadastro.IoC
             services.AddScoped<IRegistroTransacaoBancoRepository, RegistroTransacaoBancoRepository>();
             services.AddScoped<IBancoRepository, BancoRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            ConfigurarSso(services, configuration);
+
             services.AddHealthChecks()
-               .AddDbContextCheck<ApplicationDbContext>();
+                .AddDbContextCheck<ApplicationDbContext>();
         }
 
         private static void ConfigurarFluentValidation(IServiceCollection services)
@@ -51,8 +55,8 @@ namespace Cepedi.BancoCentral.Cadastro.IoC
                 .Assembly
                 .DefinedTypes
                 .Where(type => type.BaseType?.IsGenericType is true &&
-                type.BaseType.GetGenericTypeDefinition() ==
-                abstractValidator)
+                               type.BaseType.GetGenericTypeDefinition() ==
+                               abstractValidator)
                 .Select(Activator.CreateInstance)
                 .ToArray();
 
@@ -69,14 +73,29 @@ namespace Cepedi.BancoCentral.Cadastro.IoC
                 //options.UseSqlite(configuration.GetConnectionString("DefaultConnection"));
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
             });
-            
-            // services.AddDbContext<AlternativeDbContext>((sp, options) =>
-            // {
-            //     //options.UseSqlite(configuration.GetConnectionString("DefaultConnection"));
-            //     options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
-            // });
 
             services.AddScoped<ApplicationDbContextInitialiser>();
+        }
+
+        private static void ConfigurarSso(IServiceCollection services, IConfiguration configuration)
+        {
+            var authenticationOptions = configuration
+                .GetSection(KeycloakAuthenticationOptions.Section)
+                .Get<KeycloakAuthenticationOptions>();
+
+            services.AddKeycloakAuthentication(authenticationOptions);
+            
+            var authorizationOptions = configuration
+                .GetSection(KeycloakProtectionClientOptions.Section)
+                .Get<KeycloakProtectionClientOptions>();
+
+            services.AddKeycloakAuthorization(authorizationOptions);
+
+            var adminClientOptions = configuration
+                .GetSection(KeycloakAdminClientOptions.Section)
+                .Get<KeycloakAdminClientOptions>();
+
+            services.AddKeycloakAdminHttpClient(adminClientOptions);
         }
     }
 }
