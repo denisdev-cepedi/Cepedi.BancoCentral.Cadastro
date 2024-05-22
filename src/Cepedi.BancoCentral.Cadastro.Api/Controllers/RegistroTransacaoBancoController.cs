@@ -1,6 +1,8 @@
-﻿using Cepedi.BancoCentral.Cadastro.Compartilhado.Excecoes;
+﻿using Cepedi.BancoCentral.Cadastro.Compartilhado.DTO;
+using Cepedi.BancoCentral.Cadastro.Compartilhado.Excecoes;
 using Cepedi.BancoCentral.Cadastro.Compartilhado.Requests;
 using Cepedi.BancoCentral.Cadastro.Compartilhado.Responses;
+using Cepedi.BancoCentral.Cadastro.Shareable.Requests;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -45,6 +47,16 @@ public class RegistroTransacaoBancoController : BaseController
     public async Task<ActionResult<List<ObtemRegistroTransacaoBancoResponse>>> ObterListaRegistroTransacaoBancoAsync()
     {
         var request = new ObtemListaRegistroTransacaoBancoRequest();
+        return await SendCommand(request);
+    }
+
+    [HttpGet("saldo/{saldo}")]
+    [ProducesResponseType(typeof(List<RegistroTransacaoPessoaTipoTransacaoDto>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<List<RegistroTransacaoPessoaTipoTransacaoDto>>>
+        ObterRegistroTransacaoBancoPorSaldoAsync(double saldo)
+    {
+        var request = new RegistroTransacaoPessoaTipoTransacaoDtoRequest { Saldo = saldo };
         return await SendCommand(request);
     }
 }
