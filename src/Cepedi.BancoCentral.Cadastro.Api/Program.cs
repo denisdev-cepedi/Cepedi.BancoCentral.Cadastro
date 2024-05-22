@@ -1,5 +1,7 @@
 using Serilog;
 using Cepedi.BancoCentral.Cadastro.IoC;
+using Microsoft.IdentityModel.Logging;
+using Serilog;
 using Cepedi.BancoCentral.Cadastro.Api;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -27,12 +29,18 @@ if (app.Environment.IsDevelopment())
     // await app.InitialiseDatabaseAsync();
     app.UseSwagger();
     app.UseSwaggerUI();
+    IdentityModelEventSource.ShowPII = true;
+}
+else
+{
+    app.UseHttpsRedirection();
 }
 
 app.UseHealthChecks("/health");
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+app.UseAuthentication();
 
 app.MapControllers();
 

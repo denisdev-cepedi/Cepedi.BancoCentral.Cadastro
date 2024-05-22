@@ -28,15 +28,15 @@ namespace Cepedi.BancoCentral.Cadastro.IoC
         public static void ConfigureAppDependencies(this IServiceCollection services, IConfiguration configuration)
         {
             ConfigureDbContext(services, configuration);
-            
+
             services.AddMediatR(cfg =>
             cfg.RegisterServicesFromAssemblies(AppDomain.CurrentDomain.GetAssemblies()));
-            
+
             services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ExcecaoPipeline<,>));
             services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidacaoComportamento<,>));
-            
+
             ConfigurarFluentValidation(services);
-            
+
             services.AddScoped<IEmailRepository, EmailRepository>();
             services.AddScoped<IEnderecoRepository, EnderecoRepository>();
             services.AddScoped<IEstadoCivilRepository, EstadoCivilRepository>();
@@ -52,6 +52,9 @@ namespace Cepedi.BancoCentral.Cadastro.IoC
             services.AddScoped<IBancoRepository, BancoRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IRegistroTransacaoBancoQueryRepository, RegistroTransacaoBancoQueryRepository>();
+
+            ConfigurarSso(services, configuration);
+
             services.AddHealthChecks()
                .AddDbContextCheck<ApplicationDbContext>();
         }
@@ -81,7 +84,7 @@ namespace Cepedi.BancoCentral.Cadastro.IoC
                 //options.UseSqlite(configuration.GetConnectionString("DefaultConnection"));
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
             });
-            
+
             // services.AddDbContext<AlternativeDbContext>((sp, options) =>
             // {
             //     //options.UseSqlite(configuration.GetConnectionString("DefaultConnection"));
@@ -89,6 +92,28 @@ namespace Cepedi.BancoCentral.Cadastro.IoC
             // });
 
             services.AddScoped<ApplicationDbContextInitialiser>();
+        }
+        
+        private static void ConfigurarSso(IServiceCollection services, IConfiguration configuration)
+        {
+            var authenticationOptions = configuration
+                .GetSection(KeycloakAuthenticationOptions.Section)
+                .Get<KeycloakAuthenticationOptions>();
+
+            services.AddKeycloakAuthentication(authenticationOptions!);
+
+
+            var authorizationOptions = configuration
+                .GetSection(KeycloakProtectionClientOptions.Section)
+                .Get<KeycloakProtectionClientOptions>();
+
+            services.AddKeycloakAuthorization(authorizationOptions);
+
+            var adminClientOptions = configuration
+                .GetSection(KeycloakAdminClientOptions.Section)
+                .Get<KeycloakAdminClientOptions>();
+
+            services.AddKeycloakAdminHttpClient(adminClientOptions);
         }
     }
 }

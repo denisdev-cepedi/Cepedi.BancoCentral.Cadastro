@@ -1,6 +1,7 @@
 ﻿using Cepedi.BancoCentral.Cadastro.Compartilhado.Excecoes;
 using Cepedi.BancoCentral.Cadastro.Compartilhado.Requests;
 using Cepedi.BancoCentral.Cadastro.Compartilhado.Responses;
+using Microsoft.AspNetCore.Authorization;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,6 +9,7 @@ namespace Cepedi.BancoCentral.Cadastro.Api.Controllers;
 
 [ApiController]
 [Route("[controller]")]
+[Authorize]
 public class PessoaController : BaseController
 {
     private readonly ILogger<PessoaController> _logger;
