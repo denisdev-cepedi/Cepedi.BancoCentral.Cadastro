@@ -8,14 +8,14 @@ using Microsoft.Extensions.Logging;
 using OperationResult;
 
 namespace Cepedi.BancoCentral.Cadastro.Dominio.Handlers;
-public class CriarPessoaRequestHandler
+public class CriarPessoaHandler
     : IRequestHandler<CriarPessoaRequest, Result<CriarPessoaResponse>>
 {
-    private readonly ILogger<CriarPessoaRequestHandler> _logger;
+    private readonly ILogger<CriarPessoaHandler> _logger;
     private readonly IPessoaRepository _pessoaRepository;
     private readonly IUnitOfWork _unitOfWork;
 
-    public CriarPessoaRequestHandler(IPessoaRepository pessoaRepository, ILogger<CriarPessoaRequestHandler> logger, IUnitOfWork unitOfWork)
+    public CriarPessoaHandler(IPessoaRepository pessoaRepository, ILogger<CriarPessoaHandler> logger, IUnitOfWork unitOfWork)
     {
         _pessoaRepository = pessoaRepository;
         _logger = logger;

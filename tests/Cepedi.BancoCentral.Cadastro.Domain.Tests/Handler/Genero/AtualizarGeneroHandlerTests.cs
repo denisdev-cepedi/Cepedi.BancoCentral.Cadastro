@@ -17,10 +17,11 @@ public class AtualizarGeneroHandlerTests
         Substitute.For<IGeneroRepository>();
     private readonly ILogger<AtualizarGeneroHandler> _logger = Substitute.For<ILogger<AtualizarGeneroHandler>>();
     private readonly AtualizarGeneroHandler _sut;
+    private readonly IUnitOfWork _unitOfWork = Substitute.For<IUnitOfWork>();
     
     public AtualizarGeneroHandlerTests()
     {
-        _sut = new AtualizarGeneroHandler(_generoRepository, _logger);
+        _sut = new AtualizarGeneroHandler(_generoRepository, _logger, _unitOfWork);
     }
     
     [Fact]

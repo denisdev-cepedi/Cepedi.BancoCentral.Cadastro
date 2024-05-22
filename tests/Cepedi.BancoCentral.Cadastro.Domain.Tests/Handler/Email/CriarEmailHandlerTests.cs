@@ -16,10 +16,11 @@ public class CriarEmailHandlerTests
     private readonly IEmailRepository _emailRepository = Substitute.For<IEmailRepository>();
     private readonly ILogger<CriarEmailHandler> _logger = Substitute.For<ILogger<CriarEmailHandler>>();
     private readonly CriarEmailHandler _sut;
+    private readonly IUnitOfWork _unitOfWork = Substitute.For<IUnitOfWork>();
     
     public CriarEmailHandlerTests()
     {
-        _sut = new CriarEmailHandler(_emailRepository, _logger);
+        _sut = new CriarEmailHandler(_emailRepository, _logger, _unitOfWork);
     }
 
     [Fact]

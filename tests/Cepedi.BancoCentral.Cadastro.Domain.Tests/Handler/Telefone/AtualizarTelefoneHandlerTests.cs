@@ -17,10 +17,11 @@ public class AtualizarTelefoneHandlerTests
         Substitute.For<ITelefoneRepository>();
     private readonly ILogger<AtualizarTelefoneHandler> _logger = Substitute.For<ILogger<AtualizarTelefoneHandler>>();
     private readonly AtualizarTelefoneHandler _sut;
+    private readonly IUnitOfWork _unitOfWork = Substitute.For<IUnitOfWork>();
     
     public AtualizarTelefoneHandlerTests()
     {
-        _sut = new AtualizarTelefoneHandler(_telefoneRepository, _logger);
+        _sut = new AtualizarTelefoneHandler(_telefoneRepository, _logger, _unitOfWork);
     }
     
     [Fact]

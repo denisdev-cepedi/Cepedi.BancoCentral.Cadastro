@@ -17,10 +17,11 @@ public class CriarEnderecoHandlerTests
         Substitute.For<IEnderecoRepository>();
     private readonly ILogger<CriarEnderecoHandler> _logger = Substitute.For<ILogger<CriarEnderecoHandler>>();
     private readonly CriarEnderecoHandler _sut;
+    private readonly IUnitOfWork _unitOfWork = Substitute.For<IUnitOfWork>();
 
     public CriarEnderecoHandlerTests()
     {
-        _sut = new CriarEnderecoHandler(_enderecoRepository, _logger);
+        _sut = new CriarEnderecoHandler(_enderecoRepository, _logger, _unitOfWork);
     }
 
     [Fact]

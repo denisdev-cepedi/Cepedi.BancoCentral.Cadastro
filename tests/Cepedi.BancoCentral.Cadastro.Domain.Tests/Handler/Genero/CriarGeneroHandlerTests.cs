@@ -17,10 +17,11 @@ public class CriarGeneroHandlerTests
         Substitute.For<IGeneroRepository>();
     private readonly ILogger<CriarGeneroHandler> _logger = Substitute.For<ILogger<CriarGeneroHandler>>();
     private readonly CriarGeneroHandler _sut;
+    private readonly IUnitOfWork _unitOfWork = Substitute.For<IUnitOfWork>();
     
     public CriarGeneroHandlerTests()
     {
-        _sut = new CriarGeneroHandler(_generoRepository, _logger);
+        _sut = new CriarGeneroHandler(_generoRepository, _logger, _unitOfWork);
     }
     
     [Fact]

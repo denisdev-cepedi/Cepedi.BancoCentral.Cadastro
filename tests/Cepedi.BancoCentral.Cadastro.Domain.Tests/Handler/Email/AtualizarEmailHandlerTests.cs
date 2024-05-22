@@ -17,10 +17,11 @@ public class AtualizarEmailHandlerTests
     Substitute.For<IEmailRepository>();
     private readonly ILogger<AtualizarEmailHandler> _logger = Substitute.For<ILogger<AtualizarEmailHandler>>();
     private readonly AtualizarEmailHandler _sut;
+    private readonly IUnitOfWork _unitOfWork = Substitute.For<IUnitOfWork>();
 
     public AtualizarEmailHandlerTests()
     {
-        _sut = new AtualizarEmailHandler(_emailRepository, _logger);
+        _sut = new AtualizarEmailHandler(_emailRepository, _logger, _unitOfWork);
     }
 
     [Fact]

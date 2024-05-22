@@ -16,10 +16,11 @@ public class DeletarEmailHandlerTests
     private readonly IEmailRepository _emailRepository = Substitute.For<IEmailRepository>();
     private readonly ILogger<DeletarEmailHandler> _logger = Substitute.For<ILogger<DeletarEmailHandler>>();
     private readonly DeletarEmailHandler _sut;
+    private readonly IUnitOfWork _unitOfWork = Substitute.For<IUnitOfWork>();
 
     public DeletarEmailHandlerTests()
     {
-        _sut = new DeletarEmailHandler(_emailRepository, _logger);
+        _sut = new DeletarEmailHandler(_emailRepository, _logger, _unitOfWork);
     }
 
     [Fact]

@@ -17,10 +17,11 @@ public class AtualizarEnderecoHandlerTests
         Substitute.For<IEnderecoRepository>();
     private readonly ILogger<AtualizarEnderecoHandler> _logger = Substitute.For<ILogger<AtualizarEnderecoHandler>>();
     private readonly AtualizarEnderecoHandler _sut;
-
+    private readonly IUnitOfWork _unitOfWork = Substitute.For<IUnitOfWork>();
+    
     public AtualizarEnderecoHandlerTests()
     {
-        _sut = new AtualizarEnderecoHandler(_enderecoRepository, _logger);
+        _sut = new AtualizarEnderecoHandler(_enderecoRepository, _logger, _unitOfWork);
     }
 
     [Fact]
