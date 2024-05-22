@@ -13,11 +13,13 @@ public class CriarNacionalidadeHandler : IRequestHandler<CriarNacionalidadeReque
 {
     private readonly ILogger<CriarNacionalidadeHandler> _logger;
     private readonly INacionalidadeRepository _nacionalidadeRepository;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public CriarNacionalidadeHandler(INacionalidadeRepository nacionalidadeRepository, ILogger<CriarNacionalidadeHandler> logger)
+    public CriarNacionalidadeHandler(INacionalidadeRepository nacionalidadeRepository, ILogger<CriarNacionalidadeHandler> logger, IUnitOfWork unitOfWork)
     {
         _nacionalidadeRepository = nacionalidadeRepository;
         _logger = logger;
+        _unitOfWork = unitOfWork;
     }
 
     public async Task<Result<CriarNacionalidadeResponse>> Handle(CriarNacionalidadeRequest request, CancellationToken cancellationToken)
@@ -29,6 +31,8 @@ public class CriarNacionalidadeHandler : IRequestHandler<CriarNacionalidadeReque
 
         await _nacionalidadeRepository.CriarNacionalidadeAsync(nacionalidade);
 
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
+        
         return Result.Success(new CriarNacionalidadeResponse(nacionalidade.NomeNacionalidade));
     }
 }

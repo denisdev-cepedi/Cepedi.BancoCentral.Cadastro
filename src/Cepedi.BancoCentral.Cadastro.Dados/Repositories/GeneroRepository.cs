@@ -17,8 +17,6 @@ public class GeneroRepository : IGeneroRepository
     {
         _context.Genero.Update(genero);
 
-        await _context.SaveChangesAsync();
-
         return genero;
     }
 
@@ -26,16 +24,12 @@ public class GeneroRepository : IGeneroRepository
     {
         _context.Genero.Add(genero);
 
-        await _context.SaveChangesAsync();
-
         return genero;
     }
 
     public async Task<GeneroEntity> DeletarGeneroAsync(GeneroEntity genero)
     {
         _context.Genero.Remove(genero);
-
-        await _context.SaveChangesAsync();
 
         return genero;
     }

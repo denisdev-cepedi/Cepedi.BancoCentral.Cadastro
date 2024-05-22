@@ -15,7 +15,7 @@ public class RegistroTransacaoBancoRepository : IRegistroTransacaoBancoRepositor
     public async Task<RegistroTransacaoBancoEntity> CriarRegistroTransacaoBancoAsync(RegistroTransacaoBancoEntity registroTransacaoBanco)
     {
         await _context.RegistroTransacaoBanco.AddAsync(registroTransacaoBanco);
-        await _context.SaveChangesAsync();
+        // await _context.SaveChangesAsync();
         return registroTransacaoBanco;
     }
 
@@ -32,14 +32,14 @@ public class RegistroTransacaoBancoRepository : IRegistroTransacaoBancoRepositor
     public async Task<RegistroTransacaoBancoEntity> AtualizarRegistroTransacaoBancoAsync(RegistroTransacaoBancoEntity registroTransacaoBanco)
     {
         _context.RegistroTransacaoBanco.Update(registroTransacaoBanco);
-        await _context.SaveChangesAsync();
+        // await _context.SaveChangesAsync();
         return registroTransacaoBanco;
     }
 
     public async Task<RegistroTransacaoBancoEntity> DeletarRegistroTransacaoBancoAsync(RegistroTransacaoBancoEntity registroTransacaoBanco)
     {
         _context.RegistroTransacaoBanco.Remove(registroTransacaoBanco);
-        await _context.SaveChangesAsync();
+        // await _context.SaveChangesAsync();
         return registroTransacaoBanco;
     }
 

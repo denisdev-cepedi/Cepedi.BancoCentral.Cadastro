@@ -11,11 +11,13 @@ public class AtualizarNacionalidadeHandler : IRequestHandler<AtualizarNacionalid
 {
     private readonly INacionalidadeRepository _nacionalidadeRepository;
     private readonly ILogger<AtualizarNacionalidadeHandler> _logger;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public AtualizarNacionalidadeHandler(INacionalidadeRepository nacionalidadeRepository, ILogger<AtualizarNacionalidadeHandler> logger)
+    public AtualizarNacionalidadeHandler(INacionalidadeRepository nacionalidadeRepository, ILogger<AtualizarNacionalidadeHandler> logger, IUnitOfWork unitOfWork)
     {
         _nacionalidadeRepository = nacionalidadeRepository;
         _logger = logger;
+        _unitOfWork = unitOfWork;
     }
 
     public async Task<Result<AtualizarNacionalidadeResponse>> Handle(AtualizarNacionalidadeRequest request, CancellationToken cancellationToken)
@@ -31,6 +33,8 @@ public class AtualizarNacionalidadeHandler : IRequestHandler<AtualizarNacionalid
 
         await _nacionalidadeRepository.AtualizarNacionalidadeAsync(nacionalidadeEntity);
 
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
+        
         return Result.Success(new AtualizarNacionalidadeResponse(nacionalidadeEntity.NomeNacionalidade));
     }
 }

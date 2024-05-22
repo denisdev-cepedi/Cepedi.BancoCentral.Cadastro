@@ -15,10 +15,14 @@ public class DeletarTipoRegistroRequestHandler : IRequestHandler<DeletarTipoRegi
     private readonly ILogger<DeletarTipoRegistroRequestHandler> _logger;
     private readonly ITipoRegistroRepository _tiporegistroRepository;
 
-    public DeletarTipoRegistroRequestHandler(ITipoRegistroRepository tipoRegistroRepository, ILogger<DeletarTipoRegistroRequestHandler> logger)
+    private readonly IUnitOfWork _unitOfWork;
+
+    public DeletarTipoRegistroRequestHandler(ITipoRegistroRepository tipoRegistroRepository, 
+    ILogger<DeletarTipoRegistroRequestHandler> logger, IUnitOfWork unitOfWork)
     {
         _logger = logger;
         _tiporegistroRepository = tipoRegistroRepository;
+        _unitOfWork = unitOfWork;
     }
 
     public async Task<Result<DeletarTipoRegistroResponse>> Handle(DeletarTipoRegistroRequest request, CancellationToken cancellationToken)
@@ -31,6 +35,7 @@ public class DeletarTipoRegistroRequestHandler : IRequestHandler<DeletarTipoRegi
                 (Compartilhado.Enums.Cadastro.ErroDeletarTipoRegistro)));
         }
         await _tiporegistroRepository.DeletarTipoRegistroAsync(tipoEncontrado);
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
         return Result.Success(new DeletarTipoRegistroResponse(tipoEncontrado.IdTipoRegistro,tipoEncontrado.NomeTipo));
         
     }

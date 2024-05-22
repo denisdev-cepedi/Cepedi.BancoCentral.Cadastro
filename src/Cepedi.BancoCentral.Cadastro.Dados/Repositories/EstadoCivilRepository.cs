@@ -17,8 +17,6 @@ public class EstadoCivilRepository : IEstadoCivilRepository
     {
         _context.EstadoCivil.Update(estadoCivil);
 
-        await _context.SaveChangesAsync();
-
         return estadoCivil;
     }
 
@@ -26,16 +24,12 @@ public class EstadoCivilRepository : IEstadoCivilRepository
     {
         _context.EstadoCivil.Add(estadoCivil);
 
-        await _context.SaveChangesAsync();
-
         return estadoCivil;
     }
 
     public async Task<EstadoCivilEntity> DeletarEstadoCivilAsync(EstadoCivilEntity estadoCivil)
     {
         _context.EstadoCivil.Remove(estadoCivil);
-
-        await _context.SaveChangesAsync();
 
         return estadoCivil;
     }

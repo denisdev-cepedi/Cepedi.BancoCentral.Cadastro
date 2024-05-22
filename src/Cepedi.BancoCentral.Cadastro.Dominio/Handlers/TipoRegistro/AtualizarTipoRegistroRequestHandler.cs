@@ -13,19 +13,27 @@ public class AtualizarTipoRegistroRequestHandler : IRequestHandler<AtualizarTipo
     private readonly ILogger<AtualizarTipoRegistroRequestHandler> _logger;
     private readonly ITipoRegistroRepository _tiporegistroRepository;
 
-    public AtualizarTipoRegistroRequestHandler (ITipoRegistroRepository tipoRegistroRepository, ILogger<AtualizarTipoRegistroRequestHandler> logger){
+    private readonly IUnitOfWork _unitOfWork;
+
+    public AtualizarTipoRegistroRequestHandler (ITipoRegistroRepository tipoRegistroRepository, 
+    ILogger<AtualizarTipoRegistroRequestHandler> logger, IUnitOfWork unitOfWork){
         _logger = logger;
         _tiporegistroRepository = tipoRegistroRepository;
+        _unitOfWork = unitOfWork;
     }
 
-    public Task<Result<AtualizarTipoRegistroResponse>> Handle(AtualizarTipoRegistroRequest request, CancellationToken cancellationToken)
+    public async Task<Result<AtualizarTipoRegistroResponse>> Handle(AtualizarTipoRegistroRequest request, CancellationToken cancellationToken)
     {
-        var tipo = new TipoRegistroEntity(){
-                IdTipoRegistro = request.IdTipoRegistro,
-                NomeTipo = request.NomeTipo
-            };
+        var tipo = await _tiporegistroRepository.ObterTipoRegistroAsync(request.IdTipoRegistro);
+        if (tipo == null)
+        {
+            return Result.Error<AtualizarTipoRegistroResponse>(new Compartilhado.Excecoes.ExcecaoAplicacao((Compartilhado.Enums.Cadastro.DadosInvalidos)));
+        }
+        
+        tipo.AtualizarTipoRegistroAsync(request);
+        await _tiporegistroRepository.AtualizarTipoRegistroAsync(tipo);
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
 
-        _tiporegistroRepository.AtualizarTipoRegistroAsync(tipo);
-        return Task.FromResult(Result.Success(new AtualizarTipoRegistroResponse(tipo.IdTipoRegistro,tipo.NomeTipo)));  
+        return Result.Success(new AtualizarTipoRegistroResponse(tipo.IdTipoRegistro,tipo.NomeTipo));  
     }
 }

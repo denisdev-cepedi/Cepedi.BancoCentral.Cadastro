@@ -15,9 +15,13 @@ public class CriarTipoRegistroRequestHandler : IRequestHandler<CriarTipoRegistro
     private readonly ILogger<CriarTipoRegistroRequestHandler> _logger;
     private readonly ITipoRegistroRepository _tiporegistroRepository;
 
-    public CriarTipoRegistroRequestHandler (ITipoRegistroRepository tipoRegistroRepository, ILogger<CriarTipoRegistroRequestHandler> logger){
+    private readonly IUnitOfWork _unitOfWork;
+
+    public CriarTipoRegistroRequestHandler (ITipoRegistroRepository tipoRegistroRepository, 
+    ILogger<CriarTipoRegistroRequestHandler> logger, IUnitOfWork unitOfWork){
         _logger = logger;
         _tiporegistroRepository = tipoRegistroRepository;
+        _unitOfWork = unitOfWork;
     }
 
 
@@ -28,6 +32,7 @@ public class CriarTipoRegistroRequestHandler : IRequestHandler<CriarTipoRegistro
             };
 
         await _tiporegistroRepository.CriarTipoRegistroAsync(tipo);
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
         return Result.Success(new CriarTipoRegistroResponse(tipo.IdTipoRegistro,tipo.NomeTipo));
 
     }

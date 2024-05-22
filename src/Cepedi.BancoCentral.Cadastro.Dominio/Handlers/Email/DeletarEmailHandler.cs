@@ -13,11 +13,13 @@ public class DeletarEmailHandler : IRequestHandler<DeletarEmailRequest, Result<D
 {
     private readonly ILogger<DeletarEmailHandler> _logger;
     private readonly IEmailRepository _emailRepository;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public DeletarEmailHandler(IEmailRepository emailRepository, ILogger<DeletarEmailHandler> logger)
+    public DeletarEmailHandler(IEmailRepository emailRepository, ILogger<DeletarEmailHandler> logger, IUnitOfWork unitOfWork)
     {
         _emailRepository = emailRepository;
         _logger = logger;
+        _unitOfWork = unitOfWork;
     }
 
     public async Task<Result<DeletarEmailResponse>> Handle(DeletarEmailRequest request, CancellationToken cancellationToken)
@@ -32,6 +34,8 @@ public class DeletarEmailHandler : IRequestHandler<DeletarEmailRequest, Result<D
 
         await _emailRepository.DeletarEmailAsync(email);
 
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
+        
         return Result.Success(new DeletarEmailResponse(email.EnderecoEmail));
     }
 }

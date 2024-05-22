@@ -13,11 +13,13 @@ public class CriarTelefoneHandler : IRequestHandler<CriarTelefoneRequest, Result
 {
     private readonly ILogger<CriarTelefoneHandler> _logger;
     private readonly ITelefoneRepository _telefoneRepository;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public CriarTelefoneHandler(ITelefoneRepository telefoneRepository, ILogger<CriarTelefoneHandler> logger)
+    public CriarTelefoneHandler(ITelefoneRepository telefoneRepository, ILogger<CriarTelefoneHandler> logger, IUnitOfWork unitOfWork)
     {
         _telefoneRepository = telefoneRepository;
         _logger = logger;
+        _unitOfWork = unitOfWork;
     }
 
     public async Task<Result<CriarTelefoneResponse>> Handle(CriarTelefoneRequest request, CancellationToken cancellationToken)
@@ -30,6 +32,8 @@ public class CriarTelefoneHandler : IRequestHandler<CriarTelefoneRequest, Result
 
         await _telefoneRepository.CriarTelefoneAsync(telefone);
 
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
+        
         return Result.Success(new CriarTelefoneResponse(telefone.NumeroTelefone));
     }
 }

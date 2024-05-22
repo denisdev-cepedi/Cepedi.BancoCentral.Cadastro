@@ -17,8 +17,6 @@ public class EnderecoRepository : IEnderecoRepository
     {
         _context.Endereco.Update(endereco);
 
-        await _context.SaveChangesAsync();
-
         return endereco;
     }
 
@@ -26,16 +24,12 @@ public class EnderecoRepository : IEnderecoRepository
     {
         _context.Endereco.Add(endereco);
 
-        await _context.SaveChangesAsync();
-
         return endereco;
     }
 
     public async Task<EnderecoEntity> DeletarEnderecoAsync(EnderecoEntity endereco)
     {
         _context.Endereco.Remove(endereco);
-
-        await _context.SaveChangesAsync();
 
         return endereco;
     }

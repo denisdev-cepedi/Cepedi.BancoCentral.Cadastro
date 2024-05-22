@@ -38,6 +38,7 @@ namespace Cepedi.BancoCentral.Cadastro.IoC
             services.AddScoped<ITipoRegistroRepository, TipoRegistroRepository>();
             services.AddScoped<IRegistroTransacaoBancoRepository, RegistroTransacaoBancoRepository>();
             services.AddScoped<IBancoRepository, BancoRepository>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddHealthChecks()
                .AddDbContextCheck<ApplicationDbContext>();
         }
@@ -67,6 +68,12 @@ namespace Cepedi.BancoCentral.Cadastro.IoC
                 //options.UseSqlite(configuration.GetConnectionString("DefaultConnection"));
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
             });
+            
+            // services.AddDbContext<AlternativeDbContext>((sp, options) =>
+            // {
+            //     //options.UseSqlite(configuration.GetConnectionString("DefaultConnection"));
+            //     options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
+            // });
 
             services.AddScoped<ApplicationDbContextInitialiser>();
         }

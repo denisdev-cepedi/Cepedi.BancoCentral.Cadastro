@@ -6,16 +6,18 @@ using Microsoft.Extensions.Logging;
 using OperationResult;
 
 namespace Cepedi.BancoCentral.Cadastro.Dominio.Handlers;
-public class AtualizarPessoaHandler :
+public class AtualizarPessoaRequestHandler :
     IRequestHandler<AtualizarPessoaRequest, Result<AtualizarPessoaResponse>>
 {
     private readonly IPessoaRepository _pessoaRepository;
-    private readonly ILogger<AtualizarPessoaHandler> _logger;
+    private readonly ILogger<AtualizarPessoaRequestHandler> _logger;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public AtualizarPessoaHandler(IPessoaRepository pessoaRepository, ILogger<AtualizarPessoaHandler> logger)
+    public AtualizarPessoaRequestHandler(IPessoaRepository pessoaRepository, ILogger<AtualizarPessoaRequestHandler> logger, IUnitOfWork unitOfWork)
     {
         _pessoaRepository = pessoaRepository;
         _logger = logger;
+        _unitOfWork = unitOfWork;
     }
 
     public async Task<Result<AtualizarPessoaResponse>> Handle(AtualizarPessoaRequest request, CancellationToken cancellationToken)
@@ -32,6 +34,8 @@ public class AtualizarPessoaHandler :
 
         await _pessoaRepository.AtualizarPessoaAsync(pessoaEntity);
 
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
+        
         return Result.Success(new AtualizarPessoaResponse(pessoaEntity.Nome));
     }
 }

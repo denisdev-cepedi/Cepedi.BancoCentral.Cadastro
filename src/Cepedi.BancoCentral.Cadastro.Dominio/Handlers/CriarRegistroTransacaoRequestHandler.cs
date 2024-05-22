@@ -15,27 +15,35 @@ public class CriarRegistroTransacaoBancoRequestHandler : IRequestHandler<CriarRe
     private readonly IRegistroTransacaoBancoRepository _registroTransacaoBancoRepository;
     private readonly ITipoRegistroRepository _tipoRegistroRepository;
 
+    private readonly IPessoaRepository _pessoaRepository;
+    private readonly IBancoRepository _bancoRepository;
+
+    private readonly IUnitOfWork _unitOfWork;
 
 
 
-    public CriarRegistroTransacaoBancoRequestHandler(ILogger<CriarRegistroTransacaoBancoRequestHandler> logger, IRegistroTransacaoBancoRepository registroTransacaoBancoRepository, ITipoRegistroRepository tipoRegistroRepository)
+
+    public CriarRegistroTransacaoBancoRequestHandler(ILogger<CriarRegistroTransacaoBancoRequestHandler> logger, 
+    IRegistroTransacaoBancoRepository registroTransacaoBancoRepository, 
+    ITipoRegistroRepository tipoRegistroRepository,
+    IPessoaRepository pessoaRepository,
+    IBancoRepository bancoRepository,
+    IUnitOfWork unitOfWork)
     {
         _logger = logger;
         _registroTransacaoBancoRepository = registroTransacaoBancoRepository;
         _tipoRegistroRepository = tipoRegistroRepository;
+        _pessoaRepository = pessoaRepository;
+        _bancoRepository = bancoRepository;
+        _unitOfWork = unitOfWork;
     }
 
     public async Task<Result<CriarRegistroTransacaoBancoResponse>> Handle(CriarRegistroTransacaoBancoRequest request, CancellationToken cancellationToken)
     {
-        // if (request.Valor <= 0)
-        // {
-        //     throw new Exception("O valor da transação deve ser maior que zero");
-        // }
-        //Todo : Fazer Busca da Pessoa pelo id, quando o método estiver pronto
-        var pessoa = await _registroTransacaoBancoRepository.ObterRegistroTransacaoBancoPorIdPessoaAsync(request.IdPessoa);
+        
+        var pessoa = await _pessoaRepository.ObterPessoaAsync(request.IdPessoa);
 
-        //Todo : Fazer Busca do Banco pelo id, quando o método estiver pronto
-        var banco = await _registroTransacaoBancoRepository.ObterRegistroTransacaoBancoPorIdBancoAsync(request.IdBanco);
+        var banco = await _bancoRepository.ObterBancoAsync(request.IdBanco);
 
         var tipoRegistro = await _tipoRegistroRepository.ObterTipoRegistroAsync(request.IdTipoRegistro);
 
@@ -49,6 +57,7 @@ public class CriarRegistroTransacaoBancoRequestHandler : IRequestHandler<CriarRe
         };
 
         await _registroTransacaoBancoRepository.CriarRegistroTransacaoBancoAsync(registroTransacao);
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
 
         return Result.Success(new CriarRegistroTransacaoBancoResponse(registroTransacao.IdRegistro, registroTransacao.DataRegistro, registroTransacao.TipoRegistro.NomeTipo, pessoa.Nome, banco.NomeReal));
 
