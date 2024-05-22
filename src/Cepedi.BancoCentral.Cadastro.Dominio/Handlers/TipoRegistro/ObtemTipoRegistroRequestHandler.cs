@@ -24,6 +24,7 @@ public class ObtemTipoRegistroRequestHandler : IRequestHandler<ObtemTipoRegistro
        
         var tipoRegistro = await _tiporegistroRepository.ObterTipoRegistroAsync(request.IdTipoRegistro);
         if(tipoRegistro == null){
+             _logger.LogError("Tipo registro não encontrado, busca falou");
             return Result.Error<ObtemTipoRegistroResponse>(new Compartilhado.Excecoes.ExcecaoAplicacao(
                     (Compartilhado.Enums.Cadastro.SemResultados)));
             }
