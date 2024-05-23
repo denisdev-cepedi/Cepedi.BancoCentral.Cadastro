@@ -3,11 +3,13 @@ using Cepedi.BancoCentral.Cadastro.Compartilhado.Requests;
 using Cepedi.BancoCentral.Cadastro.Compartilhado.Responses;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Cepedi.BancoCentral.Cadastro.Api.Controllers;
 
 [ApiController]
 [Route("[controller]")]
+[Authorize]
 public class TipoPixController : BaseController
 {
     private readonly ILogger<TipoPixController> _logger;

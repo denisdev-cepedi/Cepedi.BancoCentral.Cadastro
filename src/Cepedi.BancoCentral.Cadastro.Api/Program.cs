@@ -5,6 +5,7 @@ using System;
 using System.Reflection;
 using Cepedi.BancoCentral.Cadastro.IoC;
 using Cepedi.BancoCentral.Cadastro.Api;
+using Microsoft.IdentityModel.Logging;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,21 +17,13 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen();
 
-/* Configurando Logger */
+builder.Services.ConfigureAppDependencies(builder.Configuration);
+
 builder.Host.UseSerilog((context, configuration) =>
 {
-    configuration
-    .ReadFrom.Configuration(context.Configuration)
-    .WriteTo.Console()
-    .WriteTo.Debug()
-    .Enrich.FromLogContext()
-    .Enrich.WithMachineName()
-    .Enrich.WithExceptionDetails()
-    .Enrich.WithProperty("Environment", Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")!)
-    .WriteTo.Elasticsearch(ConfigureElasticSink(context.Configuration, Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")!));
+    configuration.ReadFrom.Configuration(context.Configuration);
 });
 
-builder.Services.ConfigureAppDependencies(builder.Configuration);
 
 /* builder.Host.UseSerilog((context, configuration) =>
 {
@@ -45,9 +38,14 @@ if (app.Environment.IsDevelopment())
     // await app.InitialiseDatabaseAsync();
     app.UseSwagger();
     app.UseSwaggerUI();
+    IdentityModelEventSource.ShowPII = true;
+}
+else
+{
+    app.UseHttpsRedirection();
 }
 
-static ElasticsearchSinkOptions ConfigureElasticSink(IConfiguration configuration, string environment)
+/* static ElasticsearchSinkOptions ConfigureElasticSink(IConfiguration configuration, string environment)
 {
     return new ElasticsearchSinkOptions(new Uri(configuration["ElasticConfiguration:Uri"]))
     {
@@ -55,12 +53,13 @@ static ElasticsearchSinkOptions ConfigureElasticSink(IConfiguration configuratio
         IndexFormat = $"Alessandro{environment?.ToLower().Replace(".", "-")}-{DateTime.UtcNow:yyyy-MM}"
         //IndexFormat = $"{Assembly.GetExecutingAssembly().GetName().Name.ToLower().Replace(".", "-")}-{environment?.ToLower().Replace(".", "-")}-{DateTime.UtcNow:yyyy-MM}"
     };
-}
+} */
 
 app.UseHealthChecks("/health");
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+app.UseAuthentication();
 
 app.MapControllers();
 
