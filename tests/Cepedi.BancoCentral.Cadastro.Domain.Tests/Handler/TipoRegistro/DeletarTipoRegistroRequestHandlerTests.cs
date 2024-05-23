@@ -14,12 +14,13 @@ public class DeletarTipoRegistroRequestHandlerTests
 {
     private readonly ILogger<DeletarTipoRegistroRequestHandler> _logger = Substitute.For<ILogger<DeletarTipoRegistroRequestHandler>>();
     private readonly ITipoRegistroRepository _tiporegistroRepository = Substitute.For<ITipoRegistroRepository>();
+    private readonly IUnitOfWork _unitOfWork = Substitute.For<IUnitOfWork>();
 
     private readonly DeletarTipoRegistroRequestHandler _sut;
 
     public DeletarTipoRegistroRequestHandlerTests()
     {
-        _sut = new DeletarTipoRegistroRequestHandler(_tiporegistroRepository, _logger);
+        _sut = new DeletarTipoRegistroRequestHandler(_tiporegistroRepository, _logger, _unitOfWork);
     }
 
     [Fact]

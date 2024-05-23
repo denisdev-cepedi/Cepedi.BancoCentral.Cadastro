@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Cepedi.BancoCentral.Cadastro.Dados.EntityTypeConfiguration;
 
-public class TipoPixEntityTypeConfiguration
+public class TipoPixEntityTypeConfiguration : IEntityTypeConfiguration<TipoPixEntity>
 {
     public void Configure(EntityTypeBuilder<TipoPixEntity> builder)
     {
@@ -17,9 +17,9 @@ public class TipoPixEntityTypeConfiguration
         builder.Property(t => t.TipoPix).IsRequired().HasMaxLength(255);
 
         // Mapeamento do relacionamento com a entidade PixEntity
-    /*     builder.HasMany(t => t.Pixs)
-               .WithOne(p => p.IdPix)
-               .HasForeignKey(p => p.IdTipoPix)
-               .IsRequired(false);  */
+        /*     builder.HasMany(t => t.Pixs)
+                   .WithOne(p => p.IdPix)
+                   .HasForeignKey(p => p.IdTipoPix)
+                   .IsRequired(false);  */
     }
 }

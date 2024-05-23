@@ -17,10 +17,11 @@ public class AtualizarNacionalidadeHandlerTests
         Substitute.For<INacionalidadeRepository>();
     private readonly ILogger<AtualizarNacionalidadeHandler> _logger = Substitute.For<ILogger<AtualizarNacionalidadeHandler>>();
     private readonly AtualizarNacionalidadeHandler _sut;
+    private readonly IUnitOfWork _unitOfWork = Substitute.For<IUnitOfWork>();
     
     public AtualizarNacionalidadeHandlerTests()
     {
-        _sut = new AtualizarNacionalidadeHandler(_nacionalidadeRepository, _logger);
+        _sut = new AtualizarNacionalidadeHandler(_nacionalidadeRepository, _logger, _unitOfWork);
     }
     
     [Fact]

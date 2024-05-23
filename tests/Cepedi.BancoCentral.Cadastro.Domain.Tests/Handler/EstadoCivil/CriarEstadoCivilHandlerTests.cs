@@ -17,10 +17,11 @@ public class CriarEstadoCivilHandlerTests
         Substitute.For<IEstadoCivilRepository>();
     private readonly ILogger<CriarEstadoCivilHandler> _logger = Substitute.For<ILogger<CriarEstadoCivilHandler>>();
     private readonly CriarEstadoCivilHandler _sut;
+    private readonly IUnitOfWork _unitOfWork = Substitute.For<IUnitOfWork>();
     
     public CriarEstadoCivilHandlerTests()
     {
-        _sut = new CriarEstadoCivilHandler(_estadoCivilRepository, _logger);
+        _sut = new CriarEstadoCivilHandler(_estadoCivilRepository, _logger, _unitOfWork);
     }
     
     [Fact]

@@ -16,10 +16,11 @@ public class DeletarPessoaHandlerTests
     private readonly IPessoaRepository _pessoaRepository = Substitute.For<IPessoaRepository>();
     private readonly ILogger<DeletarPessoaHandler> _logger = Substitute.For<ILogger<DeletarPessoaHandler>>();
     private readonly DeletarPessoaHandler _sut;
+    private readonly IUnitOfWork _unitOfWork = Substitute.For<IUnitOfWork>();
 
     public DeletarPessoaHandlerTests()
     {
-        _sut = new DeletarPessoaHandler(_pessoaRepository, _logger);
+        _sut = new DeletarPessoaHandler(_pessoaRepository, _logger, _unitOfWork);
     }
 
     [Fact]

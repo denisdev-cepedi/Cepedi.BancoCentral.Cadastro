@@ -16,10 +16,11 @@ public class DeleterGeneroHandlerTests
     private readonly IGeneroRepository _generoRepository = Substitute.For<IGeneroRepository>();
     private readonly ILogger<DeletarGeneroHandler> _logger = Substitute.For<ILogger<DeletarGeneroHandler>>();
     private readonly DeletarGeneroHandler _sut;
+    private readonly IUnitOfWork _unitOfWork = Substitute.For<IUnitOfWork>();
 
     public DeleterGeneroHandlerTests()
     {
-        _sut = new DeletarGeneroHandler(_generoRepository, _logger);
+        _sut = new DeletarGeneroHandler(_generoRepository, _logger, _unitOfWork);
     }
 
     [Fact]

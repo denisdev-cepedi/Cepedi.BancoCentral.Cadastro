@@ -6,14 +6,14 @@ using Microsoft.Extensions.Logging;
 using OperationResult;
 
 namespace Cepedi.BancoCentral.Cadastro.Dominio.Handlers;
-public class AtualizarPessoaRequestHandler :
+public class AtualizarPessoaHandler :
     IRequestHandler<AtualizarPessoaRequest, Result<AtualizarPessoaResponse>>
 {
     private readonly IPessoaRepository _pessoaRepository;
-    private readonly ILogger<AtualizarPessoaRequestHandler> _logger;
+    private readonly ILogger<AtualizarPessoaHandler> _logger;
     private readonly IUnitOfWork _unitOfWork;
 
-    public AtualizarPessoaRequestHandler(IPessoaRepository pessoaRepository, ILogger<AtualizarPessoaRequestHandler> logger, IUnitOfWork unitOfWork)
+    public AtualizarPessoaHandler(IPessoaRepository pessoaRepository, ILogger<AtualizarPessoaHandler> logger, IUnitOfWork unitOfWork)
     {
         _pessoaRepository = pessoaRepository;
         _logger = logger;
