@@ -1,6 +1,8 @@
 using Serilog;
+using Serilog.Exceptions;
+using Serilog.Sinks.Elasticsearch;
 using Cepedi.BancoCentral.Cadastro.IoC;
-using Cepedi.BancoCentral.Cadastro.Api;
+using Microsoft.IdentityModel.Logging;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,7 +18,15 @@ builder.Services.ConfigureAppDependencies(builder.Configuration);
 
 builder.Host.UseSerilog((context, configuration) =>
 {
-    configuration.ReadFrom.Configuration(context.Configuration);
+    configuration
+    .ReadFrom.Configuration(context.Configuration)
+    .WriteTo.Console()
+    .WriteTo.Debug()
+    .Enrich.FromLogContext()
+    .Enrich.WithMachineName()
+    .Enrich.WithExceptionDetails()
+    .Enrich.WithProperty("Environment", Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT"))
+    .WriteTo.Elasticsearch(ConfigureElasticSink(context.Configuration, Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")));
 });
 
 var app = builder.Build();
@@ -27,16 +37,31 @@ if (app.Environment.IsDevelopment())
     // await app.InitialiseDatabaseAsync();
     app.UseSwagger();
     app.UseSwaggerUI();
+    IdentityModelEventSource.ShowPII = true;
+}
+else
+{
+    app.UseHttpsRedirection();
+}
+
+static ElasticsearchSinkOptions ConfigureElasticSink(IConfiguration configuration, string environment)
+{
+    return new ElasticsearchSinkOptions(new Uri(configuration["ElasticConfiguration:Uri"]))
+    {
+        AutoRegisterTemplate = true,
+        IndexFormat = $"BancoCentralCadastro{environment?.ToLower().Replace(".", "-")}-{DateTime.UtcNow:yyyy-MM}"
+        //IndexFormat = $"{Assembly.GetExecutingAssembly().GetName().Name.ToLower().Replace(".", "-")}-{environment?.ToLower().Replace(".", "-")}-{DateTime.UtcNow:yyyy-MM}"
+    };
 }
 
 app.UseHealthChecks("/health");
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+app.UseAuthentication();
 
 app.MapControllers();
 
 app.Map("/", () => Results.Redirect("/swagger"));
 
 app.Run();
-
