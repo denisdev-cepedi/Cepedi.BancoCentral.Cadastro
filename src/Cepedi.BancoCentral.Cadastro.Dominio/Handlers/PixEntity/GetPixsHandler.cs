@@ -25,6 +25,7 @@ public class GetPixsHandler : IRequestHandler<GetPixsRequest, Result<List<GetPix
     public async Task<Result<List<GetPixsResponse>>> Handle(GetPixsRequest request,
         CancellationToken cancellationToken)
     {
+         _logger.LogInformation("Buscando Pix.");
         var pixs = await _pixRepository.GetPixsAsync();
         return Result.Success(pixs.Select(p => new GetPixsResponse(p.ChavePix, p.TipoPix)).ToList());
     }

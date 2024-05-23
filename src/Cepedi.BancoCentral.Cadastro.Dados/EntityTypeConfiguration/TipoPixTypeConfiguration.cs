@@ -17,9 +17,9 @@ public class TipoPixEntityTypeConfiguration
         builder.Property(t => t.TipoPix).IsRequired().HasMaxLength(255);
 
         // Mapeamento do relacionamento com a entidade PixEntity
-    /*     builder.HasMany(t => t.Pixs)
-               .WithOne(p => p.IdPix)
-               .HasForeignKey(p => p.IdTipoPix)
-               .IsRequired(false);  */
+        builder.HasMany(t => t.Pixs)
+               .WithOne()
+               .HasForeignKey(p => p.ChavePix)
+               .IsRequired(false); 
     }
 }

@@ -22,6 +22,7 @@ public class CriarPixHandler : IRequestHandler<CriarPixRequest, Result<CriarPixR
 
     public async Task<Result<CriarPixResponse>> Handle(CriarPixRequest request, CancellationToken cancellationToken)
     {
+         _logger.LogInformation("Iniciando a criação do Pix.");
         var pix = new PixEntity()
         {
             IdPessoa = request.IdCliente,
