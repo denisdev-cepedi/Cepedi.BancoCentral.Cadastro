@@ -9,13 +9,13 @@ using OperationResult;
 
 namespace Cepedi.BancoCentral.Cadastro.Dominio.Handlers;
 
-public class DeletarTipoPixRequestHandler
+public class DeletarTipoPixHandler
     : IRequestHandler<DeletarTipoPixRequest, Result<DeletarTipoPixResponse>>
 {
-    private readonly ILogger<DeletarTipoPixRequestHandler> _logger;
+    private readonly ILogger<DeletarTipoPixHandler> _logger;
     private readonly ITipoPixRepository _tipoPixRepository;
 
-    public DeletarTipoPixRequestHandler(ITipoPixRepository tipoPixRepository, ILogger<DeletarTipoPixRequestHandler> logger)
+    public DeletarTipoPixHandler(ITipoPixRepository tipoPixRepository, ILogger<DeletarTipoPixHandler> logger)
     {
         _tipoPixRepository = tipoPixRepository;
         _logger = logger;

@@ -23,7 +23,7 @@ public class CriarPixHandlerTests
     }
 
     [Fact]
-    public async Task CriarUsuarioAsync_QuandoCriar_DeveRetornarSucesso()
+    public async Task CriarPixAsync_QuandoCriar_DeveRetornarSucesso()
     {
         //Arrange 
         var pix = new CriarPixRequest {ChavePix="CPF" };
