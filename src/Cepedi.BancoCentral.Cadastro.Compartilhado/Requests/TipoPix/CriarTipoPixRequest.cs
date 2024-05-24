@@ -6,5 +6,6 @@ namespace Cepedi.BancoCentral.Cadastro.Compartilhado.Requests;
 
 public class CriarTipoPixRequest : IRequest<Result<CriarTipoPixResponse>>
 {
-    public string TipoPix {get; set;} = default!;
+    public string TipoPix {get; set;}= default!;
+
 }

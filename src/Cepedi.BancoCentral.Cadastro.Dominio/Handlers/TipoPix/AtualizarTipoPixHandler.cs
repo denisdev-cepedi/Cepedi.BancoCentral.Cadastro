@@ -1,6 +1,4 @@
-﻿using Cepedi.BancoCentral.Cadastro.Compartilhado.Enums;
-using Cepedi.BancoCentral.Cadastro.Dominio.Entidades;
-using Cepedi.BancoCentral.Cadastro.Dominio.Repository;
+﻿using Cepedi.BancoCentral.Cadastro.Dominio.Repository;
 using Cepedi.BancoCentral.Cadastro.Compartilhado.Requests;
 using Cepedi.BancoCentral.Cadastro.Compartilhado.Responses;
 using MediatR;
@@ -9,13 +7,13 @@ using OperationResult;
 
 namespace Cepedi.BancoCentral.Cadastro.Dominio.Handlers;
 
-public class AtualizarTipoPixRequestHandler
+public class AtualizarTipoPixHandler
     : IRequestHandler<AtualizarTipoPixRequest, Result<AtualizarTipoPixResponse>>
 {
-    private readonly ILogger<AtualizarTipoPixRequestHandler> _logger;
     private readonly ITipoPixRepository _tipoPixRepository;
+    private readonly ILogger<AtualizarTipoPixHandler> _logger;
 
-    public AtualizarTipoPixRequestHandler(ITipoPixRepository tipoPixRepository, ILogger<AtualizarTipoPixRequestHandler> logger)
+    public AtualizarTipoPixHandler(ITipoPixRepository tipoPixRepository, ILogger<AtualizarTipoPixHandler> logger)
     {
         _tipoPixRepository = tipoPixRepository;
         _logger = logger;
@@ -28,8 +26,7 @@ public class AtualizarTipoPixRequestHandler
 
         if (tipoPixEntity == null)
         {
-            return Result.Error<AtualizarTipoPixResponse>(new Compartilhado.
-                Excecoes.SemResultadosExcecao());
+            return Result.Error<AtualizarTipoPixResponse>(new Compartilhado.Excecoes.SemResultadosExcecao());
         }
 
         tipoPixEntity.Atualizar(tipoPixEntity.TipoPix);

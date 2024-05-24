@@ -46,6 +46,13 @@ public class Cadastro
         Tipo = ETipoErro.Erro
     };
 
+    public static ResultadoErro ErroDeletarBanco = new()
+    {
+        Titulo = "Ocorreu um erro ao deletar",
+        Descricao = "Ocorreu um erro ao deletar o banco. Por favor tente novamente",
+        Tipo = ETipoErro.Erro
+    };
+
     public static ResultadoErro ErroLeituraTipoRegistro = new()
     {
         Titulo = "Ocorreu um erro na leitura",

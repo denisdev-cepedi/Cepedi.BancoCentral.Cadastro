@@ -12,8 +12,8 @@ namespace Cepedi.BancoCentral.Cadastro.Dominio.Handlers;
 public class GetTiposPixHandler
     : IRequestHandler<GetTiposPixRequest, Result<List<GetTiposPixResponse>>>
 {
-    private readonly ILogger<GetTiposPixHandler> _logger;
     private readonly ITipoPixRepository _tipoPixRepository;
+    private readonly ILogger<GetTiposPixHandler> _logger;
 
     public GetTiposPixHandler(ITipoPixRepository tipoPixRepository, ILogger<GetTiposPixHandler> logger)
     {
@@ -24,6 +24,6 @@ public class GetTiposPixHandler
     public async Task<Result<List<GetTiposPixResponse>>> Handle(GetTiposPixRequest request, CancellationToken cancellationToken)
     {
         var tipoPix = await _tipoPixRepository.GetTipoPixsAync();
-        return Result.Success(tipoPix.Select(p => new GetTiposPixResponse(p.IdTipoPix, p.TipoPix)).ToList());
+        return Result.Success(tipoPix.Select(p => new GetTiposPixResponse(p.TipoPix)).ToList());
     }
 }

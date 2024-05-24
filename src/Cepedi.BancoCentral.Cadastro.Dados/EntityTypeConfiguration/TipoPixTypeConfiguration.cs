@@ -13,7 +13,7 @@ public class TipoPixEntityTypeConfiguration : IEntityTypeConfiguration<TipoPixEn
         builder.HasKey(t => t.IdTipoPix); // Define a chave primária
 
         // Mapeamento das propriedades
-        builder.Property(t => t.IdTipoPix).IsRequired();
+        /* builder.Property(t => t.IdTipoPix).IsRequired(); */
         builder.Property(t => t.TipoPix).IsRequired().HasMaxLength(255);
 
         // Mapeamento do relacionamento com a entidade PixEntity
