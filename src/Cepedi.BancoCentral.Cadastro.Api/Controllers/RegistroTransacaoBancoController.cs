@@ -26,7 +26,7 @@ public class RegistroTransacaoBancoController : BaseController
     public async Task<ActionResult<CriarRegistroTransacaoBancoResponse>> CriarRegistroTransacaoBancoAsync(
                 [FromBody] CriarRegistroTransacaoBancoRequest request) => await SendCommand(request);
 
-    [HttpDelete]
+    [HttpDelete("{id}")]
     [ProducesResponseType(typeof(DeletarRegistroTransacaoBancoResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<DeletarRegistroTransacaoBancoResponse>> DeletarRegistroTransacaoBancoAsync(

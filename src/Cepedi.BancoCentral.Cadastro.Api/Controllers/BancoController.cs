@@ -24,7 +24,7 @@ public class BancoController : BaseController
     [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<CriarBancoResponse>> CriarBancoAsync([FromBody] CriarBancoRequest request) => await SendCommand(request);
 
-    [HttpDelete]
+    [HttpDelete("{id}")]
     [ProducesResponseType(typeof(DeletarBancoResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<DeletarBancoResponse>> DeletarBancoAsync([FromBody] DeletarBancoRequest request) => await SendCommand(request);

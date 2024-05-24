@@ -43,7 +43,7 @@ public class PessoaController : BaseController
         return await SendCommand(request);
     }
 
-    [HttpDelete]
+    [HttpDelete("{id}")]
     [ProducesResponseType(typeof(DeletarPessoaResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<DeletarPessoaResponse>> DeletarPessoaAsync(
