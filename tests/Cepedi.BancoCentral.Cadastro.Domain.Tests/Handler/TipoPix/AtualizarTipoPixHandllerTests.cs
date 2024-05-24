@@ -26,9 +26,9 @@ public class AtualizarTipoPixHandllerTests
     public async Task AtualizarTipoPixAsync_QuandoAtualizar_DeveRetornarSucesso()
     {
         //Arrange 
-        var tipoPix = new AtualizarTipoPixRequest { TipoPix = "CPF", IdTipoPix = 1 };
-        var tipoPixEntity = new TipoPixEntity { TipoPix = "Telefone", IdTipoPix = 2};
-        _tipoPixRepository.ObterTipoPixAsync(It.IsAny<int>()).ReturnsForAnyArgs(new TipoPixEntity());
+        var tipoPix = new AtualizarTipoPixRequest { TipoPix = "CPF" };
+        var tipoPixEntity = new TipoPixEntity { TipoPix = "CPF"};
+        _tipoPixRepository.ObterTipoPixAsync(It.IsAny<int>()).ReturnsForAnyArgs(tipoPixEntity);
         _tipoPixRepository.AtualizarTipoPixAsync(It.IsAny<TipoPixEntity>())
             .ReturnsForAnyArgs(tipoPixEntity);
 
@@ -38,7 +38,6 @@ public class AtualizarTipoPixHandllerTests
         //Assert 
         result.Should().BeOfType<Result<AtualizarTipoPixResponse>>().Which
             .Value.TipoPix.Should().Be(tipoPix.TipoPix);
-
         result.Should().BeOfType<Result<AtualizarTipoPixResponse>>().Which
             .Value.TipoPix.Should().NotBeEmpty();
     }

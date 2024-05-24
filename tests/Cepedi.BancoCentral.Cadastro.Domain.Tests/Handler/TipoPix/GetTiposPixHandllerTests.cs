@@ -23,7 +23,7 @@ public class GetTiposPixHandllerTests
     }
 
     [Fact]
-    public async Task GetPixsAsync_QuandoAtualizar_DeveRetornarSucesso(){
+    public async Task GetTiposPixAsync_QuandoAtualizar_DeveRetornarSucesso(){
         // Arrange
         var tiposPix = new GetTiposPixRequest();
         var tiposPixEntities = new List<TipoPixEntity>

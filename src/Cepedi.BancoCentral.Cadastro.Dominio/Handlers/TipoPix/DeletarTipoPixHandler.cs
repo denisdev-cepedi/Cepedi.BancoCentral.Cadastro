@@ -12,8 +12,8 @@ namespace Cepedi.BancoCentral.Cadastro.Dominio.Handlers;
 public class DeletarTipoPixHandler
     : IRequestHandler<DeletarTipoPixRequest, Result<DeletarTipoPixResponse>>
 {
-    private readonly ILogger<DeletarTipoPixHandler> _logger;
     private readonly ITipoPixRepository _tipoPixRepository;
+    private readonly ILogger<DeletarTipoPixHandler> _logger;
 
     public DeletarTipoPixHandler(ITipoPixRepository tipoPixRepository, ILogger<DeletarTipoPixHandler> logger)
     {
@@ -27,11 +27,10 @@ public class DeletarTipoPixHandler
 
         if (tipoPix == null)
         {
-            return Result.Error<DeletarTipoPixResponse>(new Compartilhado.
-                Excecoes.SemResultadosExcecao());
+            return Result.Error<DeletarTipoPixResponse>(new Compartilhado.Excecoes.SemResultadosExcecao());
         }
 
-        await _tipoPixRepository.DeletarTipoPixAsync(tipoPix.IdTipoPix);
-        return Result.Success(new DeletarTipoPixResponse(tipoPix.IdTipoPix, tipoPix.TipoPix));
+        await _tipoPixRepository.DeletarTipoPixAsync(tipoPix);
+        return Result.Success(new DeletarTipoPixResponse(tipoPix.TipoPix));
     }
 }

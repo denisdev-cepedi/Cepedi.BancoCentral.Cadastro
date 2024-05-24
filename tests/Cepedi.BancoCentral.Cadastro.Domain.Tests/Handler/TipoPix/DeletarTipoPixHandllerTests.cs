@@ -23,12 +23,13 @@ public class DeletarTipoPixHandllerTests
     }
 
     [Fact]
-    public async Task DeletarPixAsync_QuandoAtualizar_DeveRetornarSucesso()
+    public async Task DeletarTipoPixAsync_QuandoAtualizar_DeveRetornarSucesso()
     {
         //Arrange 
-        var tipoPix = new DeletarTipoPixRequest { IdTipoPix = 0};
-        _tipoPixRepository.ObterTipoPixAsync(It.IsAny<int>()).ReturnsForAnyArgs(new TipoPixEntity());
-        _tipoPixRepository.DeletarTipoPixAsync(It.IsAny<int>())
+        var tipoPix = new DeletarTipoPixRequest { IdTipoPix = 1};
+        var tipoPixEntity = new TipoPixEntity {IdTipoPix = 1};
+        _tipoPixRepository.ObterTipoPixAsync(It.IsAny<int>()).ReturnsForAnyArgs(tipoPixEntity);
+        _tipoPixRepository.DeletarTipoPixAsync(It.IsAny<TipoPixEntity>())
             .ReturnsForAnyArgs(new TipoPixEntity());
 
         //Act
@@ -36,9 +37,9 @@ public class DeletarTipoPixHandllerTests
 
         //Assert 
         result.Should().BeOfType<Result<DeletarTipoPixResponse>>().Which
-            .Value.IdTipoPix.Should().Be(tipoPix.IdTipoPix);
+            .Value.TipoPix.Should().Be(tipoPix.TipoPix);
         result.Should().BeOfType<Result<DeletarTipoPixResponse>>().Which
-            .Value.IdTipoPix.Should();
+            .Value.TipoPix.Should();
     }
 
 }

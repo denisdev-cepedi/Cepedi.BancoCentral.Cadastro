@@ -1,6 +1,4 @@
-﻿using Cepedi.BancoCentral.Cadastro.Compartilhado.Enums;
-using Cepedi.BancoCentral.Cadastro.Dominio.Entidades;
-using Cepedi.BancoCentral.Cadastro.Dominio.Repository;
+﻿using Cepedi.BancoCentral.Cadastro.Dominio.Repository;
 using Cepedi.BancoCentral.Cadastro.Compartilhado.Requests;
 using Cepedi.BancoCentral.Cadastro.Compartilhado.Responses;
 using MediatR;
@@ -12,8 +10,8 @@ namespace Cepedi.BancoCentral.Cadastro.Dominio.Handlers;
 public class AtualizarTipoPixHandler
     : IRequestHandler<AtualizarTipoPixRequest, Result<AtualizarTipoPixResponse>>
 {
-    private readonly ILogger<AtualizarTipoPixHandler> _logger;
     private readonly ITipoPixRepository _tipoPixRepository;
+    private readonly ILogger<AtualizarTipoPixHandler> _logger;
 
     public AtualizarTipoPixHandler(ITipoPixRepository tipoPixRepository, ILogger<AtualizarTipoPixHandler> logger)
     {
@@ -28,8 +26,7 @@ public class AtualizarTipoPixHandler
 
         if (tipoPixEntity == null)
         {
-            return Result.Error<AtualizarTipoPixResponse>(new Compartilhado.
-                Excecoes.SemResultadosExcecao());
+            return Result.Error<AtualizarTipoPixResponse>(new Compartilhado.Excecoes.SemResultadosExcecao());
         }
 
         tipoPixEntity.Atualizar(tipoPixEntity.TipoPix);

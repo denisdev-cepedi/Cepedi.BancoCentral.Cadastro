@@ -32,6 +32,6 @@ public class DeletarPixHandler : IRequestHandler<DeletarPixRequest, Result<Delet
 
         await _pixRepository.DeletarPixAsync(pix);
 
-        return Result.Success(new DeletarPixResponse(pix.ChavePix));
+        return Result.Success(new DeletarPixResponse(pix.IdPix));
     }
 }

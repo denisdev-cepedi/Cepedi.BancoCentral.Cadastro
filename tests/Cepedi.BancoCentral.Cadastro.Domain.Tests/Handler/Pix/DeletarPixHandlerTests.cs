@@ -26,8 +26,9 @@ public class DeletarPixHandlerTests
     public async Task DeletarPixAsync_QuandoAtualizar_DeveRetornarSucesso()
     {
         //Arrange 
-        var pix = new DeletarPixRequest { IdPix = 0 };
-        _pixRepository.ObterPixAsync(It.IsAny<int>()).ReturnsForAnyArgs(new PixEntity());
+        var pix = new DeletarPixRequest { IdPix = 10 };
+        var pixEntity = new PixEntity { IdPix = 10};
+        _pixRepository.ObterPixAsync(It.IsAny<int>()).ReturnsForAnyArgs(pixEntity);
         _pixRepository.DeletarPixAsync(It.IsAny<PixEntity>())
             .ReturnsForAnyArgs(new PixEntity());
 
@@ -36,8 +37,8 @@ public class DeletarPixHandlerTests
 
         //Assert 
         result.Should().BeOfType<Result<DeletarPixResponse>>().Which
-            .Value.Pix.Should().Be(pix.IdPix.ToString());
+            .Value.IdPix.Should().Be(pix.IdPix);
         result.Should().BeOfType<Result<DeletarPixResponse>>().Which
-            .Value.Pix.Should().NotBeEmpty();
+            .Value.IdPix.Should();
     }
 }

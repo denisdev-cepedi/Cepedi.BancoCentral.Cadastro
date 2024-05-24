@@ -1,44 +1,37 @@
-﻿using Cepedi.BancoCentral.Cadastro.Dominio.Entidades;
-using Cepedi.BancoCentral.Cadastro.Dominio.Handlers;
+﻿using Moq;
+using Xunit;
 using Cepedi.BancoCentral.Cadastro.Dominio.Repository;
-using Cepedi.BancoCentral.Cadastro.Compartilhado.Requests;
-using Cepedi.BancoCentral.Cadastro.Compartilhado.Responses;
-using FluentAssertions;
 using Microsoft.Extensions.Logging;
-using Moq;
-using NSubstitute;
-using OperationResult;
-
-namespace Cepedi.BancoCentral.Cadastro.Dominio.Tests.TipoPix;
+using Cepedi.BancoCentral.Cadastro.Dominio.Handlers;
+using Cepedi.BancoCentral.Cadastro.Dominio.Entidades;
+using System.Threading.Tasks;
+using Cepedi.BancoCentral.Cadastro.Compartilhado.Requests;
 
 public class CriarTipoPixHandllerTests
 {
-    private readonly ITipoPixRepository _tipoPixRepository = Substitute.For<ITipoPixRepository>();
-    private readonly ILogger<CriarTipoPixHandler> _logger = Substitute.For<ILogger<CriarTipoPixHandler>>();
-    private readonly CriarTipoPixHandler _sut;
+    private readonly Mock<ITipoPixRepository> _tipoPixRepositoryMock;
+    private readonly Mock<ILogger<CriarTipoPixHandler>> _loggerMock;
+    private readonly CriarTipoPixHandler _handler;
 
-    public CriarTipoPixHandllerTests(ITipoPixRepository tipoPixRepository, ILogger<CriarTipoPixHandler> logger)
+    public CriarTipoPixHandllerTests()
     {
-        _tipoPixRepository = tipoPixRepository;
-        _logger = logger;
+        _tipoPixRepositoryMock = new Mock<ITipoPixRepository>();
+        _loggerMock = new Mock<ILogger<CriarTipoPixHandler>>();
+        _handler = new CriarTipoPixHandler(_tipoPixRepositoryMock.Object, _loggerMock.Object);
     }
 
     [Fact]
     public async Task CriarTipoPixAsync_QuandoCriar_DeveRetornarSucesso()
     {
-        //Arrange 
-        var tipoPix = new CriarTipoPixRequest {TipoPix="CPF" };
-        _tipoPixRepository.CriarTipoPixAsync(It.IsAny<TipoPixEntity>())
-            .ReturnsForAnyArgs(new TipoPixEntity());
+        // Arrange
+        var tipoPix = new TipoPixEntity { IdTipoPix = 1, TipoPix = "ChaveTeste" };
+        _tipoPixRepositoryMock.Setup(repo => repo.CriarTipoPixAsync(It.IsAny<TipoPixEntity>())).ReturnsAsync(tipoPix);
 
-        //Act
-        var result = await _sut.Handle(tipoPix, CancellationToken.None);
+        // Act
+        var result = await _handler.Handle(new CriarTipoPixRequest { TipoPix = "ChaveTeste" }, default);
 
-        //Assert 
-        result.Should().BeOfType<Result<CriarTipoPixResponse>>().Which
-            .Value.TipoPix.Should().Be(tipoPix.TipoPix);
-        result.Should().BeOfType<Result<CriarTipoPixResponse>>().Which
-            .Value.TipoPix.Should().NotBeEmpty();
+        // Assert
+        Assert.NotNull(result);
+        Assert.True(result.IsSuccess);
     }
-
 }

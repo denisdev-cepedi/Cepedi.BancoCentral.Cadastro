@@ -8,12 +8,11 @@ using Microsoft.Extensions.Logging;
 using OperationResult;
 
 namespace Cepedi.BancoCentral.Cadastro.Dominio.Handlers;
-
 public class CriarTipoPixHandler
     : IRequestHandler<CriarTipoPixRequest, Result<CriarTipoPixResponse>>
 {
-    private readonly ILogger<CriarTipoPixHandler> _logger;
     private readonly ITipoPixRepository _tipoPixRepository;
+    private readonly ILogger<CriarTipoPixHandler> _logger;
 
     public CriarTipoPixHandler(ITipoPixRepository tipoPixRepository, ILogger<CriarTipoPixHandler> logger)
     {
@@ -29,6 +28,6 @@ public class CriarTipoPixHandler
         };
 
         await _tipoPixRepository.CriarTipoPixAsync(tipoPix);
-        return Result.Success(new CriarTipoPixResponse(tipoPix.IdTipoPix, tipoPix.TipoPix));
+        return Result.Success(new CriarTipoPixResponse(tipoPix.TipoPix));
     }
 }

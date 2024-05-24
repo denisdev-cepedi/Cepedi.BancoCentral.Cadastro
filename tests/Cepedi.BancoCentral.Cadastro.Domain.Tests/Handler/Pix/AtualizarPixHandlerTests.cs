@@ -28,7 +28,7 @@ public class AtualizarPixHandlerTests
         //Arrange 
         var pix = new AtualizarPixRequest { ChavePix = "000.000.000-11" };
         var pixEntity = new PixEntity { ChavePix = "000.000.000-11"};
-        _pixRepository.ObterPixAsync(It.IsAny<int>()).ReturnsForAnyArgs(new PixEntity());
+        _pixRepository.ObterPixAsync(It.IsAny<int>()).ReturnsForAnyArgs(pixEntity);
         _pixRepository.AtualizarPixAsync(It.IsAny<PixEntity>())
             .ReturnsForAnyArgs(pixEntity);
 

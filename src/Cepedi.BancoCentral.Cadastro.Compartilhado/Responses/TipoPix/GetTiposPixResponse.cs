@@ -1,3 +1,3 @@
 ﻿namespace Cepedi.BancoCentral.Cadastro.Compartilhado.Responses;
 
-public record GetTiposPixResponse(int IdTipoPix, string TipoPix);
+public record GetTiposPixResponse(string TipoPix);
