@@ -1,4 +1,5 @@
-﻿using Cepedi.BancoCentral.Cadastro.Dominio.Repository;
+﻿using Cepedi.BancoCentral.Cadastro.Compartilhado.Excecoes;
+using Cepedi.BancoCentral.Cadastro.Dominio.Repository;
 using Cepedi.BancoCentral.Cadastro.Compartilhado.Requests;
 using Cepedi.BancoCentral.Cadastro.Compartilhado.Responses;
 using MediatR;
@@ -26,8 +27,7 @@ public class AtualizarUsuarioRequestHandler :
 
             if (usuarioEntity == null)
             {
-                return Result.Error<AtualizarUsuarioResponse>(new Compartilhado.
-                    Excecoes.SemResultadosExcecao());
+                return Result.Error<AtualizarUsuarioResponse>(new SemResultadosExcecao());
             }
 
             usuarioEntity.Atualizar(request.Nome);
