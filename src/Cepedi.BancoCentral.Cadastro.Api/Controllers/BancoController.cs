@@ -1,5 +1,4 @@
 using Cepedi.BancoCentral.Cadastro.Compartilhado.Excecoes;
-using Cepedi.BancoCentral.Cadastro.Dominio.Entidades;
 using Cepedi.BancoCentral.Cadastro.Shareable.Requests;
 using Cepedi.BancoCentral.Cadastro.Shareable.Responses;
 using MediatR;
@@ -12,9 +11,9 @@ namespace Cepedi.BancoCentral.Cadastro.Api.Controllers;
 public class BancoController : BaseController
 {
     private readonly IMediator _mediator;
-    private readonly ILogger<BancoEntity> _logger;
+    private readonly ILogger<BancoController> _logger;
 
-    public BancoController(IMediator mediator, ILogger<BancoEntity> logger) : base(mediator)
+    public BancoController(IMediator mediator, ILogger<BancoController> logger) : base(mediator)
     {
         _mediator = mediator;
         _logger = logger;
@@ -42,7 +41,7 @@ public class BancoController : BaseController
     [HttpGet]
     [ProducesResponseType(typeof(List<ObtemBancoResponse>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<ObtemBancoResponse>> ObterListaBancoAsync()
+    public async Task<ActionResult<List<ObtemBancoResponse>>> ObterListaBancoAsync()
     {
         var request = new ObtemListaBancoRequest();
         return await SendCommand(request);

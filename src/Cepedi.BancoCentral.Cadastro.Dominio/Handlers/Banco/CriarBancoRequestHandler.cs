@@ -26,6 +26,7 @@ public class CriarBancoRequestHandler : IRequestHandler<CriarBancoRequest, Resul
             NomeFantasia = request.NomeFantasia, NomeReal  = request.NomeReal, Cnpj = request.Cnpj, DataCriacao = request.DataCriacao
         };
         await _bancoRepository.CriarBancoAsync(banco);
+        _logger.LogInformation($"Criando banco: {banco.NomeReal}");
         return Result.Success(new CriarBancoResponse(
             banco.IdBanco,
             banco.NomeReal,

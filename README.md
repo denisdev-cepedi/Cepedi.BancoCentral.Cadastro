@@ -19,3 +19,11 @@ Executar o projeto `src\Cepedi.BancoCentral.Cadastro.Api` para abrir o swagger
 
 # Coloca o banco para o estado inicial zero
  dotnet ef migrations update 0 --project .\src\Cepedi.BancoCentral.Cadastro.Dados\ -s .\src\Cepedi.BancoCentral.Cadastro.Api\
+
+# Criar Migrations
+dotnet ef migrations add estruturaBase -s ../Cepedi.BancoCentral.Cadastro.Api/Cepedi.BancoCentral.Cadastro.Api.csproj
+
+# Atualizar Banco
+dotnet ef database update -s ../Cepedi.BancoCentral.Cadastro.Api/Cepedi.BancoCentral.Cadastro.Api.csproj
+
+
