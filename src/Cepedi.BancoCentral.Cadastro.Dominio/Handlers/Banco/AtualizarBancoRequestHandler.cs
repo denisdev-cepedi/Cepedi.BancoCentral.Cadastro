@@ -31,6 +31,7 @@ public class AtualizarBancoRequestHandler : IRequestHandler<AtualizarBancoReques
         };
         
         _bancoRepository.AtualizarBancoAsync(banco);
+        _logger.LogInformation($"Atualizando banco: {banco.NomeReal}");
         return Task.FromResult(Result.Success(new AtualizarBancoResponse(banco.IdBanco, banco.NomeFantasia, banco.NomeReal, banco.Cnpj, banco.DataCriacao)));
     }
 }
